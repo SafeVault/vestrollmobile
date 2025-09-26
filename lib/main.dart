@@ -4,6 +4,7 @@ import 'package:vestrollmobile/service_locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await _initializeImportantResources();
 
   // Initialize dependency injection

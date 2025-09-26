@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Comprehensive `ThemeExtension` for the complete color system.
-///
-/// This extension includes all color categories from the design system:
-/// - Constant colors (brand identity)
-/// - Text colors with semantic hierarchy
-/// - Gray scale for backgrounds and strokes
-/// - Full color palettes (Blue, Green, Yellow, Orange, Red, Pink)
-/// - Background levels and surfaces
-///
-/// Usage: `Theme.of(context).extension<ColorSystemExtension>()?.primary500`
 class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
   const ColorSystemExtension({
     // Constant/Brand Colors
@@ -528,7 +518,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
     // Constant/Brand Colors
     Color? constantDefault,
     Color? constantContrast,
-    
+
     // Brand Colors
     Color? brandDefault,
     Color? brandContrast,
@@ -654,7 +644,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       // Constant/Brand Colors
       constantDefault: constantDefault ?? this.constantDefault,
       constantContrast: constantContrast ?? this.constantContrast,
-      
+
       // Brand Colors
       brandDefault: brandDefault ?? this.brandDefault,
       brandContrast: brandContrast ?? this.brandContrast,
@@ -790,8 +780,9 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
     return ColorSystemExtension(
       // Constant/Brand Colors
       constantDefault: Color.lerp(constantDefault, other.constantDefault, t)!,
-      constantContrast: Color.lerp(constantContrast, other.constantContrast, t)!,
-      
+      constantContrast:
+          Color.lerp(constantContrast, other.constantContrast, t)!,
+
       // Brand Colors
       brandDefault: Color.lerp(brandDefault, other.brandDefault, t)!,
       brandContrast: Color.lerp(brandContrast, other.brandContrast, t)!,
@@ -943,19 +934,19 @@ extension ColorSystemSemantics on ColorSystemExtension {
   Color get warning => yellow500;
   Color get danger => red500;
   Color get info => blue500;
-  
+
   // Interactive states
   Color get hover => brandHover;
   Color get active => brandActive;
   Color get focus => blue600;
   Color get disabled => gray400;
-  
+
   // Status colors
   Color get successBackground => green50;
   Color get warningBackground => yellow50;
   Color get dangerBackground => red50;
   Color get infoBackground => blue50;
-  
+
   Color get successBorder => green200;
   Color get warningBorder => yellow200;
   Color get dangerBorder => red200;

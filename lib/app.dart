@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vestrollmobile/app_bloc_provider.dart';
 import 'package:vestrollmobile/core/navigation/app_router.dart';
+import 'package:vestrollmobile/core/utils/app_theme.dart';
 import 'package:vestrollmobile/shared/widgets/dismiss_keyboard.dart';
+import 'package:vestrollmobile/theme_bloc.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -14,10 +16,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  @override
-  void didChangeDependencies() {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
+  void _updateSystemUIOverlay(bool isDark) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -27,8 +26,6 @@ class _AppState extends State<App> {
             isDark ? Brightness.light : Brightness.dark,
       ),
     );
-
-    super.didChangeDependencies();
   }
 
   @override
@@ -40,16 +37,24 @@ class _AppState extends State<App> {
       child: MultiBlocProvider(
         providers: appBlocProviders,
         child: DismissKeyboard(
-          child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'PayrollApp',
-            // theme: AppTheme.light,
-            // darkTheme: AppTheme.dark,
-            themeMode: ThemeMode.light,
-            scrollBehavior: const _AppScrollBehavior(),
-            routeInformationProvider: AppRouter.router.routeInformationProvider,
-            routeInformationParser: AppRouter.router.routeInformationParser,
-            routerDelegate: AppRouter.router.routerDelegate,
+          child: BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, themeState) {
+              _updateSystemUIOverlay(themeState.isDarkMode);
+
+              return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                title: 'VestrollMobile',
+                theme: AppTheme.light,
+                darkTheme: AppTheme.dark,
+                themeMode:
+                    themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                scrollBehavior: const _AppScrollBehavior(),
+                routeInformationProvider:
+                    AppRouter.router.routeInformationProvider,
+                routeInformationParser: AppRouter.router.routeInformationParser,
+                routerDelegate: AppRouter.router.routerDelegate,
+              );
+            },
           ),
         ),
       ),
