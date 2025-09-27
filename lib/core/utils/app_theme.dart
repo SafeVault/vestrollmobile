@@ -460,7 +460,7 @@ class AppTheme {
         titleTextStyle: _lightFontTheme.heading2Bold,
         elevation: 0,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _lightAppColors.bgB0,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -565,7 +565,7 @@ class AppTheme {
         titleTextStyle: _darkFontTheme.heading2Bold,
         elevation: 0,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _darkAppColors.bgB1,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
