@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/utils/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/theme_demo_screen.dart';
@@ -54,7 +55,9 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.push('/profile-creation-success');
+                        },
                         child: Text('Get Started', style: fonts.textMdBold),
                       ),
                       const SizedBox(width: 12),
