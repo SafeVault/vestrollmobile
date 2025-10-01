@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/profile_creation_success_screen.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/screens/address_details_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 
 class AppRouter {
@@ -44,6 +45,29 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const HomeScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/address-details',
+        name: RouteConstants.addressDetails,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const AddressDetailsScreen(),
             transitionsBuilder: (
               context,
               animation,
