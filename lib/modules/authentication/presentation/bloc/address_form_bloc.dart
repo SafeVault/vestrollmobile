@@ -13,24 +13,30 @@ class AddressFormBloc extends Bloc<AddressFormEvent, AddressFormState> {
   }
 
   void _onCountryChanged(CountryChanged event, Emitter<AddressFormState> emit) {
+    print('Country changed to: ${event.country?.name}');
     final newState = state.copyWith(selectedCountry: event.country);
-    emit(newState.copyWith(isValid: _isFormValid(newState)));
+    final isValid = _isFormValid(newState);
+    print('Form is valid: $isValid');
+    emit(newState.copyWith(isValid: isValid));
   }
 
   void _onStreetChanged(StreetChanged event, Emitter<AddressFormState> emit) {
     final newState = state.copyWith(street: event.street);
-    emit(newState.copyWith(isValid: _isFormValid(newState)));
+    final isValid = _isFormValid(newState);
+    emit(newState.copyWith(isValid: isValid));
   }
 
   void _onCityChanged(CityChanged event, Emitter<AddressFormState> emit) {
     final newState = state.copyWith(city: event.city);
-    emit(newState.copyWith(isValid: _isFormValid(newState)));
+    final isValid = _isFormValid(newState);
+    emit(newState.copyWith(isValid: isValid));
   }
 
   void _onPostalCodeChanged(
       PostalCodeChanged event, Emitter<AddressFormState> emit) {
     final newState = state.copyWith(postalCode: event.postalCode);
-    emit(newState.copyWith(isValid: _isFormValid(newState)));
+    final isValid = _isFormValid(newState);
+    emit(newState.copyWith(isValid: isValid));
   }
 
   Future<void> _onFormSubmitted(
@@ -74,10 +80,12 @@ class AddressFormBloc extends Bloc<AddressFormEvent, AddressFormState> {
   }
 
   bool _isFormValid(AddressFormState state) {
-    return state.selectedCountry != null &&
+    final isValid = state.selectedCountry != null &&
         state.street.trim().isNotEmpty &&
         state.city.trim().isNotEmpty &&
         state.postalCode.trim().isNotEmpty;
+    print('Form validation: country=${state.selectedCountry?.name}, street=${state.street}, city=${state.city}, postal=${state.postalCode}, valid=$isValid');
+    return isValid;
   }
 
   Map<String, String?> _validateAllFields() {
