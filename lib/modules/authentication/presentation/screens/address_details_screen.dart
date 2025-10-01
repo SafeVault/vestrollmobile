@@ -29,6 +29,26 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    // Listen to form state changes to update text controllers
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final addressBloc = context.read<AddressFormBloc>();
+      addressBloc.stream.listen((state) {
+        if (state.street != _streetController.text) {
+          _streetController.text = state.street;
+        }
+        if (state.city != _cityController.text) {
+          _cityController.text = state.city;
+        }
+        if (state.postalCode != _postalCodeController.text) {
+          _postalCodeController.text = state.postalCode;
+        }
+      });
+    });
+  }
+
   void _showCountryModal() {
     showModalBottomSheet(
       context: context,
