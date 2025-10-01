@@ -34,7 +34,7 @@ class AddressFormState {
     Map<String, String?>? fieldErrors,
   }) {
     return AddressFormState(
-      selectedCountry: selectedCountry,
+      selectedCountry: selectedCountry ?? this.selectedCountry,
       street: street ?? this.street,
       city: city ?? this.city,
       postalCode: postalCode ?? this.postalCode,
