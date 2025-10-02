@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          context.push('/profile-creation-success');
+                          context.push('/address-details');
                         },
                         child: Text('Get Started', style: fonts.textMdBold),
                       ),

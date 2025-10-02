@@ -8,6 +8,7 @@ class RouteConstants {
   static const String verifyAccount = 'verifyAccount';
   static const String letsGetToKnowYou = 'letsGetToKnowYou';
   static const String profileCreationSuccess = 'profileCreationSuccess';
+  static const String addressDetails = 'addressDetails';
   static const String wallet = 'wallet';
   static const String ride = 'ride';
   static const String community = 'community';
