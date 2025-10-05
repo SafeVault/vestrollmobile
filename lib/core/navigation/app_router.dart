@@ -6,6 +6,7 @@ import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/profile_creation_success_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/address_details_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/screens/user_type_selection_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -91,6 +92,29 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const ProfileCreationSuccessScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/user-type-selection',
+        name: RouteConstants.userTypeSelection,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const UserTypeSelectionScreen(),
             transitionsBuilder: (
               context,
               animation,
