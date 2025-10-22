@@ -24,7 +24,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
     required this.blue50,
     required this.blue100,
     required this.blue200,
-    required this.blue300,
+    required this.blue300,  
     required this.blue400,
     required this.blue500,
     required this.blue600,
