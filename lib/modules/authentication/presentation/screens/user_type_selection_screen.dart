@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/account_type_card.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 
 enum AccountType { freelancer, contractor }
 

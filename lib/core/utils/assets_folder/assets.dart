@@ -4,6 +4,7 @@ class AppAssets {
   static const defifundrIconPath = 'assets/icons/';
   //! AUTH
   static String userIcon = '${defifundrIconPath}user.svg';
+  static String arrowClockwise = '${defifundrIconPath}arrow_clockwise.svg';
   static String headSetIcon = '${defifundrIconPath}headset.svg';
   static String smileSuccess = '${defifundrIconPath}smile_success.svg';
   static String sadError = '${defifundrIconPath}sad_error.svg';

@@ -23,4 +23,6 @@ class RouteConstants {
   static const String selectPaymentPlan = 'selectPaymentPlan';
   static const String plans = 'plans';
   static const String analytics = 'analytics';
+  static const String resetPassword = 'resetPassword';
+  static const String verifyOtpScreen = 'verifyOtpScreen';
 }

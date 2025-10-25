@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/theme_demo_screen.dart';
 import 'package:vestrollmobile/shared/widgets/theme_toggle_button.dart';
 

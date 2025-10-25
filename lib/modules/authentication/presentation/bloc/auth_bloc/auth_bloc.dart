@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vestrollmobile/modules/authentication/domain/domain_repositories/auth_domain_repositories.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/bloc/auth_event.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/bloc/auth_state.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/bloc/auth_bloc/auth_event.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/bloc/auth_bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;

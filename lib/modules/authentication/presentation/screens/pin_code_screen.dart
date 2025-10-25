@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/biometric_enum.dart';
-import 'package:vestrollmobile/core/utils/heptic_manager.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/enums/biometric_enum.dart';
+import 'package:vestrollmobile/core/utils/managers/heptic_manager.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/bottom_action.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/pin_input_section.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/pin_login_header.dart';

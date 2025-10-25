@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
-import 'package:vestrollmobile/core/utils/app_icons.dart';
-import 'package:vestrollmobile/core/utils/assets.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
+import 'package:vestrollmobile/core/utils/assets_folder/app_icons.dart';
+import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/or_widget.dart';
 import 'package:vestrollmobile/shared/widgets/app_bar.dart';
 import 'package:vestrollmobile/shared/widgets/app_textfiled.dart';
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // context.pushNamed(RouteConstants.forgotPassword);
+                      context.pushNamed(RouteConstants.resetPassword);
                     },
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,

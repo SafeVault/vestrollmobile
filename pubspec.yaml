@@ -24,6 +24,10 @@ dependencies:
   path_provider: ^2.1.5
   shared_preferences: ^2.5.3
   mask_text_input_formatter: ^2.9.0
+  bloc_concurrency: ^0.3.0
+  equatable: ^2.0.7
+  email_validator: ^3.0.0
+  pin_code_fields: ^8.0.1
 
 dev_dependencies:
   flutter_test:

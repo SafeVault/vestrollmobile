@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
 /// AppTheme - Main theme configuration for VelocityStaff payroll application
 class AppTheme {

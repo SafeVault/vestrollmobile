@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 
 // PIN Dot Component
 class PinDot extends StatelessWidget {

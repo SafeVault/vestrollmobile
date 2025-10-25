@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_event.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_state.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_bloc/address_form_event.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_bloc/address_form_state.dart';
 
 class AddressFormBloc extends Bloc<AddressFormEvent, AddressFormState> {
   AddressFormBloc() : super(const AddressFormState()) {

@@ -1,6 +1,6 @@
 // lib/modules/authentication/presentation/widgets/account_type_card.dart
 import 'package:flutter/material.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 
 class AccountTypeCard extends StatelessWidget {
   final IconData icon;

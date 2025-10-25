@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vestrollmobile/core/utils/biometric_enum.dart';
+import 'package:vestrollmobile/core/utils/enums/biometric_enum.dart';
 import 'package:vestrollmobile/shared/widgets/action_button.dart';
 import 'package:vestrollmobile/shared/widgets/key_pad_button.dart';
 
