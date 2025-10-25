@@ -15,7 +15,7 @@ class SecondaryButton extends StatefulWidget {
     this.icon,
     this.iconRtr,
     this.textColor,
-    this.textSize = 14,
+    this.textSize = 16,
     this.borderColor,
     this.fixedSize,
     this.padding,
@@ -125,14 +125,15 @@ class _SecondaryButtonState extends State<SecondaryButton>
                   decoration: BoxDecoration(
                     color:
                         widget.isEnabled ?? true
-                            ? widget.backgroundColor ?? colors.gray300
+                            ? widget.backgroundColor ??
+                                colors.gray950.withAlpha(30)
                             : colors.gray400.withAlpha(100),
                     borderRadius:
-                        widget.borderRadius ?? BorderRadius.circular(28.sp),
+                        widget.borderRadius ?? BorderRadius.circular(12.sp),
                     border: Border.all(
                       color:
                           widget.isEnabled ?? false
-                              ? widget.borderColor ?? colors.gray300
+                              ? widget.borderColor ?? Colors.transparent
                               : Colors.transparent,
                     ),
                   ),

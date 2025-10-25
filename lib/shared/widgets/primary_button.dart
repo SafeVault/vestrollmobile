@@ -14,7 +14,7 @@ class PrimaryButton extends StatefulWidget {
     this.icon,
     this.iconRtr,
     this.textColor,
-    this.textSize = 14,
+    this.textSize = 16,
     this.borderColor,
     this.fixedSize,
     this.iconColor,
@@ -159,7 +159,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
       curve: Curves.easeInOut,
       decoration: _getButtonDecoration(colors),
       padding: _getButtonPadding(),
-      height: widget.fixedSize?.height ?? 55.h,
+      height: widget.fixedSize?.height ?? 48.h,
       width: widget.fixedSize?.width ?? MediaQuery.of(context).size.width - 40,
       child: _buildButtonContent(context, colors, fonts),
     );
@@ -171,7 +171,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
           widget.isEnabled
               ? widget.color ?? colors.brandDefault
               : colors.gray300.withAlpha(100),
-      borderRadius: widget.borderRadius ?? BorderRadius.circular(200.sp),
+      borderRadius: widget.borderRadius ?? BorderRadius.circular(12.sp),
       border: Border.all(
         color:
             widget.isEnabled

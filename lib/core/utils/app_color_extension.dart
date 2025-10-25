@@ -299,7 +299,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       constantContrast: Color(0xFFFFFFFF),
 
       // Brand Colors (Purple/Violet based on your design)
-      brandDefault: Color(0xFF5E2ABC),
+      brandDefault: Color(0xFF5E2A8C),
       brandContrast: Color(0xFF7C3AED),
       brandHover: Color(0xFF7C3AED),
       brandActive: Color(0xFF6D28D9),
@@ -349,7 +349,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       gray700: Color(0xFF374151),
       gray800: Color(0xFF1F2937),
       gray900: Color(0xFF111827),
-      gray950: Color(0xFF030712),
+      gray950: Color(0xFF18181B),
 
       // Yellow Colors
       yellow50: Color(0xFFFEFCE8),

@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -77,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   valueListenable: inputFormatter,
                   builder: (context, inputFormatter, _) {
                     return AppTextField(
-                      
                       borderRadius: 8.sp,
                       controller: _passwordController,
                       hintText: 'Enter password',
@@ -97,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(bottom: 14, right: 14),
+                          padding: const EdgeInsets.only(bottom: 8, right: 14),
                           child: SvgPicture.asset(
                             _obscurePassword
                                 ? AppIcons.eyeIcon
@@ -131,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: fonts.textBaseMedium.copyWith(
                         color: colors.brandDefault,
                         fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -184,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Sign up',
                         style: fonts.bodyMedium.copyWith(
                           fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                           color: colors.brandDefault,
                         ),
                       ),
