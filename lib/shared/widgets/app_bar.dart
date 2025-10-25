@@ -1,9 +1,10 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:vestrollmobile/core/utils/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
-import 'package:vestrollmobile/core/utils/image_theme.dart';
+import 'package:vestrollmobile/core/utils/assets.dart';
 
 class AppBarHeaderWidget extends StatelessWidget {
   const AppBarHeaderWidget({super.key, this.widget});
@@ -16,43 +17,23 @@ class AppBarHeaderWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        widget ??
-            Container(
-              width: 40.sp,
-              height: 40.sp,
-              decoration: BoxDecoration(
-                color: colors.constantDefault,
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              padding: const EdgeInsets.all(8),
-              // child: ThemeAdaptiveImage.colorAdaptive(
-              //   asset: AppAssets.defiFundrLogo,
-              //   width: 14.sp,
-              //   height: 24.sp,
-              //   lightColor: colors.constantContrast,
-              //   darkColor: colors.constantContrast,
-              // ),
-            ),
+        widget ?? Image.asset(AppAssets.vestrollImage),
         Container(
           height: 32.h,
           width: 111.w,
           decoration: BoxDecoration(
-            color: Colors.transparent,
             borderRadius: BorderRadius.circular(100.r),
-            border: Border.all(
-              // color: context.theme.iconTheme.color!,
-            ),
+            border: Border.all(color: colors.constantDefault),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // ThemeAdaptiveImage.colorAdaptive(
-              //   asset: Assets.icons.questionSvg,
-              //   width: 14.sp,
-              //   height: 14.sp,
-              //   lightColor: colors.constantDefault,
-              //   darkColor: colors.constantDefault,
-              // ),
+              SvgPicture.asset(
+                height: 17.sp,
+                width: 17.sp,
+                AppAssets.questionSvg,
+                color: colors.red200,
+              ),
               const SizedBox(width: 4),
               Text('Need Help?', style: fonts.textSmMedium),
             ],

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/screens/login_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/profile_creation_success_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/address_details_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
@@ -22,7 +23,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const HomeScreen(),
+            child: const LoginScreen(),
             transitionsBuilder: (
               context,
               animation,
@@ -45,7 +46,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const HomeScreen(),
+            child: const LoginScreen(),
             transitionsBuilder: (
               context,
               animation,

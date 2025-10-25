@@ -31,7 +31,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(390, 844),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: false,
       child: MultiBlocProvider(
@@ -45,7 +45,7 @@ class _AppState extends State<App> {
                 debugShowCheckedModeBanner: false,
                 title: 'VestrollMobile',
                 theme: AppTheme.light,
-                darkTheme: AppTheme.dark,
+                darkTheme: AppTheme.light,
                 themeMode:
                     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 scrollBehavior: const _AppScrollBehavior(),

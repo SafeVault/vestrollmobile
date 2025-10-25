@@ -24,7 +24,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
     required this.blue50,
     required this.blue100,
     required this.blue200,
-    required this.blue300,  
+    required this.blue300,
     required this.blue400,
     required this.blue500,
     required this.blue600,
@@ -126,6 +126,25 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
     required this.bgB1,
     required this.bgB2,
     required this.bgB3,
+
+    // Surface colors
+    required this.surface,
+    required this.surfaceCard,
+
+    // Button/Interactive colors
+    required this.inactiveButton,
+    required this.activeButton,
+    required this.buttonTertiary,
+    required this.buttonSecondary,
+
+    // Icon colors
+    required this.iconRed,
+    required this.iconBlue,
+    required this.textHighlightBlue,
+
+    // Miscellaneous colors
+    required this.contrastBlack,
+    required this.contrastWhite,
   });
 
   // Constant/Brand Colors
@@ -253,6 +272,25 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
   final Color bgB2;
   final Color bgB3;
 
+  // Surface colors
+  final Color surface;
+  final Color surfaceCard;
+
+  // Button/Interactive colors
+  final Color inactiveButton;
+  final Color activeButton;
+  final Color buttonTertiary;
+  final Color buttonSecondary;
+
+  // Icon colors
+  final Color iconRed;
+  final Color iconBlue;
+  final Color textHighlightBlue;
+
+  // Miscellaneous colors
+  final Color contrastBlack;
+  final Color contrastWhite;
+
   /// Create light theme colors
   factory ColorSystemExtension.light() {
     return const ColorSystemExtension(
@@ -261,7 +299,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       constantContrast: Color(0xFFFFFFFF),
 
       // Brand Colors (Purple/Violet based on your design)
-      brandDefault: Color(0xFF8B5CF6),
+      brandDefault: Color(0xFF5E2ABC),
       brandContrast: Color(0xFF7C3AED),
       brandHover: Color(0xFF7C3AED),
       brandActive: Color(0xFF6D28D9),
@@ -270,7 +308,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
 
       // Text Colors
       textPrimary: Color(0xFF111827),
-      textSecondary: Color(0xFF6B7280),
+      textSecondary: Color(0xFF71717A),
       textTertiary: Color(0xFF9CA3AF),
       textQuaternary: Color(0xFFD1D5DB),
 
@@ -380,6 +418,25 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       bgB1: Color(0xFFF9FAFB),
       bgB2: Color(0xFFF3F4F6),
       bgB3: Color(0xFFE5E7EB),
+
+      // Surface colors
+      surface: Color(0xFFFFFFFF),
+      surfaceCard: Color(0xFFF9FAFB),
+
+      // Button/Interactive colors
+      inactiveButton: Color(0xFFE5E7EB),
+      activeButton: Color(0xFF8B5CF6),
+      buttonTertiary: Color(0xFFF3F4F6),
+      buttonSecondary: Color(0xFFE5E7EB),
+
+      // Icon colors
+      iconRed: Color(0xFFEF4444),
+      iconBlue: Color(0xFF3B82F6),
+      textHighlightBlue: Color(0xFF60A5FA),
+
+      // Miscellaneous colors
+      contrastBlack: Color(0xFF000000),
+      contrastWhite: Color(0xFFFFFFFF),
     );
   }
 
@@ -510,6 +567,25 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       bgB1: Color(0xFF111827),
       bgB2: Color(0xFF1F2937),
       bgB3: Color(0xFF374151),
+
+      // Surface colors
+      surface: Color(0xFF111827),
+      surfaceCard: Color(0xFF1F2937),
+
+      // Button/Interactive colors
+      inactiveButton: Color(0xFF374151),
+      activeButton: Color(0xFF8B5CF6),
+      buttonTertiary: Color(0xFF1F2937),
+      buttonSecondary: Color(0xFF374151),
+
+      // Icon colors
+      iconRed: Color(0xFFEF4444),
+      iconBlue: Color(0xFF60A5FA),
+      textHighlightBlue: Color(0xFF93C5FD),
+
+      // Miscellaneous colors
+      contrastBlack: Color(0xFF000000),
+      contrastWhite: Color(0xFFFFFFFF),
     );
   }
 
@@ -639,6 +715,25 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
     Color? bgB1,
     Color? bgB2,
     Color? bgB3,
+
+    // Surface colors
+    Color? surface,
+    Color? surfaceCard,
+
+    // Button/Interactive colors
+    Color? inactiveButton,
+    Color? activeButton,
+    Color? buttonTertiary,
+    Color? buttonSecondary,
+
+    // Icon colors
+    Color? iconRed,
+    Color? iconBlue,
+    Color? textHighlightBlue,
+
+    // Miscellaneous colors
+    Color? contrastBlack,
+    Color? contrastWhite,
   }) {
     return ColorSystemExtension(
       // Constant/Brand Colors
@@ -765,6 +860,25 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       bgB1: bgB1 ?? this.bgB1,
       bgB2: bgB2 ?? this.bgB2,
       bgB3: bgB3 ?? this.bgB3,
+
+      // Surface colors
+      surface: surface ?? this.surface,
+      surfaceCard: surfaceCard ?? this.surfaceCard,
+
+      // Button/Interactive colors
+      inactiveButton: inactiveButton ?? this.inactiveButton,
+      activeButton: activeButton ?? this.activeButton,
+      buttonTertiary: buttonTertiary ?? this.buttonTertiary,
+      buttonSecondary: buttonSecondary ?? this.buttonSecondary,
+
+      // Icon colors
+      iconRed: iconRed ?? this.iconRed,
+      iconBlue: iconBlue ?? this.iconBlue,
+      textHighlightBlue: textHighlightBlue ?? this.textHighlightBlue,
+
+      // Miscellaneous colors
+      contrastBlack: contrastBlack ?? this.contrastBlack,
+      contrastWhite: contrastWhite ?? this.contrastWhite,
     );
   }
 
@@ -903,6 +1017,26 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       bgB1: Color.lerp(bgB1, other.bgB1, t)!,
       bgB2: Color.lerp(bgB2, other.bgB2, t)!,
       bgB3: Color.lerp(bgB3, other.bgB3, t)!,
+
+      // Surface colors
+      surface: Color.lerp(surface, other.surface, t)!,
+      surfaceCard: Color.lerp(surfaceCard, other.surfaceCard, t)!,
+
+      // Button/Interactive colors
+      inactiveButton: Color.lerp(inactiveButton, other.inactiveButton, t)!,
+      activeButton: Color.lerp(activeButton, other.activeButton, t)!,
+      buttonTertiary: Color.lerp(buttonTertiary, other.buttonTertiary, t)!,
+      buttonSecondary: Color.lerp(buttonSecondary, other.buttonSecondary, t)!,
+
+      // Icon colors
+      iconRed: Color.lerp(iconRed, other.iconRed, t)!,
+      iconBlue: Color.lerp(iconBlue, other.iconBlue, t)!,
+      textHighlightBlue:
+          Color.lerp(textHighlightBlue, other.textHighlightBlue, t)!,
+
+      // Miscellaneous colors
+      contrastBlack: Color.lerp(contrastBlack, other.contrastBlack, t)!,
+      contrastWhite: Color.lerp(contrastWhite, other.contrastWhite, t)!,
     );
   }
 }
