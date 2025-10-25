@@ -25,8 +25,8 @@ class PinDot extends StatelessWidget {
                   ? colors.red500
                   : isFilled
                   ? colors.brandDefault
-                  : colors.gray400,
-          width: 1.5,
+                  : colors.gray100,
+          width: 1,
         ),
       ),
       child:

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
 import 'package:vestrollmobile/core/utils/app_icons.dart';
@@ -139,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 PrimaryButton(
                   text: "Log In",
                   onPressed: () {
-                    // context.pushNamed(RouteConstants.quickPayScreen);
+                    context.pushNamed(RouteConstants.keypad);
                   },
                 ),
                 SizedBox(height: 20.h),
@@ -149,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: 'Log in using Google',
                   icon: AppAssets.googleIcon,
                   onPressed: () {
-                    // context.pushNamed(RouteConstants.quickPayScreen);
+                    // context.pushNamed(RouteConstants.keypad);
                   },
                 ),
                 SizedBox(height: 12.h),

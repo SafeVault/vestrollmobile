@@ -31,7 +31,8 @@ class PinInputSection extends StatelessWidget {
         Text(
           'Enter PIN',
           style: fonts.textMdMedium.copyWith(
-            fontSize: 12.sp,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
             color: colors.textPrimary,
           ),
         ),
