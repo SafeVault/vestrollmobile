@@ -18,6 +18,7 @@ class AppAssets {
   static String ninSlipImage = '$defifundrIconPath/nin_slip.png';
   static String person = '${defifundrIconPath}person.svg';
   static String crossEye = '${defifundrIconPath}cross_eye.svg';
+  static String eyeIcon = '${defifundrIconPath}eye_icon.svg';
   static String arrowRightCurve = '${defifundrIconPath}arrow_right.svg';
   static String headset = '${defifundrIconPath}headset.svg';
   static String googleIcon = '${defifundrIconPath}googleIcon.svg';

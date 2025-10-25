@@ -127,12 +127,16 @@ class _OverlayMessageState extends State<OverlayMessage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(widget.title, style: fonts.textLgBold),
+                        Text(
+                          widget.title,
+                          style: fonts.textLgBold.copyWith(fontSize: 16.sp),
+                        ),
                         SizedBox(height: 4.h),
                         Text(
                           widget.message,
                           style: fonts.textMdRegular.copyWith(
                             color: colors.textSecondary,
+                            fontSize: 14.sp,
                           ),
                         ),
                       ],

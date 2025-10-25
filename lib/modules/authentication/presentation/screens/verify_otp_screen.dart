@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/managers/app_text.dart';
 import 'package:vestrollmobile/core/utils/managers/config.dart';
@@ -62,7 +64,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       return;
     }
 
-    // context.pushNamed(RouteConstants.newPassword);
+    context.pushNamed(RouteConstants.newPassword);
   }
 
   void _handleResendOtp() {
@@ -93,14 +95,14 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           children: [
             SizedBox(height: 20.h),
             _buildHeader(colors, fonts),
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
             _buildOtpInput(colors, fonts),
-            const SizedBox(height: 24),
+            SizedBox(height: 20.h),
+            _buildResendButton(colors, fonts),
+            SizedBox(height: 20.h),
             _buildInfoCard(colors, fonts),
             const Expanded(child: SizedBox()),
             _buildVerifyButton(),
-            SizedBox(height: 10.sp),
-            _buildResendButton(colors, fonts),
             _buildBottomSpacing(),
           ],
         ),
@@ -115,7 +117,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Verify OTP", style: fonts.heading2Bold),
+        Text("Verify OTP", style: fonts.heading2Bold.copyWith(fontSize: 24.sp)),
         const SizedBox(height: 4),
         BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
           buildWhen:
@@ -127,12 +129,14 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 text: "Please enter the 6 digit OTP code sent to ",
                 style: fonts.textMdRegular.copyWith(
                   color: colors.textSecondary,
+                  fontSize: 14.sp,
                 ),
                 children: [
                   TextSpan(
-                    text: state.emailAddress ?? 'tempuser12346@mail.com',
+                    text: state.emailAddress ?? 'lewechi@mail.com',
                     style: fonts.textMdSemiBold.copyWith(
                       color: colors.brandDefault,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ],
@@ -152,7 +156,10 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppTexts.enterCode, style: fonts.textMdMedium),
+        Text(
+          AppTexts.enterCode,
+          style: fonts.textMdMedium.copyWith(fontSize: 14.sp),
+        ),
         const SizedBox(height: 8),
         BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
           listener: (context, state) {
@@ -196,9 +203,9 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 borderRadius: BorderRadius.circular(12),
                 fieldWidth: 52,
                 fieldHeight: 52,
-                borderWidth: 2,
+                borderWidth: 1,
                 activeColor: _hasError ? colors.red500 : colors.brandDefault,
-                inactiveColor: _hasError ? colors.red500 : colors.gray400,
+                inactiveColor: _hasError ? colors.red500 : colors.gray200,
                 selectedColor: _hasError ? colors.red500 : colors.brandDefault,
                 activeFillColor: colors.bgB1,
                 inactiveFillColor: colors.bgB1,
@@ -221,7 +228,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: colors.gray400),
+        border: Border.all(color: colors.gray200),
         borderRadius: BorderRadius.circular(12),
         color: isDark ? colors.bgB1 : colors.bgB0,
       ),
@@ -278,14 +285,26 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 ? ''
                 : '\t(00:${countdown > 9 ? countdown : '0$countdown'})';
 
-        return PrimaryButton(
-          text: "${AppTexts.resendCode}$countdownText",
-          textColor: colors.textPrimary,
-          color: colors.gray300,
-          icon: AppAssets.arrowClockwise,
-          iconColor: colors.constantDefault,
-          isEnabled: isEnabled,
+        return TextButton(
           onPressed: isEnabled ? _handleResendOtp : null,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SvgPicture.asset(
+                AppAssets.arrowClockwise,
+                color: isEnabled ? colors.brandDefault : colors.textSecondary,
+              ),
+              SizedBox(width: 8.sp),
+              Text(
+                "${AppTexts.resendCode}$countdownText",
+                style: fonts.textMdMedium.copyWith(
+                  color: isEnabled ? colors.brandDefault : colors.textSecondary,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -298,7 +317,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
           SizedBox(
             height: 8 + MediaQuery.systemGestureInsetsOf(context).bottom,
           ),
-        SizedBox(height: 20.sp),
       ],
     );
   }

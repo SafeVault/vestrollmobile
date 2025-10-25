@@ -18,8 +18,9 @@ class AppTexts {
   static String enterCode = "Enter Code";
   static String cantFindCode = "Can't find the code?";
   static String cantFindCodeDesc = "Code not received? ";
-  static String invalidOTPCode = "Invalid OTP code";
-  static String invalidOTPCodeDesc = "Please enter a valid OTP code";
+  static String invalidOTPCode = "OTP code incorrect!";
+  static String invalidOTPCodeDesc =
+      "The OTP code you entered is incorrect. Please double-check and try again.";
   static String otpCodeResent = "OTP code resent";
   static String otpCodeResentDesc = "A new code has been sent to your email";
 
