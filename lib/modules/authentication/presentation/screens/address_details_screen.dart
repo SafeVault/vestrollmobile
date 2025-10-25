@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_bloc.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_event.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_state.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_bloc/address_form_bloc.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_bloc/address_form_event.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/bloc/address_form_bloc/address_form_state.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/country_selection_modal.dart';
 
 class AddressDetailsScreen extends StatefulWidget {

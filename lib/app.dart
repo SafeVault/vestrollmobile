@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vestrollmobile/app_bloc_provider.dart';
 import 'package:vestrollmobile/core/navigation/app_router.dart';
-import 'package:vestrollmobile/core/utils/app_theme.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_theme.dart';
 import 'package:vestrollmobile/shared/widgets/dismiss_keyboard.dart';
 import 'package:vestrollmobile/theme_bloc.dart';
 
@@ -31,7 +31,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(390, 844),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: false,
       child: MultiBlocProvider(
@@ -45,7 +45,7 @@ class _AppState extends State<App> {
                 debugShowCheckedModeBanner: false,
                 title: 'VestrollMobile',
                 theme: AppTheme.light,
-                darkTheme: AppTheme.dark,
+                darkTheme: AppTheme.light,
                 themeMode:
                     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 scrollBehavior: const _AppScrollBehavior(),

@@ -3,6 +3,7 @@ class RouteConstants {
   static const String onboarding = 'onboarding';
   static const String auth = 'auth';
   static const String login = 'login';
+  static const String keypad = 'keypad';
   static const String signUp = 'signUp';
   static const String userTypeSelection = 'userTypeSelection';
   static const String verifyAccount = 'verifyAccount';
@@ -22,4 +23,7 @@ class RouteConstants {
   static const String selectPaymentPlan = 'selectPaymentPlan';
   static const String plans = 'plans';
   static const String analytics = 'analytics';
+  static const String resetPassword = 'resetPassword';
+  static const String verifyOtpScreen = 'verifyOtpScreen';
+  static const String newPassword = 'newPassword';
 }

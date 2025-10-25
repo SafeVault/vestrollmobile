@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
 class SecondaryButton extends StatefulWidget {
   const SecondaryButton({
@@ -15,7 +15,7 @@ class SecondaryButton extends StatefulWidget {
     this.icon,
     this.iconRtr,
     this.textColor,
-    this.textSize = 14,
+    this.textSize = 16,
     this.borderColor,
     this.fixedSize,
     this.padding,
@@ -125,14 +125,15 @@ class _SecondaryButtonState extends State<SecondaryButton>
                   decoration: BoxDecoration(
                     color:
                         widget.isEnabled ?? true
-                            ? widget.backgroundColor ?? colors.gray300
+                            ? widget.backgroundColor ??
+                                colors.gray950.withAlpha(30)
                             : colors.gray400.withAlpha(100),
                     borderRadius:
-                        widget.borderRadius ?? BorderRadius.circular(28.sp),
+                        widget.borderRadius ?? BorderRadius.circular(12.sp),
                     border: Border.all(
                       color:
                           widget.isEnabled ?? false
-                              ? widget.borderColor ?? colors.gray300
+                              ? widget.borderColor ?? Colors.transparent
                               : Colors.transparent,
                     ),
                   ),

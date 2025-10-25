@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:vestrollmobile/core/utils/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/app_font_theme_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
 enum PrefixType { none, phone, name, customIcon, customWidget }
 
@@ -284,7 +284,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 readOnly: widget.readOnly,
                 style: fonts.textMdRegular.copyWith(
                   color: widget.textColor ?? colors.textPrimary,
-                  fontSize: widget.hideText ? 10.sp : 12.sp,
+                  fontSize: widget.hideText ? 14.sp : 16.sp,
                   height: 1.3,
                 ),
                 textInputAction: widget.textInputAction,
