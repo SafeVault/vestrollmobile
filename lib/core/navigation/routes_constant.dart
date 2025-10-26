@@ -26,4 +26,6 @@ class RouteConstants {
   static const String resetPassword = 'resetPassword';
   static const String verifyOtpScreen = 'verifyOtpScreen';
   static const String newPassword = 'newPassword';
+  static const String createAccount = 'createAccount';
+  static const String createPassword = 'createPassword';
 }

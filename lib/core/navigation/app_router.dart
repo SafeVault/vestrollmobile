@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/enums/biometric_enum.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/screens/create_account.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/screens/create_password_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/login_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/new_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/profile_creation_success_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/address_details_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/reset_password.dart';
+import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_account_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_otp_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/user_type_selection_screen.dart';
@@ -124,6 +127,75 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: NewPassword(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/createAccount',
+        name: RouteConstants.createAccount,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: CreateAccountScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/createPassword',
+        name: RouteConstants.createPassword,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: CreatePasswordScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/verifyAccount',
+        name: RouteConstants.verifyAccount,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: VerifyAccountScreen(),
             transitionsBuilder: (
               context,
               animation,

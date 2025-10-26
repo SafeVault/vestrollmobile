@@ -56,7 +56,7 @@ class AppTexts {
   static const passwordRequirements = "Must Contain At Least:";
   static String capitalLetter = "Capital letter";
   static String number = "Must Contain At least One number";
-  static String specialCharacter = "At least One special character";
+  static String specialCharacter = "A special character";
   static String chacterLength = "At least 8 characters";
   static String passwordNotMatch = "Password does not match";
   static String looksGood = "Looks Good!";
@@ -75,6 +75,7 @@ class AppTexts {
       "Ooops! don't worry,\nthe process is simpler than you thought";
   static String forgotPasswordButton = "Continue";
   static String resetPassword = "Reset Password";
+  static String setPassword = "Set Password";
   static String resetPasswordDesc =
       "Enter your email or username to reset password";
   static String resetPasswordButton = "Reset Password";
@@ -105,7 +106,7 @@ class AppTexts {
   static const eightCharacters = '8 characters';
   static const aNumber = 'A number';
   static const anUpperCase = 'An uppercase letter';
-  static const anLowerCase = 'An lowercase letter';
+  static const anLowerCase = 'A lowercase letter';
   static const aSpecialCharacter = 'A special character';
 
   //! DASHBOARD
