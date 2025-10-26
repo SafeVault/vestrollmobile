@@ -29,6 +29,7 @@ dependencies:
   email_validator: ^3.0.0
   pin_code_fields: ^8.0.1
   url_launcher: ^6.3.2
+  confetti: ^0.8.0
 
 dev_dependencies:
   flutter_test:

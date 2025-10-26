@@ -28,4 +28,7 @@ class RouteConstants {
   static const String newPassword = 'newPassword';
   static const String createAccount = 'createAccount';
   static const String createPassword = 'createPassword';
+  static const String accountType = 'accountType';
+  static const String personalDetails = 'personalDetails';
+  static const String profileCreated = 'profileCreated';
 }

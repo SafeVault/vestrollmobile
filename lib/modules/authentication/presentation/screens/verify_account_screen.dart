@@ -64,7 +64,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
       return;
     }
 
-    // context.pushNamed(RouteConstants.newPassword);
+    context.pushNamed(RouteConstants.accountType);
   }
 
   void _handleResendOtp() {

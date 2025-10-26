@@ -9,13 +9,14 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/creat
 import 'package:vestrollmobile/modules/authentication/presentation/screens/login_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/new_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/screens/profile_creation_success_screen.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/screens/address_details_screen.dart';
+import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
+import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/address_details.dart';
+import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/personal_details.dart';
+import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/profile_created_screen.dart';
+import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/profile_creation_success_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/reset_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_account_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_otp_screen.dart';
-import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
-import 'package:vestrollmobile/modules/authentication/presentation/screens/user_type_selection_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -236,12 +237,58 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: '/address-details',
+        path: '/personalDetails',
+        name: RouteConstants.personalDetails,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const PersonalDetailsScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/addressDetails',
         name: RouteConstants.addressDetails,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const AddressDetailsScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/profileCreated',
+        name: RouteConstants.profileCreated,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const ProfileCreatedScreen(),
             transitionsBuilder: (
               context,
               animation,
@@ -282,12 +329,12 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: '/user-type-selection',
-        name: RouteConstants.userTypeSelection,
+        path: '/accountType',
+        name: RouteConstants.accountType,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const UserTypeSelectionScreen(),
+            child: const AccountTypeScreen(),
             transitionsBuilder: (
               context,
               animation,
