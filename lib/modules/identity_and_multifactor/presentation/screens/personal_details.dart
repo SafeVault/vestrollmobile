@@ -192,7 +192,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         width: MediaQuery.of(context).size.width * 0.6,
         height: 4,
         decoration: BoxDecoration(
-          color: colors.activeButton,
+          color: colors.brandDefault,
           borderRadius: BorderRadius.circular(2),
         ),
       ),

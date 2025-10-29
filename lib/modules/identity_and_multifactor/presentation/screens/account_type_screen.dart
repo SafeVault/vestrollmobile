@@ -44,7 +44,7 @@ class _AccountTypeScreenState extends State<AccountTypeScreen> {
                 width: MediaQuery.of(context).size.width * 0.3,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: colors.activeButton,
+                  color: colors.brandDefault,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
