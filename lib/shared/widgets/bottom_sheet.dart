@@ -102,7 +102,7 @@ class _SearchableBottomSheetState<T> extends State<SearchableBottomSheet<T>> {
                 hintText: 'Search',
                 hintStyle: TextStyle(
                   color: colors.textSecondary,
-                  fontSize: 18.sp,
+                  fontSize: 18.sp, 
                 ),
                 prefixIcon: Icon(
                   Icons.search,

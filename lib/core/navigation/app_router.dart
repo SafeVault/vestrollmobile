@@ -11,7 +11,9 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/new_p
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/address_details.dart';
+import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/create_pin_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/personal_details.dart';
+import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/pin_created_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/profile_created_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/profile_creation_success_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/reset_password.dart';
@@ -289,6 +291,52 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const ProfileCreatedScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/createPin',
+        name: RouteConstants.createPin,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const CreatePinScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/pinCreated',
+        name: RouteConstants.pinCreated,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const PinCreatedScreen(),
             transitionsBuilder: (
               context,
               animation,

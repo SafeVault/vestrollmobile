@@ -9,11 +9,14 @@ import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension
 import 'package:vestrollmobile/shared/widgets/confetti_wrapper.dart';
 import 'package:vestrollmobile/shared/widgets/primary_button.dart';
 
-class ProfileCreatedScreen extends StatelessWidget {
-  const ProfileCreatedScreen({super.key});
+class PinCreatedScreen extends StatelessWidget {
+  const PinCreatedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).extension<ColorSystemExtension>()!;
+    final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
+
     return ConfettiWrapper(
       autoStart: true,
       duration: const Duration(seconds: 5),
@@ -25,7 +28,9 @@ class ProfileCreatedScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(
               children: [
-                Expanded(child: Center(child: _buildContent(context))),
+                Expanded(
+                  child: Center(child: _buildContent(context, colors, fonts)),
+                ),
                 _buildActionButton(context),
                 SizedBox(height: 32.h),
               ],
@@ -36,19 +41,22 @@ class ProfileCreatedScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(
+    BuildContext context,
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _buildSuccessIcon(context),
+        _buildSuccessIcon(colors),
         SizedBox(height: 32.h),
-        _buildTextContent(context),
+        _buildTextContent(colors, fonts),
       ],
     );
   }
 
-  Widget _buildSuccessIcon(BuildContext context) {
-    final colors = Theme.of(context).extension<ColorSystemExtension>()!;
+  Widget _buildSuccessIcon(ColorSystemExtension colors) {
     return Container(
       width: 80.w,
       height: 80.h,
@@ -66,30 +74,22 @@ class ProfileCreatedScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextContent(BuildContext context) {
-    final colors = Theme.of(context).extension<ColorSystemExtension>()!;
-    final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
-
+  Widget _buildTextContent(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
     return Column(
       children: [
         Text(
-          'Your Profile has been created!',
+          'Your PIN Has Been Created!',
           textAlign: TextAlign.center,
-          style: fonts.heading2Bold.copyWith(
-            fontSize: 24.sp,
-            color: colors.textPrimary,
-            fontWeight: FontWeight.w700,
-          ),
+          style: fonts.heading2Bold.copyWith(color: colors.constantDefault),
         ),
         SizedBox(height: 16.h),
         Text(
-          'Your PIN has been successfully created. You can now use this PIN to log in to your account securely.',
+          'Your PIN has been successfully created. You can now use this PIN to log in to your account.',
           textAlign: TextAlign.center,
-          style: fonts.bodyMedium.copyWith(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w400,
-            color: colors.textSecondary,
-          ),
+          style: fonts.bodyMedium.copyWith(color: colors.gray500),
         ),
       ],
     );
@@ -97,10 +97,10 @@ class ProfileCreatedScreen extends StatelessWidget {
 
   Widget _buildActionButton(BuildContext context) {
     return PrimaryButton(
-      text: 'Proceed to login',
+      text: 'Continue',
       isEnabled: true,
       onPressed: () {
-        context.pushNamed(RouteConstants.createPin);
+        context.pushNamed(RouteConstants.login);
       },
     );
   }

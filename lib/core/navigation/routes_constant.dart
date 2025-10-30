@@ -31,4 +31,6 @@ class RouteConstants {
   static const String accountType = 'accountType';
   static const String personalDetails = 'personalDetails';
   static const String profileCreated = 'profileCreated';
+  static const String createPin = 'createPin';
+  static const String pinCreated = 'pinCreated';
 }
