@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
+import 'package:vestrollmobile/modules/homepage/presentation/widgets/account_setup_card.dart';
+import 'package:vestrollmobile/modules/homepage/presentation/widgets/balance_card.dart';
+import 'package:vestrollmobile/modules/homepage/presentation/widgets/empty_state_section.dart';
+import 'package:vestrollmobile/modules/homepage/presentation/widgets/quick_action_section.dart';
+import 'package:vestrollmobile/shared/widgets/bottom_navigation_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,9 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedTabIndex = 0;
-  bool _showBalance = true;
-
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
@@ -74,25 +74,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              // Wallet Tab Bar
-              WalletTabBar(
-                selectedIndex: _selectedTabIndex,
-                onTabChanged: (index) {
-                  setState(() {
-                    _selectedTabIndex = index;
-                  });
-                },
-              ),
-
               // Balance Card
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-                child: BalanceCard(
-                  showBalance: _showBalance,
-                  onToggleVisibility: () {
-                    setState(() {
-                      _showBalance = !_showBalance;
-                    });
+                child: TotalBalanceCard(
+                  balance: 0.00,
+                  percentageChange: -0.00,
+                  amountChange: 0.00,
+                  onTap: () {
+                    // Navigate to balance details
                   },
                 ),
               ),
@@ -100,7 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
               // Account Setup Card
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: const AccountSetupCard(),
+                child: AccountSetupCard(
+                  progress: 0.2, // 20%
+                  onTap: () {
+                    // Navigate to account setup
+                  },
+                ),
               ),
 
               SizedBox(height: 24.h),
@@ -114,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
               EmptyStateSection(
                 title: 'Contracts',
                 onSeeAll: () {
-                  context.pushNamed(RouteConstants.contracts);
+                  // context.pushNamed(RouteConstants.contracts);
                 },
               ),
 
@@ -124,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
               EmptyStateSection(
                 title: 'Transactions',
                 onSeeAll: () {
-                  context.pushNamed(RouteConstants.transactions);
+                  // context.pushNamed(RouteConstants.transactions);
                 },
               ),
 
@@ -134,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
               EmptyStateSection(
                 title: 'Upcoming payments',
                 onSeeAll: () {
-                  context.pushNamed(RouteConstants.upcomingPayments);
+                  // context.pushNamed(RouteConstants.upcomingPayments);
                 },
               ),
 

@@ -297,11 +297,11 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       // Constant/Brand Colors
       constantDefault: Color(0xFF000000),
       constantContrast: Color(0xFFFFFFFF),
-
+ 
       // Brand Colors (Purple/Violet based on your design)
       brandDefault: Color(0xFF5E2A8C),
       brandContrast: Color(0xFF7C3AED),
-      brandHover: Color(0xFF7C3AED),
+      brandHover: Color(0xFF7C3AED), 
       brandActive: Color(0xFF6D28D9),
       brandStroke: Color(0xFFC4B5FD),
       brandFill: Color(0xFFF3F4F6),

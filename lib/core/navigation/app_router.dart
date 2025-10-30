@@ -9,6 +9,8 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/creat
 import 'package:vestrollmobile/modules/authentication/presentation/screens/login_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/new_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/finance_screen.dart';
+import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/address_details.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/create_pin_screen.dart';
@@ -19,6 +21,9 @@ import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/scr
 import 'package:vestrollmobile/modules/authentication/presentation/screens/reset_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_account_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_otp_screen.dart';
+import 'package:vestrollmobile/modules/more/presentation/screens/more_screen.dart';
+import 'package:vestrollmobile/modules/more_options/presentation/screens/more_options_screen.dart';
+import 'package:vestrollmobile/modules/workspace/presentation/screens/workspace_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -353,13 +358,15 @@ class AppRouter {
           );
         },
       ),
+
+      //////
       GoRoute(
-        path: '/profile-creation-success',
-        name: RouteConstants.profileCreationSuccess,
+        path: '/moreScreen',
+        name: RouteConstants.moreScreen,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const ProfileCreationSuccessScreen(),
+            child: const MoreScreen(),
             transitionsBuilder: (
               context,
               animation,
@@ -376,6 +383,103 @@ class AppRouter {
           );
         },
       ),
+      GoRoute(
+        path: '/moreOptionsScreen',
+        name: RouteConstants.moreOptionsScreen,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const MoreOptionsScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+
+      GoRoute(
+        path: '/homeScreen',
+        name: RouteConstants.homeScreen,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const HomeScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+
+      GoRoute(
+        path: '/financeScreen',
+        name: RouteConstants.financeScreen,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const FinanceScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+
+      GoRoute(
+        path: '/workspaceScreen',
+        name: RouteConstants.workspaceScreen,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const WorkspaceScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+
+      /////
       GoRoute(
         path: '/accountType',
         name: RouteConstants.accountType,
