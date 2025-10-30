@@ -42,7 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

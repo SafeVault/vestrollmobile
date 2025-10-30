@@ -131,6 +131,16 @@ class AppAssets {
   static String userCircle = '${_baseAssetUrl}user_circle.svg';
   static String buildingOfficeSvg = '${_baseAssetUrl}BuildingOffice.svg';
   static const questionSvg = '$_baseAssetUrl/question_svg.svg';
+  static const notificationHome = '$_baseAssetUrl/notificationHome.svg';
+  static const homeIcon = '$_baseAssetUrl/homeIcon.svg';
+  static const moreIcon = '$_baseAssetUrl/moreIcon.svg';
+  static const workspaceIcon = '$_baseAssetUrl/workspaceIcon.svg';
+  static const financeIcon = '$_baseAssetUrl/financeIcon.svg';
+  static const quickpayHome = '$_baseAssetUrl/quickpayHome.svg';
+  static const invoiceHome = '$_baseAssetUrl/invoiceHome.svg';
+  static const contractHome = '$_baseAssetUrl/contractHome.svg';
+  static const contractEmpty = '$_baseAssetUrl/contractEmpty.svg';
+  static const transactionEmpty = '$_baseAssetUrl/transactionEmpty.svg';
 
   //Payment Icons
   static String money = '${_baseImageAssetUrl}money.png';

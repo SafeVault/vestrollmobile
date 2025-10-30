@@ -1,15 +1,21 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
 class EmptyStateSection extends StatelessWidget {
   final String title;
   final VoidCallback onSeeAll;
+  final String assetImage;
 
   const EmptyStateSection({
     required this.title,
     required this.onSeeAll,
+    required this.assetImage,
+
     super.key,
   });
 
@@ -29,7 +35,7 @@ class EmptyStateSection extends StatelessWidget {
               Text(
                 title,
                 style: fonts.heading3Bold.copyWith(
-                  fontSize: 20.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   color: colors.textPrimary,
                 ),
@@ -42,7 +48,7 @@ class EmptyStateSection extends StatelessWidget {
                     Text(
                       'See all',
                       style: fonts.textSmMedium.copyWith(
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         color: colors.brandDefault,
                       ),
                     ),
@@ -58,7 +64,7 @@ class EmptyStateSection extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height: 8.h),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Container(
@@ -66,7 +72,7 @@ class EmptyStateSection extends StatelessWidget {
             height: 156.h,
             decoration: BoxDecoration(
               color: colors.bgB0,
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(12.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.04),
@@ -78,14 +84,11 @@ class EmptyStateSection extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.article_outlined,
-                  color: colors.textTertiary.withOpacity(0.4),
-                  size: 64.sp,
-                ),
+                SvgPicture.asset(assetImage, width: 64.sp),
+
                 SizedBox(height: 16.h),
                 Text(
-                  '${title} will appear here',
+                  '$title will appear here',
                   style: fonts.textSmRegular.copyWith(
                     fontSize: 16.sp,
                     color: colors.textSecondary,

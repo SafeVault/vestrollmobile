@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/account_setup_card.dart';
@@ -28,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header Section
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
                 child: Row(
@@ -54,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    // Notification Bell
                     Container(
                       width: 40.w,
                       height: 40.h,
@@ -63,77 +63,56 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Center(
-                        child: Icon(
-                          Icons.notifications_outlined,
-                          color: colors.textPrimary,
-                          size: 20.sp,
-                        ),
+                        child: SvgPicture.asset(AppAssets.notificationHome),
                       ),
                     ),
                   ],
                 ),
               ),
-
-              // Balance Card
+              SizedBox(height: 16.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: TotalBalanceCard(
                   balance: 0.00,
                   percentageChange: -0.00,
                   amountChange: 0.00,
-                  onTap: () {
-                    // Navigate to balance details
-                  },
+                  onTap: () {},
                 ),
               ),
-
-              // Account Setup Card
+              SizedBox(height: 24.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: AccountSetupCard(
-                  progress: 0.2, // 20%
-                  onTap: () {
-                    // Navigate to account setup
-                  },
-                ),
+                child: AccountSetupCard(progress: 0.2, onTap: () {}),
               ),
 
               SizedBox(height: 24.h),
-
-              // Quick Actions Section
               const QuickActionsSection(),
-
               SizedBox(height: 24.h),
-
-              // Contracts Section
               EmptyStateSection(
+                assetImage: AppAssets.contractEmpty,
                 title: 'Contracts',
                 onSeeAll: () {
                   // context.pushNamed(RouteConstants.contracts);
                 },
               ),
-
               SizedBox(height: 24.h),
-
-              // Transactions Section
               EmptyStateSection(
+                assetImage: AppAssets.transactionEmpty,
                 title: 'Transactions',
                 onSeeAll: () {
                   // context.pushNamed(RouteConstants.transactions);
                 },
               ),
-
               SizedBox(height: 24.h),
-
               // Upcoming Payments Section
               EmptyStateSection(
+                assetImage: AppAssets.transactionEmpty,
                 title: 'Upcoming payments',
                 onSeeAll: () {
                   // context.pushNamed(RouteConstants.upcomingPayments);
                 },
               ),
-
-              SizedBox(height: 100.h), // Space for bottom nav
+              SizedBox(height: 26.h), // Space for bottom nav
             ],
           ),
         ),

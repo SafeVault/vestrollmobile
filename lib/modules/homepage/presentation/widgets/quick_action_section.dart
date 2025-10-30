@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
@@ -30,18 +32,18 @@ class QuickActionsSection extends StatelessWidget {
           child: Text(
             'Quick actions',
             style: fonts.heading3Bold.copyWith(
-              fontSize: 20.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.bold,
               color: colors.textPrimary,
             ),
           ),
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height: 8.h),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Container(
             height: 88.h,
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
             decoration: BoxDecoration(
               color: colors.bgB0,
               borderRadius: BorderRadius.circular(16.r),
@@ -57,31 +59,28 @@ class QuickActionsSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _QuickActionItem(
-                  icon: Icons.description_outlined,
+                  assetImage: AppAssets.contractHome,
                   label: 'Contract',
-                  iconColor: const Color(0xFF6B3FA0),
                   onTap: onContractTap,
                 ),
                 Container(
                   width: 1.w,
-                  height: 48.h,
+                  height: 40.h,
                   color: colors.strokeSecondary,
                 ),
                 _QuickActionItem(
-                  icon: Icons.receipt_long_outlined,
+                  assetImage: AppAssets.invoiceHome,
                   label: 'Invoice',
-                  iconColor: const Color(0xFFFF9500),
                   onTap: onInvoiceTap,
                 ),
                 Container(
                   width: 1.w,
-                  height: 60.h,
+                  height: 40.h,
                   color: colors.strokeSecondary,
                 ),
                 _QuickActionItem(
-                  icon: Icons.payments_outlined,
+                  assetImage: AppAssets.quickpayHome,
                   label: 'Quickpay',
-                  iconColor: const Color(0xFFE91E63),
                   onTap: onQuickpayTap,
                 ),
               ],
@@ -94,15 +93,13 @@ class QuickActionsSection extends StatelessWidget {
 }
 
 class _QuickActionItem extends StatelessWidget {
-  final IconData icon;
+  final String assetImage;
   final String label;
-  final Color iconColor;
   final VoidCallback? onTap;
 
   const _QuickActionItem({
-    required this.icon,
+    required this.assetImage,
     required this.label,
-    required this.iconColor,
     this.onTap,
   });
 
@@ -117,7 +114,7 @@ class _QuickActionItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: iconColor, size: 32.sp),
+          SvgPicture.asset(assetImage, width: 32, height: 32),
           SizedBox(height: 8.h),
           Text(
             label,
