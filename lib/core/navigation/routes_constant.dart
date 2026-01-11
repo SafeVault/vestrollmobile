@@ -26,4 +26,16 @@ class RouteConstants {
   static const String resetPassword = 'resetPassword';
   static const String verifyOtpScreen = 'verifyOtpScreen';
   static const String newPassword = 'newPassword';
+  static const String createAccount = 'createAccount';
+  static const String createPassword = 'createPassword';
+  static const String accountType = 'accountType';
+  static const String personalDetails = 'personalDetails';
+  static const String profileCreated = 'profileCreated';
+  static const String createPin = 'createPin';
+  static const String pinCreated = 'pinCreated';
+  static const String moreScreen = 'moreScreen';
+  static const String financeScreen = 'financeScreen';
+  static const String homeScreen = 'homeScreen';
+  static const String moreOptionsScreen = 'moreOptionsScreen';
+  static const String workspaceScreen = 'workspaceScreen';
 }

@@ -4,6 +4,7 @@ class AppAssets {
   static const defifundrIconPath = 'assets/icons/';
   //! AUTH
   static String userIcon = '${defifundrIconPath}user.svg';
+
   static String arrowClockwise = '${defifundrIconPath}arrow_clockwise.svg';
   static String headSetIcon = '${defifundrIconPath}headset.svg';
   static String smileSuccess = '${defifundrIconPath}smile_success.svg';
@@ -24,7 +25,6 @@ class AppAssets {
   static String googleIcon = '${defifundrIconPath}googleIcon.svg';
   static String appleIcon = '${defifundrIconPath}appleIcon.svg';
   static String defiFundrLogo = '${defifundrIconPath}defifundrLogo.svg';
-  static const questionSvg = '$defifundrIconPath/question_svg.svg';
 
   //-------------------------------------------- IMAGES -------------------------------------------- //
   static const defifundrImagePath = 'assets/images';
@@ -97,9 +97,53 @@ class AppAssets {
   static const shareNetworkSvg = '$defifundrImagePath/ShareNetwork.svg';
   static const headsetSvg = '$defifundrImagePath/Headset.svg';
 
-  //-------------------------------------------- FLAGS -------------------------------------------- //
+  //-------------------------------------------- ICONS -------------------------------------------- //
 
   static const defifundrFlagPath = 'assets/icons/country_flags';
 
   static const nigeriaSvg = '$defifundrFlagPath/nigeria.svg';
+
+  static const _baseAssetUrl = 'assets/icons/';
+  static const _baseImageAssetUrl = 'assets/images/';
+
+  //! AUTH
+  static String backIcon = '${_baseAssetUrl}back_icon.svg';
+  static String headsetIcon = '${_baseAssetUrl}headset_icon.svg';
+  static String crossEyeIcon = '${_baseAssetUrl}cross_eye.svg';
+  static String userEdit = '${_baseAssetUrl}user_edit.svg';
+  static String zeroPercent = '${_baseAssetUrl}zero_percent.svg';
+  static String twentyFivePercent = '${_baseAssetUrl}twenty_five_percent.svg';
+  static String hundredPercent = '${_baseAssetUrl}hundred_percent.svg';
+
+  ///Image icons
+  static String people = '${_baseImageAssetUrl}people.png';
+
+  static String gradientBackground =
+      '${_baseImageAssetUrl}gradientBackground.png';
+  static String driversCard = '${_baseImageAssetUrl}drivers_card.png';
+
+  // Blockchain icons
+  static String ethereumIcon = '${_baseAssetUrl}ethereumIcon.svg';
+  static String starknetIcon = '${_baseAssetUrl}starknetIcon.svg';
+  static String solanaIcon = '${_baseAssetUrl}solanaIcon.svg';
+  static String stellar = '${_baseAssetUrl}stellar.svg';
+  static String briefCase = '${_baseAssetUrl}brief_case.svg';
+  static String userCircle = '${_baseAssetUrl}user_circle.svg';
+  static String buildingOfficeSvg = '${_baseAssetUrl}BuildingOffice.svg';
+  static const questionSvg = '$_baseAssetUrl/question_svg.svg';
+  static const notificationHome = '$_baseAssetUrl/notificationHome.svg';
+  static const homeIcon = '$_baseAssetUrl/homeIcon.svg';
+  static const moreIcon = '$_baseAssetUrl/moreIcon.svg';
+  static const workspaceIcon = '$_baseAssetUrl/workspaceIcon.svg';
+  static const financeIcon = '$_baseAssetUrl/financeIcon.svg';
+  static const quickpayHome = '$_baseAssetUrl/quickpayHome.svg';
+  static const invoiceHome = '$_baseAssetUrl/invoiceHome.svg';
+  static const contractHome = '$_baseAssetUrl/contractHome.svg';
+  static const contractEmpty = '$_baseAssetUrl/contractEmpty.svg';
+  static const transactionEmpty = '$_baseAssetUrl/transactionEmpty.svg';
+
+  //Payment Icons
+  static String money = '${_baseImageAssetUrl}money.png';
+  static String invoice = '${_baseImageAssetUrl}invoice.png';
+  // App icons
 }

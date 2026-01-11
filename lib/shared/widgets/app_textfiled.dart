@@ -334,7 +334,7 @@ class _AppTextFieldState extends State<AppTextField> {
                       Radius.circular(widget.borderRadius),
                     ),
                     borderSide: BorderSide(
-                      color: hasError ? colors.red500 : colors.gray300,
+                      color: hasError ? colors.red500 : colors.gray200,
                       width: hasError ? 1.0 : 1.0,
                     ),
                   ),

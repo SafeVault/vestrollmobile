@@ -42,7 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -175,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        // context.pushNamed(RouteConstants.passwordValidation);
+                        context.pushNamed(RouteConstants.createAccount);
                       },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
