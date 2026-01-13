@@ -5,8 +5,6 @@ import 'package:vestrollmobile/shared/services/overlay_message.dart';
 class MessageService {
   static OverlayEntry? _currentOverlay;
 
-  /// Shows a message overlay at the top of the screen
-  ///
   /// [context] - BuildContext to find the overlay
   /// [title] - Title of the message
   /// [message] - Content of the message

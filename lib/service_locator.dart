@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:vestrollmobile/modules/authentication/domain/domain_repositories/auth_domain_repositories.dart';
 
 final getIt = GetIt.instance;
 
