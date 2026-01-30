@@ -32,56 +32,53 @@ class QuickActionsSection extends StatelessWidget {
           child: Text(
             'Quick actions',
             style: fonts.heading3Bold.copyWith(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.bold,
+              fontSize: 16.sp,
               color: colors.textPrimary,
             ),
           ),
         ),
-        SizedBox(height: 8.h),
+        SizedBox(height: 12.h),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Container(
-            height: 88.h,
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            height: 96.h,
             decoration: BoxDecoration(
               color: colors.bgB0,
               borderRadius: BorderRadius.circular(16.r),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: Offset(0, 2),
-                ),
-              ],
+              border: Border.all(color: colors.strokePrimary.withOpacity(0.5)),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _QuickActionItem(
-                  assetImage: AppAssets.contractHome,
-                  label: 'Contract',
-                  onTap: onContractTap,
+                Expanded(
+                  child: _QuickActionItem(
+                    assetImage: AppAssets.contractHome,
+                    label: 'Contract',
+                    onTap: onContractTap,
+                  ),
                 ),
                 Container(
                   width: 1.w,
                   height: 40.h,
-                  color: colors.strokeSecondary,
+                  color: colors.strokeSecondary.withOpacity(0.5),
                 ),
-                _QuickActionItem(
-                  assetImage: AppAssets.invoiceHome,
-                  label: 'Invoice',
-                  onTap: onInvoiceTap,
+                Expanded(
+                  child: _QuickActionItem(
+                    assetImage: AppAssets.invoiceHome,
+                    label: 'Invoice',
+                    onTap: onInvoiceTap,
+                  ),
                 ),
                 Container(
                   width: 1.w,
                   height: 40.h,
-                  color: colors.strokeSecondary,
+                  color: colors.strokeSecondary.withOpacity(0.5),
                 ),
-                _QuickActionItem(
-                  assetImage: AppAssets.quickpayHome,
-                  label: 'Quickpay',
-                  onTap: onQuickpayTap,
+                Expanded(
+                  child: _QuickActionItem(
+                    assetImage: AppAssets.quickpayHome,
+                    label: 'Quickpay',
+                    onTap: onQuickpayTap,
+                  ),
                 ),
               ],
             ),
@@ -110,16 +107,16 @@ class _QuickActionItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(assetImage, width: 32, height: 32),
+          SvgPicture.asset(assetImage, width: 32.sp, height: 32.sp),
           SizedBox(height: 8.h),
           Text(
             label,
-            style: fonts.textSmRegular.copyWith(
-              fontSize: 14.sp,
+            style: fonts.textSmMedium.copyWith(
+              fontSize: 12.sp,
               color: colors.textSecondary,
             ),
           ),

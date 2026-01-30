@@ -23,6 +23,7 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/verif
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_otp_screen.dart';
 import 'package:vestrollmobile/modules/more/presentation/screens/more_screen.dart';
 import 'package:vestrollmobile/modules/more_options/presentation/screens/more_options_screen.dart';
+import 'package:vestrollmobile/modules/onboarding/presentation/screens/onboarding_checklist_screen.dart';
 import 'package:vestrollmobile/modules/workspace/presentation/screens/workspace_screen.dart';
 
 class AppRouter {
@@ -39,7 +40,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const TransactionsScreen(),
+            child: const HomeScreen(),
             transitionsBuilder: (
               context,
               animation,
