@@ -29,15 +29,11 @@ class TotalBalanceCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
-          color: colors.bgB0,
+          color:
+              colors
+                  .bgB0, // Figma shows it as slightly off-white or white with a light border
           borderRadius: BorderRadius.circular(16.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 8,
-              offset: Offset(0, 2),
-            ),
-          ],
+          border: Border.all(color: colors.strokePrimary.withOpacity(0.5)),
         ),
         child: Row(
           children: [
@@ -54,20 +50,21 @@ class TotalBalanceCard extends StatelessWidget {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    '\$${balance.toStringAsFixed(2)}',
-                    style: fonts.textSmSemiBold.copyWith(
-                      fontSize: 40.sp,
-                      fontWeight: FontWeight.bold,
+                    '\$${balance.toStringAsFixed(2).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')}',
+                    style: fonts.heading1Bold.copyWith(
+                      fontSize: 32.sp,
                       color: colors.textPrimary,
-                      height: 1.2,
                     ),
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 6.h),
                   Text(
-                    '${percentageChange >= 0 ? '' : '-'}${percentageChange.abs().toStringAsFixed(2)}% (\$${amountChange.toStringAsFixed(2)})',
-                    style: fonts.textSmRegular.copyWith(
+                    '${percentageChange < 0 ? '-' : '+'}${percentageChange.abs().toStringAsFixed(4)}% (\$${amountChange.toStringAsFixed(2)})',
+                    style: fonts.textSmMedium.copyWith(
                       fontSize: 14.sp,
-                      color: colors.textTertiary,
+                      color:
+                          percentageChange < 0
+                              ? colors.red500
+                              : colors.green500,
                     ),
                   ),
                 ],

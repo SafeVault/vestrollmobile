@@ -11,7 +11,6 @@ class BottomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
-    final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return Container(
       decoration: BoxDecoration(
@@ -20,88 +19,104 @@ class BottomNavigationBarWidget extends StatelessWidget {
           topLeft: Radius.circular(32.r),
           topRight: Radius.circular(32.r),
         ),
-        border: Border(top: BorderSide(color: colors.gray100)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            offset: Offset(0, -4),
+            blurRadius: 16,
+          ),
+        ],
       ),
-      child: SizedBox(
-        height: 80.h,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 12.h, bottom: 12.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  _NavItem(
-                    icon: Icons.home_outlined,
-                    label: 'Home',
-                    isActive: true,
-                    onTap: () {
-                      context.pushNamed(RouteConstants.homeScreen);
-                    },
-                  ),
-                  _NavItem(
-                    icon: Icons.layers_outlined,
-                    label: 'Workspace',
-                    isActive: false,
-                    onTap: () {
-                      context.pushNamed(RouteConstants.workspaceScreen);
-                    },
-                  ),
-                  SizedBox(width: 56.w), // Space for center button
-                  _NavItem(
-                    icon: Icons.attach_money_outlined,
-                    label: 'Finance',
-                    isActive: false,
-                    onTap: () {
-                      context.pushNamed(RouteConstants.financeScreen);
-                    },
-                  ),
-                  _NavItem(
-                    icon: Icons.more_horiz_outlined,
-                    label: 'More',
-                    isActive: false,
-                    onTap: () {
-                      context.pushNamed(RouteConstants.moreOptionsScreen);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: -20.h,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: GestureDetector(
-                  onTap: () {
-                    context.pushNamed(RouteConstants.moreScreen);
-                  },
-                  child: Container(
-                    width: 56.w,
-                    height: 56.h,
-                    decoration: BoxDecoration(
-                      color: colors.brandDefault,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
-                          blurRadius: 12,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
+      child: SafeArea(
+        top: false,
+        child: SizedBox(
+          height: 72.h,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: _NavItem(
+                        icon: Icons.home_rounded,
+                        label: 'Home',
+                        isActive: true,
+                        onTap: () {
+                          context.pushNamed(RouteConstants.homeScreen);
+                        },
+                      ),
                     ),
-                    child: Icon(
-                      Icons.arrow_upward,
-                      color: colors.constantContrast,
-                      size: 24.sp,
+                    Expanded(
+                      child: _NavItem(
+                        icon: Icons.layers_rounded,
+                        label: 'Workspace',
+                        isActive: false,
+                        onTap: () {
+                          context.pushNamed(RouteConstants.workspaceScreen);
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 64.w), // Space for center button
+                    Expanded(
+                      child: _NavItem(
+                        icon: Icons.monetization_on_rounded,
+                        label: 'Finance',
+                        isActive: false,
+                        onTap: () {
+                          context.pushNamed(RouteConstants.financeScreen);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: _NavItem(
+                        icon: Icons.more_horiz_rounded,
+                        label: 'More',
+                        isActive: false,
+                        onTap: () {
+                          context.pushNamed(RouteConstants.moreOptionsScreen);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: -32.h,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      context.pushNamed(RouteConstants.moreScreen);
+                    },
+                    child: Container(
+                      width: 64.w,
+                      height: 64.h,
+                      decoration: BoxDecoration(
+                        color: colors.brandDefault,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: colors.brandDefault.withOpacity(0.3),
+                            blurRadius: 16,
+                            offset: Offset(0, 8),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.arrow_upward_rounded,
+                        color: colors.constantContrast,
+                        size: 32.sp,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -128,20 +143,21 @@ class _NavItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             icon,
-            color: isActive ? colors.brandDefault : colors.textSecondary,
+            color: isActive ? colors.brandDefault : colors.textTertiary,
             size: 24.sp,
           ),
           SizedBox(height: 4.h),
           Text(
             label,
-            style: fonts.textXsRegular.copyWith(
-              fontSize: 10.sp,
-              color: isActive ? colors.brandDefault : colors.textSecondary,
+            style: fonts.textXsMedium.copyWith(
+              fontSize: 11.sp,
+              color: isActive ? colors.brandDefault : colors.textTertiary,
             ),
           ),
         ],
