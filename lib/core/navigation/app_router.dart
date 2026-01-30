@@ -10,6 +10,7 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/login
 import 'package:vestrollmobile/modules/authentication/presentation/screens/new_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/finance_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/transactions_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/address_details.dart';
@@ -17,7 +18,6 @@ import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/scr
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/personal_details.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/pin_created_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/profile_created_screen.dart';
-import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/profile_creation_success_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/reset_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_account_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_otp_screen.dart';
@@ -39,7 +39,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const LoginScreen(),
+            child: const TransactionsScreen(),
             transitionsBuilder: (
               context,
               animation,
