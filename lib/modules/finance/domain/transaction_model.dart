@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 enum TransactionStatus { successful, processing, failed }
 
+enum TransactionType { all, contractPayment, invoice, quickpay, withdrawal }
+
 class Transaction {
   final String id;
   final String title;
@@ -11,6 +13,7 @@ class Transaction {
   final Color iconBackgroundColor;
   final IconData icon;
   final DateTime date;
+  final TransactionType type;
 
   const Transaction({
     required this.id,
@@ -21,6 +24,7 @@ class Transaction {
     required this.iconBackgroundColor,
     required this.icon,
     required this.date,
+    required this.type,
   });
 
   Color getStatusColor() {
