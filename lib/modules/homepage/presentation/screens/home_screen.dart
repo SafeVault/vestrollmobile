@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
@@ -80,7 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildSection(
                 title: 'Upcoming payments',
                 isEmpty: _isEmpty,
-                onSeeAll: () {},
+                onSeeAll: () {
+                  context.pushNamed(RouteConstants.upcomingPayments);
+                },
                 emptyAsset: AppAssets.transactionEmpty,
                 content: _buildUpcomingPaymentsList(colors, fonts),
               ),

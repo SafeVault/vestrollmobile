@@ -11,6 +11,7 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/new_p
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/finance_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/transactions_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/upcoming_payments_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/address_details.dart';
@@ -40,7 +41,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const HomeScreen(),
+            child: const UpcomingPaymentsScreen(),
             transitionsBuilder: (
               context,
               animation,
@@ -488,6 +489,29 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const AccountTypeScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/upcomingPayments',
+        name: RouteConstants.upcomingPayments,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const UpcomingPaymentsScreen(),
             transitionsBuilder: (
               context,
               animation,

@@ -38,4 +38,5 @@ class RouteConstants {
   static const String homeScreen = 'homeScreen';
   static const String moreOptionsScreen = 'moreOptionsScreen';
   static const String workspaceScreen = 'workspaceScreen';
+  static const String upcomingPayments = 'upcomingPayments';
 }
