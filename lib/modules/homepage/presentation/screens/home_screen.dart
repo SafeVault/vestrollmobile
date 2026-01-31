@@ -61,6 +61,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: AccountSetupCard(progress: 0.2, onTap: () {}),
                 ),
               ],
+              SizedBox(height: 16.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: GestureDetector(
+                  onTap:
+                      () => context.pushNamed(RouteConstants.timelineShowcase),
+                  child: Container(
+                    padding: EdgeInsets.all(12.sp),
+                    decoration: BoxDecoration(
+                      color: colors.brandDefault.withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(
+                        color: colors.brandDefault.withOpacity(0.1),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'View High-Fidelity Timelines (Beta)',
+                          style: fonts.textSmMedium.copyWith(
+                            color: colors.brandDefault,
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          color: colors.brandDefault,
+                          size: 20.sp,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(height: 24.h),
               const QuickActionsSection(),
               SizedBox(height: 24.h),

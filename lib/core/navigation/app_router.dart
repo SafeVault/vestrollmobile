@@ -12,8 +12,8 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_c
 import 'package:vestrollmobile/modules/finance/presentation/screens/contract_payment_details_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/finance_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/invoice_details_screen.dart';
-import 'package:vestrollmobile/modules/finance/presentation/screens/transactions_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/upcoming_payments_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/timeline_showcase_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/address_details.dart';
@@ -26,7 +26,6 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/verif
 import 'package:vestrollmobile/modules/authentication/presentation/screens/verify_otp_screen.dart';
 import 'package:vestrollmobile/modules/more/presentation/screens/more_screen.dart';
 import 'package:vestrollmobile/modules/more_options/presentation/screens/more_options_screen.dart';
-import 'package:vestrollmobile/modules/onboarding/presentation/screens/onboarding_checklist_screen.dart';
 import 'package:vestrollmobile/modules/workspace/presentation/screens/workspace_screen.dart';
 
 class AppRouter {
@@ -43,7 +42,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const UpcomingPaymentsScreen(),
+            child: const TimelineShowcaseScreen(),
             transitionsBuilder: (
               context,
               animation,
@@ -560,6 +559,29 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const InvoiceDetailsScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/timelineShowcase',
+        name: RouteConstants.timelineShowcase,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const TimelineShowcaseScreen(),
             transitionsBuilder: (
               context,
               animation,
