@@ -30,6 +30,7 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       daysRemaining: 7,
       iconBackgroundColor: const Color(0xFFF97316),
       icon: Icons.receipt_long,
+      type: PaymentType.invoice,
     ),
     UpcomingPayment(
       id: '2',
@@ -41,6 +42,7 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       daysRemaining: 7,
       iconBackgroundColor: const Color(0xFF8B5CF6),
       icon: Icons.receipt_long,
+      type: PaymentType.contract,
     ),
     UpcomingPayment(
       id: '3',
@@ -51,6 +53,7 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       status: UpcomingPaymentStatus.overdue,
       iconBackgroundColor: const Color(0xFFF97316),
       icon: Icons.receipt_long,
+      type: PaymentType.invoice,
     ),
     UpcomingPayment(
       id: '4',
@@ -61,6 +64,7 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       status: UpcomingPaymentStatus.overdue,
       iconBackgroundColor: const Color(0xFF8B5CF6),
       icon: Icons.receipt_long,
+      type: PaymentType.contract,
     ),
   ];
 
@@ -111,10 +115,10 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
 
     return Scaffold(
       backgroundColor: colors.bgB1,
-      appBar: VestrollAppBar(
+      appBar: const VestrollAppBar(
         title: 'Upcoming payments',
         isBack: true,
-        actions: const [],
+        actions: [],
       ),
       body: Column(
         children: [
@@ -195,10 +199,7 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       itemCount: _filteredPayments.length,
       itemBuilder: (context, index) {
-        return UpcomingPaymentCard(
-          payment: _filteredPayments[index],
-          onTap: () {},
-        );
+        return UpcomingPaymentCard(payment: _filteredPayments[index]);
       },
     );
   }

@@ -6,6 +6,7 @@ import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
+import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/account_setup_card.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/balance_card.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/contract_list_item.dart';
@@ -391,6 +392,7 @@ class _HomeScreenState extends State<HomeScreen> {
           statusColor: colors.orange500,
           icon: Icons.account_balance_wallet,
           iconBackgroundColor: colors.brandContrast,
+          paymentType: PaymentType.contract,
         ),
         UpcomingPaymentListItem(
           title: 'Neurolytix Initial consul...',
@@ -400,6 +402,7 @@ class _HomeScreenState extends State<HomeScreen> {
           statusColor: Colors.blue,
           icon: Icons.receipt_long,
           iconBackgroundColor: Colors.orange,
+          paymentType: PaymentType.invoice,
         ),
         UpcomingPaymentListItem(
           title: 'MintForge Bug fixes an...',
@@ -409,6 +412,7 @@ class _HomeScreenState extends State<HomeScreen> {
           statusColor: colors.orange500,
           icon: Icons.account_balance_wallet,
           iconBackgroundColor: colors.brandContrast,
+          paymentType: PaymentType.contract,
         ),
       ],
     );

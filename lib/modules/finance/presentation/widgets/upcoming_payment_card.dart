@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
 
 class UpcomingPaymentCard extends StatelessWidget {
   final UpcomingPayment payment;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
-  const UpcomingPaymentCard({
-    super.key,
-    required this.payment,
-    required this.onTap,
-  });
+  const UpcomingPaymentCard({super.key, required this.payment, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,15 @@ class UpcomingPaymentCard extends StatelessWidget {
     final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return InkWell(
-      onTap: onTap,
+      onTap:
+          onTap ??
+          () {
+            if (payment.type == PaymentType.contract) {
+              context.pushNamed(RouteConstants.contractPaymentDetails);
+            } else {
+              context.pushNamed(RouteConstants.invoiceDetails);
+            }
+          },
       borderRadius: BorderRadius.circular(12.r),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 4.h),

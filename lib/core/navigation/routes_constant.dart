@@ -39,4 +39,6 @@ class RouteConstants {
   static const String moreOptionsScreen = 'moreOptionsScreen';
   static const String workspaceScreen = 'workspaceScreen';
   static const String upcomingPayments = 'upcomingPayments';
+  static const String contractPaymentDetails = 'contractPaymentDetails';
+  static const String invoiceDetails = 'invoiceDetails';
 }

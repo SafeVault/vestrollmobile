@@ -145,5 +145,6 @@ class AppAssets {
   //Payment Icons
   static String money = '${_baseImageAssetUrl}money.png';
   static String invoice = '${_baseImageAssetUrl}invoice.png';
+  static String invoiceSvg = '${_baseAssetUrl}invoice.svg';
   // App icons
 }
