@@ -9,8 +9,11 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/creat
 import 'package:vestrollmobile/modules/authentication/presentation/screens/login_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/new_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/contract_payment_details_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/finance_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/invoice_details_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/transactions_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/upcoming_payments_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/address_details.dart';
@@ -40,7 +43,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const HomeScreen(),
+            child: const UpcomingPaymentsScreen(),
             transitionsBuilder: (
               context,
               animation,
@@ -488,6 +491,75 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const AccountTypeScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/upcomingPayments',
+        name: RouteConstants.upcomingPayments,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const UpcomingPaymentsScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/contractPaymentDetails',
+        name: RouteConstants.contractPaymentDetails,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const ContractPaymentDetailsScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/invoiceDetails',
+        name: RouteConstants.invoiceDetails,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const InvoiceDetailsScreen(),
             transitionsBuilder: (
               context,
               animation,

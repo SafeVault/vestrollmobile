@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
+import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
 
 class UpcomingPaymentListItem extends StatelessWidget {
   final String title;
@@ -11,6 +14,7 @@ class UpcomingPaymentListItem extends StatelessWidget {
   final Color statusColor;
   final IconData icon;
   final Color iconBackgroundColor;
+  final PaymentType? paymentType;
   final VoidCallback? onTap;
 
   const UpcomingPaymentListItem({
@@ -22,6 +26,7 @@ class UpcomingPaymentListItem extends StatelessWidget {
     required this.statusColor,
     required this.icon,
     required this.iconBackgroundColor,
+    this.paymentType,
     this.onTap,
   });
 
@@ -31,7 +36,16 @@ class UpcomingPaymentListItem extends StatelessWidget {
     final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return GestureDetector(
-      onTap: onTap,
+      onTap:
+          onTap ??
+          () {
+            if (paymentType == null) return;
+            if (paymentType == PaymentType.contract) {
+              context.pushNamed(RouteConstants.contractPaymentDetails);
+            } else {
+              context.pushNamed(RouteConstants.invoiceDetails);
+            }
+          },
       behavior: HitTestBehavior.opaque,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 12.h),
