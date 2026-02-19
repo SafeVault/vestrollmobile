@@ -6,7 +6,9 @@ import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
-  const BottomNavigationBarWidget({super.key});
+  final VoidCallback? onFinanceTap;
+
+  const BottomNavigationBarWidget({super.key, this.onFinanceTap});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         label: 'Finance',
                         isActive: false,
                         onTap: () {
-                          context.pushNamed(RouteConstants.financeScreen);
+                          if (onFinanceTap != null) {
+                            onFinanceTap!();
+                          } else {
+                            context.pushNamed(RouteConstants.financeScreen);
+                          }
                         },
                       ),
                     ),

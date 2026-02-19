@@ -42,7 +42,7 @@ class AppRouter {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const TimelineShowcaseScreen(),
+            child: const LoginScreen(),
             transitionsBuilder: (
               context,
               animation,

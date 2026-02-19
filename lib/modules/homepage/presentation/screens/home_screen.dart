@@ -7,10 +7,12 @@ import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
+import 'package:vestrollmobile/modules/finance/presentation/widgets/finance_bottom_sheet.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/account_setup_card.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/balance_card.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/contract_list_item.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/empty_state_section.dart';
+
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/home_transaction_item.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/quick_action_section.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/upcoming_payment_list_item.dart';
@@ -128,7 +130,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: BottomNavigationBarWidget(
+        onFinanceTap: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => const FinanceBottomSheet(),
+          );
+        },
+      ),
     );
   }
 

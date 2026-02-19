@@ -83,7 +83,7 @@ class ProfileCreatedScreen extends StatelessWidget {
         ),
         SizedBox(height: 16.h),
         Text(
-          'Your PIN has been successfully created. You can now use this PIN to log in to your account securely.',
+          'Your profile has been successfully created. Next, set up a 4-digit PIN to keep your account secure.',
           textAlign: TextAlign.center,
           style: fonts.bodyMedium.copyWith(
             fontSize: 14.sp,
@@ -97,7 +97,7 @@ class ProfileCreatedScreen extends StatelessWidget {
 
   Widget _buildActionButton(BuildContext context) {
     return PrimaryButton(
-      text: 'Proceed to login',
+      text: 'Create your PIN',
       isEnabled: true,
       onPressed: () {
         context.pushNamed(RouteConstants.createPin);

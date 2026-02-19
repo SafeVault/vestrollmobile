@@ -7,6 +7,8 @@ import 'package:vestrollmobile/core/utils/managers/app_text.dart';
 import 'package:vestrollmobile/core/utils/managers/config.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/bloc/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/password_requirements_viewer.dart';
 import 'package:vestrollmobile/shared/widgets/app_textfiled.dart';
@@ -212,7 +214,7 @@ class _NewPasswordState extends State<NewPassword> {
                   isEnabled:
                       state.newPasswordState?.isVerificationPassed ?? false,
                   onPressed: () {
-                    // context.pushNamed(RouteConstants.passwordReset);
+                    context.goNamed(RouteConstants.signUp);
                   },
                 );
               },

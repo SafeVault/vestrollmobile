@@ -239,7 +239,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                     isEnabled:
                         state.newPasswordState?.isVerificationPassed ?? false,
                     onPressed: () {
-                      context.pushNamed(RouteConstants.verifyAccount);
+                      context.pushNamed(RouteConstants.accountType);
                     },
                   );
                 },

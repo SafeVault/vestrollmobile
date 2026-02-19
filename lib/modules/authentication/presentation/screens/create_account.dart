@@ -90,7 +90,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 PrimaryButton(
                   text: "Create account",
                   onPressed: () {
-                    context.pushNamed(RouteConstants.createPassword);
+                    context.pushNamed(RouteConstants.verifyAccount);
                   },
                 ),
                 SizedBox(height: 20.h),
@@ -125,7 +125,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        // context.pushNamed(RouteConstants.passwordValidation);
+                        context.pushNamed(RouteConstants.signUp);
                       },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
