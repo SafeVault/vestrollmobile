@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+ // ignore_for_file: deprecated_member_use
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -19,11 +19,22 @@ class AccountSetupCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: Container(
-        height: 104.h,
         decoration: BoxDecoration(
-          color: colors.brandDefault,
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF7C3AED), Color(0xFF6D28D9)], // Purple gradient
+          ),
           borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
         child: Row(
@@ -34,19 +45,19 @@ class AccountSetupCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Complete Account Setup',
+                    'Finish setting up...',
                     style: fonts.heading3Bold.copyWith(
                       fontSize: 16.sp,
-                      color: colors.constantContrast,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 6.h),
+                  SizedBox(height: 4.h),
                   Text(
-                    'Finish setting up your account to start\nsending invoices and signing contracts.',
+                    'Complete your profile to get started',
                     style: fonts.textSmRegular.copyWith(
                       fontSize: 12.sp,
-                      color: colors.constantContrast.withOpacity(0.9),
-                      height: 1.4,
+                      color: Colors.white.withOpacity(0.8),
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -56,29 +67,27 @@ class AccountSetupCard extends StatelessWidget {
             ),
             SizedBox(width: 16.w),
             SizedBox(
-              width: 56.w,
-              height: 56.h,
+              width: 44.w,
+              height: 44.w,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   SizedBox(
-                    width: 56.w,
-                    height: 56.h,
+                    width: 44.w,
+                    height: 44.w,
                     child: CircularProgressIndicator(
                       value: progress,
-                      strokeWidth: 4.w,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        colors.constantContrast,
-                      ),
-                      backgroundColor: colors.constantContrast.withOpacity(0.3),
+                      strokeWidth: 3,
+                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                      backgroundColor: Colors.white.withOpacity(0.3),
                       strokeCap: StrokeCap.round,
                     ),
                   ),
                   Text(
                     '${(progress * 100).toInt()}%',
                     style: fonts.textSmBold.copyWith(
-                      fontSize: 13.sp,
-                      color: colors.constantContrast,
+                      fontSize: 12.sp,
+                      color: Colors.white,
                     ),
                   ),
                 ],
