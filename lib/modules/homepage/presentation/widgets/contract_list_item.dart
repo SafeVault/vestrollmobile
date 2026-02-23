@@ -1,14 +1,19 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
+
+enum ContractStatus {
+  active,
+  pending,
+  expired,
+}
 
 class ContractListItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final String amount;
-  final String status;
-  final Color statusColor;
+  final ContractStatus status;
   final String initials;
   final Color avatarColor;
   final VoidCallback? onTap;
@@ -19,11 +24,32 @@ class ContractListItem extends StatelessWidget {
     required this.subtitle,
     required this.amount,
     required this.status,
-    required this.statusColor,
     required this.initials,
     required this.avatarColor,
     this.onTap,
   });
+
+  Color _getStatusColor() {
+    switch (status) {
+      case ContractStatus.active:
+        return const Color(0xFF10B981); // Active green
+      case ContractStatus.pending:
+        return const Color(0xFFF59E0B); // Pending orange
+      case ContractStatus.expired:
+        return const Color(0xFFEF4444); // Expired red
+    }
+  }
+
+  String _getStatusText() {
+    switch (status) {
+      case ContractStatus.active:
+        return 'Active';
+      case ContractStatus.pending:
+        return 'Pending';
+      case ContractStatus.expired:
+        return 'Expired';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +64,17 @@ class ContractListItem extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 48.w,
-              height: 48.h,
+              width: 44.w,
+              height: 44.w,
               decoration: BoxDecoration(
-                color: avatarColor,
-                shape: BoxShape.circle,
+                color: avatarColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               child: Center(
                 child: Text(
                   initials,
                   style: fonts.textMdBold.copyWith(
-                    color: colors.constantContrast,
+                    color: avatarColor,
                     fontSize: 16.sp,
                   ),
                 ),
@@ -63,7 +89,7 @@ class ContractListItem extends StatelessWidget {
                     title,
                     style: fonts.textMdSemiBold.copyWith(
                       color: colors.textPrimary,
-                      fontSize: 15.sp,
+                      fontSize: 16.sp,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -72,8 +98,8 @@ class ContractListItem extends StatelessWidget {
                   Text(
                     subtitle,
                     style: fonts.textSmRegular.copyWith(
-                      color: colors.textTertiary,
-                      fontSize: 13.sp,
+                      color: colors.textSecondary,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ],
@@ -87,30 +113,24 @@ class ContractListItem extends StatelessWidget {
                   amount,
                   style: fonts.textMdBold.copyWith(
                     color: colors.textPrimary,
-                    fontSize: 15.sp,
+                    fontSize: 16.sp,
                   ),
                 ),
                 SizedBox(height: 4.h),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 6.w,
-                      height: 6.h,
-                      decoration: BoxDecoration(
-                        color: statusColor,
-                        shape: BoxShape.circle,
-                      ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                  decoration: BoxDecoration(
+                    color: _getStatusColor().withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
+                  child: Text(
+                    _getStatusText(),
+                    style: fonts.textSmMedium.copyWith(
+                      color: _getStatusColor(),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
                     ),
-                    SizedBox(width: 4.w),
-                    Text(
-                      status,
-                      style: fonts.textSmMedium.copyWith(
-                        color: statusColor,
-                        fontSize: 13.sp,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
