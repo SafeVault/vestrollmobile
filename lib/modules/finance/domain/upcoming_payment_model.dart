@@ -4,6 +4,8 @@ enum UpcomingPaymentStatus { inDays, overdue }
 
 enum PaymentType { contract, invoice }
 
+enum ContractType { fixed, payg, milestone }
+
 class UpcomingPayment {
   final String id;
   final String title;
@@ -15,6 +17,7 @@ class UpcomingPayment {
   final Color iconBackgroundColor;
   final IconData icon;
   final PaymentType type;
+  final ContractType? contractType;
 
   const UpcomingPayment({
     required this.id,
@@ -27,6 +30,7 @@ class UpcomingPayment {
     required this.iconBackgroundColor,
     required this.icon,
     required this.type,
+    this.contractType,
   });
 
   String get amountWithCurrency => '$amount $currency';

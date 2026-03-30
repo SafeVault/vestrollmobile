@@ -22,7 +22,10 @@ class UpcomingPaymentCard extends StatelessWidget {
           onTap ??
           () {
             if (payment.type == PaymentType.contract) {
-              context.pushNamed(RouteConstants.contractPaymentDetails);
+              context.pushNamed(
+                RouteConstants.contractPaymentDetails,
+                extra: payment.contractType,
+              );
             } else {
               context.pushNamed(RouteConstants.invoiceDetails);
             }

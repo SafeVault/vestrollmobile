@@ -13,6 +13,7 @@ import 'package:vestrollmobile/modules/finance/presentation/screens/contract_pay
 import 'package:vestrollmobile/modules/finance/presentation/screens/finance_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/invoice_details_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/upcoming_payments_screen.dart';
+import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/timeline_showcase_screen.dart';
 import 'package:vestrollmobile/modules/homepage/presentation/screens/home_screen.dart';
 import 'package:vestrollmobile/modules/identity_and_multifactor/presentation/screens/account_type_screen.dart';
@@ -533,9 +534,10 @@ class AppRouter {
         path: '/contractPaymentDetails',
         name: RouteConstants.contractPaymentDetails,
         pageBuilder: (context, state) {
+          final contractType = state.extra as ContractType?;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const ContractPaymentDetailsScreen(),
+            child: ContractPaymentDetailsScreen(contractType: contractType),
             transitionsBuilder: (
               context,
               animation,
