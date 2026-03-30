@@ -18,6 +18,8 @@ class UpcomingPaymentsScreen extends StatefulWidget {
 class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
+  Set<String> _selectedTypes = {};
+  Set<String> _selectedStatuses = {};
 
   final List<UpcomingPayment> _allPayments = [
     UpcomingPayment(
@@ -91,10 +93,20 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       backgroundColor: Colors.transparent,
       builder:
           (context) => UpcomingPaymentFilterBottomSheet(
+            initialTypes: _selectedTypes,
+            initialStatuses: _selectedStatuses,
             onClear: () {
+              setState(() {
+                _selectedTypes = {};
+                _selectedStatuses = {};
+              });
               Navigator.pop(context);
             },
-            onShowResults: () {
+            onShowResults: (types, statuses) {
+              setState(() {
+                _selectedTypes = types;
+                _selectedStatuses = statuses;
+              });
               Navigator.pop(context);
             },
           ),
@@ -102,10 +114,29 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
   }
 
   List<UpcomingPayment> get _filteredPayments {
-    if (_searchQuery.isEmpty) return _allPayments;
-    return _allPayments
-        .where((p) => p.title.toLowerCase().contains(_searchQuery))
-        .toList();
+    return _allPayments.where((p) {
+      // Search filter
+      final matchesSearch =
+          _searchQuery.isEmpty || p.title.toLowerCase().contains(_searchQuery);
+
+      // Type filter
+      bool matchesType = true;
+      if (_selectedTypes.isNotEmpty) {
+        final typeStr =
+            p.type == PaymentType.contract ? 'Contract payment' : 'Invoice';
+        matchesType = _selectedTypes.contains(typeStr);
+      }
+
+      // Status filter
+      bool matchesStatus = true;
+      if (_selectedStatuses.isNotEmpty) {
+        final statusStr =
+            p.status == UpcomingPaymentStatus.overdue ? 'Overdue' : 'Coming';
+        matchesStatus = _selectedStatuses.contains(statusStr);
+      }
+
+      return matchesSearch && matchesType && matchesStatus;
+    }).toList();
   }
 
   @override

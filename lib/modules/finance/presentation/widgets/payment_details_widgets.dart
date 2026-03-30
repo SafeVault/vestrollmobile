@@ -175,9 +175,16 @@ class PaymentStatusCard extends StatelessWidget {
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
   ) {
-    final Color bgColor = isOverdue ? colors.orange50 : colors.blue50;
-    final Color textColor = isOverdue ? colors.orange600 : colors.blue600;
-    final Color borderColor = isOverdue ? colors.orange100 : colors.blue100;
+    // Colors from screenshots: blue for "Coming in 2 days", orange for "Overdue"
+    final Color bgColor =
+        isOverdue
+            ? colors.orange500.withOpacity(0.1)
+            : colors.brandDefault.withOpacity(0.05);
+    final Color textColor = isOverdue ? colors.orange500 : colors.brandDefault;
+    final Color borderColor =
+        isOverdue
+            ? colors.orange500.withOpacity(0.2)
+            : colors.brandDefault.withOpacity(0.1);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
@@ -188,7 +195,7 @@ class PaymentStatusCard extends StatelessWidget {
       ),
       child: Text(
         status,
-        style: fonts.textXsBold.copyWith(color: textColor, fontSize: 11.sp),
+        style: fonts.textSmMedium.copyWith(color: textColor, fontSize: 13.sp),
       ),
     );
   }
@@ -338,6 +345,7 @@ class PaymentTimeline extends StatelessWidget {
                             ? colors.textPrimary
                             : colors.textTertiary,
                     fontSize: 14.sp,
+                    fontWeight: step.isActive ? FontWeight.w600 : null,
                   ),
                 ),
                 if (step.subtitle != null) ...[
@@ -374,7 +382,7 @@ class PaymentTimeline extends StatelessWidget {
           Icon(Icons.check_circle, color: colors.green500, size: 20.sp)
         else if (step.isActive)
           Icon(
-            step.activeIcon ?? Icons.warning_amber_rounded,
+            step.activeIcon ?? Icons.access_time_rounded,
             color: step.activeIconColor ?? colors.orange500,
             size: 20.sp,
           )
@@ -389,13 +397,38 @@ class PaymentTimeline extends StatelessWidget {
           ),
         if (!isLast)
           Expanded(
-            child: VerticalDivider(
-              color: step.isCompleted ? colors.green500 : colors.gray200,
-              thickness: 2,
-              width: 20.w,
-            ),
+            child:
+                step.isDashed
+                    ? _buildDashedDivider(colors)
+                    : VerticalDivider(
+                      color: step.isCompleted ? colors.green500 : colors.gray200,
+                      thickness: 2,
+                      width: 20.w,
+                    ),
           ),
       ],
+    );
+  }
+
+  Widget _buildDashedDivider(ColorSystemExtension colors) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final boxHeight = constraints.constrainHeight();
+        const dashHeight = 4.0;
+        const dashSpace = 4.0;
+        final dashCount = (boxHeight / (dashHeight + dashSpace)).floor();
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(dashCount, (index) {
+            return Container(
+              width: 2,
+              height: dashHeight,
+              color: colors.gray200,
+              margin: const EdgeInsets.symmetric(vertical: dashSpace / 2),
+            );
+          }),
+        );
+      },
     );
   }
 
@@ -404,13 +437,38 @@ class PaymentTimeline extends StatelessWidget {
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
   ) {
-    // This handles the bold text in descriptions like "31 May 2025"
-    // Simplified for now, but can be improved with RichText
-    return Text(
-      description,
-      style: fonts.textSmRegular.copyWith(
-        color: colors.textSecondary,
-        fontSize: 13.sp,
+    // Parsing bold text in brackets like "your client will get invoice access [10 days] before it is due."
+    final List<TextSpan> spans = [];
+    final regExp = RegExp(r'\[(.*?)\]');
+    int lastMatchEnd = 0;
+
+    for (final match in regExp.allMatches(description)) {
+      if (match.start > lastMatchEnd) {
+        spans.add(
+          TextSpan(text: description.substring(lastMatchEnd, match.start)),
+        );
+      }
+      spans.add(
+        TextSpan(
+          text: match.group(1),
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      );
+      lastMatchEnd = match.end;
+    }
+
+    if (lastMatchEnd < description.length) {
+      spans.add(TextSpan(text: description.substring(lastMatchEnd)));
+    }
+
+    return RichText(
+      text: TextSpan(
+        style: fonts.textSmRegular.copyWith(
+          color: colors.textSecondary,
+          fontSize: 13.sp,
+          height: 1.5,
+        ),
+        children: spans.isEmpty ? [TextSpan(text: description)] : spans,
       ),
     );
   }
@@ -422,6 +480,7 @@ class TimelineStep {
   final String? description;
   final bool isCompleted;
   final bool isActive;
+  final bool isDashed;
   final IconData? activeIcon;
   final Color? activeIconColor;
 
@@ -431,6 +490,7 @@ class TimelineStep {
     this.description,
     this.isCompleted = false,
     this.isActive = false,
+    this.isDashed = false,
     this.activeIcon,
     this.activeIconColor,
   });

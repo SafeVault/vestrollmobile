@@ -80,15 +80,16 @@ class ContractPaymentDetailsScreen extends StatelessWidget {
                 TimelineStep(
                   title: 'Awaiting payment confirmation',
                   description:
-                      'Your client will get invoice access 10 days before it is due.',
+                      'Your client will get invoice access [10 days] before it is due.',
                   isActive: true,
                   activeIcon: Icons.access_time_rounded,
                   activeIconColor: const Color(0xFFF97316),
+                  isDashed: true,
                 ),
-                TimelineStep(title: 'Process your client payment'),
+                TimelineStep(title: 'Process your client payment', isDashed: true),
                 TimelineStep(
                   title:
-                      'According to your invoice, funds should be reflected in your balance on 31 May 2025.',
+                      'According to your invoice, funds should be reflected in your balance on [31 May 2025].',
                 ),
               ],
             ),
