@@ -17,19 +17,7 @@ import 'package:vestrollmobile/modules/homepage/presentation/widgets/quick_actio
 import 'package:vestrollmobile/modules/homepage/presentation/widgets/upcoming_payment_list_item.dart';
 import 'package:vestrollmobile/shared/widgets/bottom_navigation_bar.dart';
 
-// Add this enum if not already defined elsewhere
-enum EmptyStateType {
-  contracts,
-  transactions,
-  payments,
-}
 
-// Add this enum for contract status
-enum ContractStatus {
-  active,
-  pending,
-  expired,
-}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

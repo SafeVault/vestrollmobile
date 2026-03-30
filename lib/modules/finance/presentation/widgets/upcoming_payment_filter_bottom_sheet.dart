@@ -5,13 +5,17 @@ import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension
 import 'package:vestrollmobile/shared/widgets/bottom_sheet.dart';
 
 class UpcomingPaymentFilterBottomSheet extends StatefulWidget {
+  final Function(Set<String> types, Set<String> statuses) onShowResults;
   final VoidCallback onClear;
-  final VoidCallback onShowResults;
+  final Set<String> initialTypes;
+  final Set<String> initialStatuses;
 
   const UpcomingPaymentFilterBottomSheet({
     super.key,
     required this.onClear,
     required this.onShowResults,
+    this.initialTypes = const {},
+    this.initialStatuses = const {},
   });
 
   @override
@@ -21,12 +25,23 @@ class UpcomingPaymentFilterBottomSheet extends StatefulWidget {
 
 class _UpcomingPaymentFilterBottomSheetState
     extends State<UpcomingPaymentFilterBottomSheet> {
+  late Set<String> _selectedTypes;
+  late Set<String> _selectedStatuses;
   bool _isTypeExpanded = true;
   bool _isStatusExpanded = true;
 
-  // For demonstration/UI purpose as per Figma
-  final Set<String> _selectedTypes = {'All', 'Invoice'};
-  final Set<String> _selectedStatuses = {'All', 'Overdue'};
+  @override
+  void initState() {
+    super.initState();
+    _selectedTypes = Set.from(widget.initialTypes);
+    _selectedStatuses = Set.from(widget.initialStatuses);
+    
+    // For visual parity with Screenshot 3 if no initial state
+    if (_selectedTypes.isEmpty && _selectedStatuses.isEmpty) {
+      _selectedTypes = {'Invoice'};
+      _selectedStatuses = {'Overdue'};
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +67,18 @@ class _UpcomingPaymentFilterBottomSheetState
                     selectedItems: _selectedTypes,
                     onItemToggle: (item) {
                       setState(() {
-                        if (_selectedTypes.contains(item)) {
-                          _selectedTypes.remove(item);
+                        if (item == 'All') {
+                          if (_selectedTypes.length == 2) {
+                            _selectedTypes.clear();
+                          } else {
+                            _selectedTypes = {'Contract payment', 'Invoice'};
+                          }
                         } else {
-                          _selectedTypes.add(item);
+                          if (_selectedTypes.contains(item)) {
+                            _selectedTypes.remove(item);
+                          } else {
+                            _selectedTypes.add(item);
+                          }
                         }
                       });
                     },
@@ -74,10 +97,18 @@ class _UpcomingPaymentFilterBottomSheetState
                     selectedItems: _selectedStatuses,
                     onItemToggle: (item) {
                       setState(() {
-                        if (_selectedStatuses.contains(item)) {
-                          _selectedStatuses.remove(item);
+                        if (item == 'All') {
+                          if (_selectedStatuses.length == 2) {
+                            _selectedStatuses.clear();
+                          } else {
+                            _selectedStatuses = {'Coming', 'Overdue'};
+                          }
                         } else {
-                          _selectedStatuses.add(item);
+                          if (_selectedStatuses.contains(item)) {
+                            _selectedStatuses.remove(item);
+                          } else {
+                            _selectedStatuses.add(item);
+                          }
                         }
                       });
                     },
@@ -147,6 +178,20 @@ class _UpcomingPaymentFilterBottomSheetState
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
   }) {
+    // Logic for "All" checkbox visual state
+    bool showMinus = false;
+    bool allChecked = false;
+    
+    if (label == 'All') {
+      final currentList = isStatus ? _selectedStatuses : _selectedTypes;
+      final totalPossible = 2; // Contract payment, Invoice OR Coming, Overdue
+      if (currentList.length > 0 && currentList.length < totalPossible) {
+        showMinus = true;
+      } else if (currentList.length == totalPossible) {
+        allChecked = true;
+      }
+    }
+
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -165,7 +210,7 @@ class _UpcomingPaymentFilterBottomSheetState
               ),
             const Spacer(),
             label == 'All'
-                ? _buildCheckboxAll(colors)
+                ? _buildCheckboxAll(allChecked, showMinus, colors)
                 : _buildCheckbox(isSelected, colors),
           ],
         ),
@@ -224,10 +269,6 @@ class _UpcomingPaymentFilterBottomSheetState
   }
 
   Widget _buildCheckbox(bool isSelected, ColorSystemExtension colors) {
-    // Simplified logic to match Figma: 'All' uses a minus icon if partially selected, but here we just follow the UI.
-    // In Figma, 'All' has a purple square with a minus sign.
-    // 'Invoice' and 'Overdue' have a purple square with a check sign.
-
     return Container(
       width: 20.w,
       height: 20.h,
@@ -246,8 +287,18 @@ class _UpcomingPaymentFilterBottomSheetState
     );
   }
 
-  // To match Figma exactly for "All" (it has a minus icon)
-  Widget _buildCheckboxAll(ColorSystemExtension colors) {
+  Widget _buildCheckboxAll(bool isSelected, bool isIndeterminate, ColorSystemExtension colors) {
+    if (!isSelected && !isIndeterminate) {
+        return Container(
+          width: 20.w,
+          height: 20.h,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(4.r),
+            border: Border.all(color: colors.gray200, width: 2),
+          ),
+        );
+    }
     return Container(
       width: 20.w,
       height: 20.h,
@@ -255,7 +306,11 @@ class _UpcomingPaymentFilterBottomSheetState
         color: colors.brandDefault,
         borderRadius: BorderRadius.circular(4.r),
       ),
-      child: Icon(Icons.remove, size: 14.sp, color: colors.constantContrast),
+      child: Icon(
+        isIndeterminate ? Icons.remove : Icons.check,
+        size: 14.sp,
+        color: colors.constantContrast,
+      ),
     );
   }
 
@@ -267,7 +322,13 @@ class _UpcomingPaymentFilterBottomSheetState
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: widget.onClear,
+            onTap: () {
+                setState(() {
+                    _selectedTypes.clear();
+                    _selectedStatuses.clear();
+                });
+                widget.onClear();
+            },
             child: Container(
               height: 48.h,
               decoration: BoxDecoration(
@@ -289,7 +350,7 @@ class _UpcomingPaymentFilterBottomSheetState
         SizedBox(width: 12.w),
         Expanded(
           child: GestureDetector(
-            onTap: widget.onShowResults,
+            onTap: () => widget.onShowResults(_selectedTypes, _selectedStatuses),
             child: Container(
               height: 48.h,
               decoration: BoxDecoration(

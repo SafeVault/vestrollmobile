@@ -29,11 +29,11 @@ class InvoiceDetailsScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.h),
             PaymentStatusCard(
-              status: 'Overdue',
+              status: 'Coming in 2 days',
               estArrivalDate: '20 April 2025',
               network: 'Ethereum',
               networkIcon: _buildEthereumIcon(),
-              isOverdue: true,
+              isOverdue: false,
             ),
             SizedBox(height: 16.h),
             PaymentInfoSection(
@@ -45,7 +45,7 @@ class InvoiceDetailsScreen extends StatelessWidget {
                 ),
                 PaymentInfoItem(
                   label: 'Title',
-                  value: 'ShopLink Pro UX Audit feedb...',
+                  value: 'Neurolytix Initial consultation...',
                 ),
                 PaymentInfoItem(
                   label: 'Client',
@@ -62,17 +62,18 @@ class InvoiceDetailsScreen extends StatelessWidget {
                   isCompleted: true,
                 ),
                 TimelineStep(
-                  title: 'Client payment overdue',
+                  title: 'Awaiting payment confirmation',
                   description:
-                      'The payment was expected by 31 May 2025 but has not yet been received.',
+                      'Your client will get invoice access before it is due on [31 May 2025].',
                   isActive: true,
-                  activeIcon: Icons.warning_amber_rounded,
+                  activeIcon: Icons.access_time_rounded,
                   activeIconColor: const Color(0xFFF97316),
+                  isDashed: true,
                 ),
-                TimelineStep(title: 'Process your client payment'),
+                TimelineStep(title: 'Process your client payment', isDashed: true),
                 TimelineStep(
                   title:
-                      'According to your invoice, funds should be reflected in your balance on 31 May 2025.',
+                      'According to your invoice, funds should be reflected in your balance on [31 May 2025].',
                 ),
               ],
             ),
