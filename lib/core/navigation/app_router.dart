@@ -9,9 +9,11 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/creat
 import 'package:vestrollmobile/modules/authentication/presentation/screens/login_screen.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/new_password.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/screens/pin_code_screen.dart';
+import 'package:vestrollmobile/modules/finance/domain/transaction_model.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/contract_payment_details_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/finance_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/invoice_details_screen.dart';
+import 'package:vestrollmobile/modules/finance/presentation/screens/transaction_details_screen.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/upcoming_payments_screen.dart';
 import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
 import 'package:vestrollmobile/modules/finance/presentation/screens/timeline_showcase_screen.dart';
@@ -584,6 +586,30 @@ class AppRouter {
           return CustomTransitionPage(
             key: state.pageKey,
             child: const TimelineShowcaseScreen(),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: CurveTween(
+                  curve: Curves.easeInOutCirc,
+                ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/transactionDetails',
+        name: RouteConstants.transactionDetails,
+        pageBuilder: (context, state) {
+          final transaction = state.extra as Transaction;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: TransactionDetailsScreen(transaction: transaction),
             transitionsBuilder: (
               context,
               animation,

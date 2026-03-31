@@ -11,6 +11,8 @@ class PaymentDetailsHeader extends StatelessWidget {
   final String? assetPath;
   final IconData? icon;
   final Color iconBackgroundColor;
+  final Color? amountColor;
+  final String? amountPrefix;
 
   const PaymentDetailsHeader({
     super.key,
@@ -20,12 +22,18 @@ class PaymentDetailsHeader extends StatelessWidget {
     this.assetPath,
     this.icon,
     required this.iconBackgroundColor,
+    this.amountColor,
+    this.amountPrefix = '',
   });
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
     final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
+    final displayColor = amountColor ?? colors.textPrimary;
+    final displayAmount = amountPrefix != null && amountPrefix!.isNotEmpty 
+        ? '$amountPrefix $amount $currency' 
+        : '$amount $currency';
 
     return Container(
       width: double.infinity,
@@ -60,9 +68,9 @@ class PaymentDetailsHeader extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           Text(
-            '$amount $currency',
+            displayAmount,
             style: fonts.heading1Bold.copyWith(
-              color: colors.textPrimary,
+              color: displayColor,
               fontSize: 32.sp,
             ),
           ),
@@ -238,46 +246,54 @@ class PaymentInfoSection extends StatelessWidget {
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
   ) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 100.w,
-          child: Text(
-            item.label,
-            style: fonts.textMdRegular.copyWith(
-              color: colors.textSecondary,
-              fontSize: 14.sp,
+    return GestureDetector(
+      onTap: item.onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 100.w,
+            child: Text(
+              item.label,
+              style: fonts.textMdRegular.copyWith(
+                color: colors.textSecondary,
+                fontSize: 14.sp,
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Flexible(
-                child: Text(
-                  item.value,
-                  style: fonts.textMdBold.copyWith(
-                    color: colors.textPrimary,
-                    fontSize: 14.sp,
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Flexible(
+                  child: Text(
+                    item.value,
+                    style: fonts.textMdBold.copyWith(
+                      color: colors.textPrimary,
+                      fontSize: 14.sp,
+                    ),
+                    textAlign: TextAlign.end,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  textAlign: TextAlign.end,
-                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-              if (item.showOpenIcon) ...[
-                SizedBox(width: 8.w),
-                Icon(
-                  Icons.open_in_new_rounded,
-                  size: 16.sp,
-                  color: colors.textSecondary,
-                ),
+                if (item.showOpenIcon) ...[
+                  SizedBox(width: 8.w),
+                  Icon(
+                    Icons.open_in_new_rounded,
+                    size: 16.sp,
+                    color: colors.textSecondary,
+                  ),
+                ],
+                if (item.trailing != null) ...[
+                  SizedBox(width: 8.w),
+                  item.trailing!,
+                ],
               ],
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -286,11 +302,15 @@ class PaymentInfoItem {
   final String label;
   final String value;
   final bool showOpenIcon;
+  final Widget? trailing;
+  final VoidCallback? onTap;
 
   PaymentInfoItem({
     required this.label,
     required this.value,
     this.showOpenIcon = false,
+    this.trailing,
+    this.onTap,
   });
 }
 

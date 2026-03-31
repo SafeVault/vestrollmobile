@@ -42,4 +42,5 @@ class RouteConstants {
   static const String contractPaymentDetails = 'contractPaymentDetails';
   static const String invoiceDetails = 'invoiceDetails';
   static const String timelineShowcase = 'timelineShowcase';
+  static const String transactionDetails = 'transactionDetails';
 }
