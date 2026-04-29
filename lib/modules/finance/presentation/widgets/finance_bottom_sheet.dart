@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/shared/widgets/bottom_sheet.dart';
@@ -21,10 +23,7 @@ class FinanceBottomSheet extends StatelessWidget {
             context,
             icon: Icons.add_circle_outline_rounded,
             label: 'Add Money',
-            onTap: () {
-              // TODO: Navigate to Add Money screen
-              Navigator.pop(context);
-            },
+            onTap: () => Navigator.pop(context),
             colors: colors,
             fonts: fonts,
           ),
@@ -33,10 +32,7 @@ class FinanceBottomSheet extends StatelessWidget {
             context,
             icon: Icons.send_rounded,
             label: 'Transfer',
-            onTap: () {
-              // TODO: Navigate to Transfer screen
-              Navigator.pop(context);
-            },
+            onTap: () => Navigator.pop(context),
             colors: colors,
             fonts: fonts,
           ),
@@ -45,10 +41,7 @@ class FinanceBottomSheet extends StatelessWidget {
             context,
             icon: Icons.account_balance_wallet_outlined,
             label: 'Withdraw',
-            onTap: () {
-              // TODO: Navigate to Withdraw screen
-              Navigator.pop(context);
-            },
+            onTap: () => Navigator.pop(context),
             colors: colors,
             fonts: fonts,
           ),
@@ -58,8 +51,8 @@ class FinanceBottomSheet extends StatelessWidget {
             icon: Icons.history_rounded,
             label: 'Transactions',
             onTap: () {
-              // TODO: Navigate to Transactions screen
               Navigator.pop(context);
+              context.pushNamed(RouteConstants.transactionsScreen);
             },
             colors: colors,
             fonts: fonts,
@@ -100,7 +93,7 @@ class FinanceBottomSheet extends StatelessWidget {
                 fontSize: 16.sp,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Icon(
               Icons.arrow_forward_ios_rounded,
               color: colors.textTertiary,
