@@ -30,6 +30,8 @@ import 'package:vestrollmobile/modules/authentication/presentation/screens/verif
 import 'package:vestrollmobile/modules/more/presentation/screens/more_screen.dart';
 import 'package:vestrollmobile/modules/more_options/presentation/screens/more_options_screen.dart';
 import 'package:vestrollmobile/modules/workspace/presentation/screens/workspace_screen.dart';
+import 'package:vestrollmobile/modules/workspace/presentation/screens/invoices_screen.dart';
+import 'package:vestrollmobile/modules/workspace/presentation/screens/create_invoice_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -620,6 +622,38 @@ class AppRouter {
                 opacity: CurveTween(
                   curve: Curves.easeInOutCirc,
                 ).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/invoicesScreen',
+        name: RouteConstants.invoicesScreen,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const InvoicesScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: '/createInvoiceScreen',
+        name: RouteConstants.createInvoiceScreen,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const CreateInvoiceScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOutCirc).animate(animation),
                 child: child,
               );
             },

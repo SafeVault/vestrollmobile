@@ -43,4 +43,6 @@ class RouteConstants {
   static const String invoiceDetails = 'invoiceDetails';
   static const String timelineShowcase = 'timelineShowcase';
   static const String transactionDetails = 'transactionDetails';
+  static const String invoicesScreen = 'invoicesScreen';
+  static const String createInvoiceScreen = 'createInvoiceScreen';
 }
