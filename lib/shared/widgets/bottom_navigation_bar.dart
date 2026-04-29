@@ -4,18 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
-import 'package:vestrollmobile/shared/widgets/bottom_nav_tab.dart';
 
-export 'bottom_nav_tab.dart';
+enum BottomNavTab { home, workspace, finance, more }
 
 class BottomNavigationBarWidget extends StatelessWidget {
-  final VoidCallback? onFinanceTap;
   final BottomNavTab activeTab;
+  final VoidCallback? onFinanceTap;
 
   const BottomNavigationBarWidget({
     super.key,
-    this.onFinanceTap,
     this.activeTab = BottomNavTab.home,
+    this.onFinanceTap,
   });
 
   @override
@@ -55,7 +54,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         label: 'Home',
                         isActive: activeTab == BottomNavTab.home,
                         onTap: () {
-                          context.pushNamed(RouteConstants.homeScreen);
+                          if (activeTab != BottomNavTab.home) {
+                            context.pushNamed(RouteConstants.homeScreen);
+                          }
                         },
                       ),
                     ),
@@ -65,11 +66,13 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         label: 'Workspace',
                         isActive: activeTab == BottomNavTab.workspace,
                         onTap: () {
-                          context.pushNamed(RouteConstants.workspaceScreen);
+                          if (activeTab != BottomNavTab.workspace) {
+                            context.pushNamed(RouteConstants.workspaceScreen);
+                          }
                         },
                       ),
                     ),
-                    SizedBox(width: 64.w),
+                    SizedBox(width: 64.w), // Space for center button
                     Expanded(
                       child: _NavItem(
                         icon: Icons.monetization_on_rounded,
@@ -78,7 +81,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         onTap: () {
                           if (onFinanceTap != null) {
                             onFinanceTap!();
-                          } else {
+                          } else if (activeTab != BottomNavTab.finance) {
                             context.pushNamed(RouteConstants.financeScreen);
                           }
                         },
@@ -90,7 +93,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         label: 'More',
                         isActive: activeTab == BottomNavTab.more,
                         onTap: () {
-                          context.pushNamed(RouteConstants.moreOptionsScreen);
+                          if (activeTab != BottomNavTab.more) {
+                            context.pushNamed(RouteConstants.moreOptionsScreen);
+                          }
                         },
                       ),
                     ),
@@ -104,12 +109,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        builder: (_) => const _QuickActionSheet(),
-                      );
+                      context.pushNamed(RouteConstants.moreScreen);
                     },
                     child: Container(
                       width: 64.w,
@@ -126,7 +126,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                         ],
                       ),
                       child: Icon(
-                        Icons.add_rounded,
+                        Icons.arrow_upward_rounded,
                         color: colors.constantContrast,
                         size: 32.sp,
                       ),
@@ -178,88 +178,6 @@ class _NavItem extends StatelessWidget {
               fontSize: 11.sp,
               color: isActive ? colors.brandDefault : colors.textTertiary,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _QuickActionSheet extends StatelessWidget {
-  const _QuickActionSheet();
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<ColorSystemExtension>()!;
-    final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
-
-    final actions = [
-      (Icons.receipt_long_outlined, 'Invoice', const Color(0xFF8B5CF6)),
-      (Icons.handshake_outlined, 'Contract', const Color(0xFF3B82F6)),
-      (Icons.flash_on_rounded, 'Quick Pay', const Color(0xFFF97316)),
-      (Icons.send_rounded, 'Transfer', const Color(0xFF22C55E)),
-    ];
-
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.bgB0,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-      ),
-      padding: EdgeInsets.fromLTRB(24.w, 20.h, 24.w, 40.h),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Container(
-              width: 40.w,
-              height: 4.h,
-              decoration: BoxDecoration(
-                color: colors.strokeSecondary,
-                borderRadius: BorderRadius.circular(2.r),
-              ),
-            ),
-          ),
-          SizedBox(height: 20.h),
-          Text(
-            'Create New',
-            style: fonts.heading3Bold.copyWith(
-              fontSize: 18.sp,
-              color: colors.textPrimary,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          SizedBox(height: 20.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: actions.map((action) {
-              return GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 64.w,
-                      height: 64.h,
-                      decoration: BoxDecoration(
-                        color: action.$3.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(18.r),
-                        border: Border.all(color: action.$3.withOpacity(0.2)),
-                      ),
-                      child: Icon(action.$1, color: action.$3, size: 28.sp),
-                    ),
-                    SizedBox(height: 8.h),
-                    Text(
-                      action.$2,
-                      style: fonts.textSmMedium.copyWith(
-                        color: colors.textSecondary,
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
           ),
         ],
       ),
