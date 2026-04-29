@@ -5,10 +5,17 @@ import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
+enum BottomNavTab { home, workspace, finance, more }
+
 class BottomNavigationBarWidget extends StatelessWidget {
+  final BottomNavTab activeTab;
   final VoidCallback? onFinanceTap;
 
-  const BottomNavigationBarWidget({super.key, this.onFinanceTap});
+  const BottomNavigationBarWidget({
+    super.key,
+    this.activeTab = BottomNavTab.home,
+    this.onFinanceTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
-            offset: Offset(0, -4),
+            offset: const Offset(0, -4),
             blurRadius: 16,
           ),
         ],
@@ -45,9 +52,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       child: _NavItem(
                         icon: Icons.home_rounded,
                         label: 'Home',
-                        isActive: true,
+                        isActive: activeTab == BottomNavTab.home,
                         onTap: () {
-                          context.pushNamed(RouteConstants.homeScreen);
+                          if (activeTab != BottomNavTab.home) {
+                            context.pushNamed(RouteConstants.homeScreen);
+                          }
                         },
                       ),
                     ),
@@ -55,9 +64,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       child: _NavItem(
                         icon: Icons.layers_rounded,
                         label: 'Workspace',
-                        isActive: false,
+                        isActive: activeTab == BottomNavTab.workspace,
                         onTap: () {
-                          context.pushNamed(RouteConstants.workspaceScreen);
+                          if (activeTab != BottomNavTab.workspace) {
+                            context.pushNamed(RouteConstants.workspaceScreen);
+                          }
                         },
                       ),
                     ),
@@ -66,11 +77,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       child: _NavItem(
                         icon: Icons.monetization_on_rounded,
                         label: 'Finance',
-                        isActive: false,
+                        isActive: activeTab == BottomNavTab.finance,
                         onTap: () {
                           if (onFinanceTap != null) {
                             onFinanceTap!();
-                          } else {
+                          } else if (activeTab != BottomNavTab.finance) {
                             context.pushNamed(RouteConstants.financeScreen);
                           }
                         },
@@ -80,9 +91,11 @@ class BottomNavigationBarWidget extends StatelessWidget {
                       child: _NavItem(
                         icon: Icons.more_horiz_rounded,
                         label: 'More',
-                        isActive: false,
+                        isActive: activeTab == BottomNavTab.more,
                         onTap: () {
-                          context.pushNamed(RouteConstants.moreOptionsScreen);
+                          if (activeTab != BottomNavTab.more) {
+                            context.pushNamed(RouteConstants.moreOptionsScreen);
+                          }
                         },
                       ),
                     ),
@@ -108,7 +121,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                           BoxShadow(
                             color: colors.brandDefault.withOpacity(0.3),
                             blurRadius: 16,
-                            offset: Offset(0, 8),
+                            offset: const Offset(0, 8),
                           ),
                         ],
                       ),

@@ -3,206 +3,641 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
 import 'package:vestrollmobile/modules/finance/presentation/widgets/payment_details_widgets.dart';
+import 'package:vestrollmobile/shared/widgets/primary_button.dart';
+import 'package:vestrollmobile/shared/widgets/secondary.dart';
 import 'package:vestrollmobile/shared/widgets/vestroll_app_bar.dart';
 
-class ContractPaymentDetailsScreen extends StatelessWidget {
+enum ContractInvoiceStatus { pending, paid, overdue }
+
+class ContractPaymentDetailsScreen extends StatefulWidget {
   final ContractType? contractType;
 
   const ContractPaymentDetailsScreen({super.key, this.contractType});
 
   @override
+  State<ContractPaymentDetailsScreen> createState() =>
+      _ContractPaymentDetailsScreenState();
+}
+
+class _ContractPaymentDetailsScreenState
+    extends State<ContractPaymentDetailsScreen> {
+  // Toggle this to see different states
+  final ContractInvoiceStatus _currentStatus = ContractInvoiceStatus.pending;
+
+  @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
+    final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return Scaffold(
       backgroundColor: colors.bgB1,
-      appBar: const VestrollAppBar(
-        title: 'Contract payment',
+      appBar: VestrollAppBar(
+        title: '#INV-607',
         isBack: true,
-        actions: [],
+        centerTitle: true,
+        actions: const [],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 40.h),
         child: Column(
           children: [
-            const PaymentDetailsHeader(
+            if (_currentStatus == ContractInvoiceStatus.overdue) ...[
+              _buildOverdueBanner(colors, fonts),
+              SizedBox(height: 16.h),
+            ],
+            PaymentDetailsHeader(
               amount: '581',
               currency: 'USDT',
               approxValue: '\$476.19',
-              assetPath: AppAssets.wallet,
-              iconBackgroundColor: const Color(0xFF8B5CF6),
+              assetPath: AppAssets.invoiceSvg,
+              iconBackgroundColor: const Color(0xFFF97316),
             ),
             SizedBox(height: 16.h),
-            PaymentStatusCard(
-              status: 'Coming in 2 days',
-              estArrivalDate: '20 April 2025',
-              network: 'Ethereum',
-              networkIcon: _buildEthereumIcon(),
-              isOverdue: false,
-            ),
+            _buildInvoiceInfoCard(colors, fonts),
             SizedBox(height: 16.h),
-            PaymentInfoSection(
-              items: [
-                PaymentInfoItem(
-                  label: 'Contract',
-                  value: _getContractTitle(),
-                  showOpenIcon: true,
-                ),
-                PaymentInfoItem(
-                  label: 'Contract type',
-                  value: _getContractTypeName(),
-                ),
-                PaymentInfoItem(
-                  label: 'Invoice',
-                  value: '#INV-2025-001',
-                  showOpenIcon: true,
-                ),
-                PaymentInfoItem(
-                  label: 'Client',
-                  value: 'Adegboyega Oluwagbemiro',
-                ),
-              ],
-            ),
+            _buildBilledToCard(colors, fonts),
             SizedBox(height: 16.h),
-            PaymentTimeline(steps: _getTimelineSteps()),
+            _buildBilledFromCard(colors, fonts),
+            SizedBox(height: 16.h),
+            _buildInvoiceBreakdownCard(colors, fonts),
+            SizedBox(height: 16.h),
+            _buildPaymentTrackerCard(colors, fonts),
+            SizedBox(height: 16.h),
+            _buildPaymentMemoCard(colors, fonts),
             SizedBox(height: 32.h),
+            _buildActionButtons(colors),
           ],
         ),
       ),
     );
   }
 
-  String _getContractTitle() {
-    switch (contractType) {
-      case ContractType.payg:
-        return 'Brightfolk Concept work and...';
-      case ContractType.milestone:
-        return 'GlowLabs UI/UX Redesign...';
-      case ContractType.fixed:
-      default:
-        return 'MintForge Bug fixes and...';
-    }
+  Widget _buildOverdueBanner(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: colors.bgB0,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: colors.red500.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Invoice Overdue',
+            style: fonts.textMdBold.copyWith(
+              color: colors.red500,
+              fontSize: 14.sp,
+            ),
+          ),
+          SizedBox(height: 4.h),
+          Text(
+            "Check with your client if they've initiated payment for your invoice.",
+            style: fonts.textSmRegular.copyWith(
+              color: colors.textSecondary,
+              fontSize: 13.sp,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
-  String _getContractTypeName() {
-    switch (contractType) {
-      case ContractType.payg:
-        return 'Pay As You Go';
-      case ContractType.milestone:
-        return 'Milestone';
-      case ContractType.fixed:
-      default:
-        return 'Fixed Rate';
+  Widget _buildInvoiceInfoCard(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
+    Color badgeColor;
+    Color badgeTextColor;
+    String badgeText;
+
+    switch (_currentStatus) {
+      case ContractInvoiceStatus.pending:
+        badgeColor = colors.orange500.withOpacity(0.1);
+        badgeTextColor = colors.orange500;
+        badgeText = 'Pending';
+        break;
+      case ContractInvoiceStatus.paid:
+        badgeColor = colors.green500.withOpacity(0.1);
+        badgeTextColor = colors.green500;
+        badgeText = 'Paid';
+        break;
+      case ContractInvoiceStatus.overdue:
+        badgeColor = colors.red500.withOpacity(0.1);
+        badgeTextColor = colors.red500;
+        badgeText = 'Overdue';
+        break;
     }
+
+    final items = [
+      PaymentInfoItem(
+        label: 'Status',
+        value: '',
+        trailing: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+          decoration: BoxDecoration(
+            color: badgeColor,
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: Text(
+            badgeText,
+            style: fonts.textXsMedium.copyWith(
+              color: badgeTextColor,
+              fontSize: 11.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
+      PaymentInfoItem(label: 'Invoice no', value: '#INV-2025-001'),
+      PaymentInfoItem(label: 'Type', value: 'Contract Monthly Payment'),
+      PaymentInfoItem(label: 'Title', value: 'For Mar 31st - Apr 6th 2025'),
+      PaymentInfoItem(
+        label: 'Network',
+        value: 'Ethereum',
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(AppAssets.ethereumIcon, width: 16.sp, height: 16.sp),
+            SizedBox(width: 4.w),
+            Text(
+              'Ethereum',
+              style: fonts.textMdBold.copyWith(
+                color: colors.textPrimary,
+                fontSize: 14.sp,
+              ),
+            ),
+          ],
+        ),
+      ),
+      PaymentInfoItem(
+        label: 'Asset',
+        value: '',
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 16.sp,
+              height: 16.sp,
+              decoration: const BoxDecoration(
+                color: Color(0xFF22C55E),
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  'T',
+                  style: fonts.textXsBold.copyWith(
+                    color: Colors.white,
+                    fontSize: 10.sp,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 4.w),
+            Text(
+              'USDT',
+              style: fonts.textMdBold.copyWith(
+                color: colors.textPrimary,
+                fontSize: 14.sp,
+              ),
+            ),
+          ],
+        ),
+      ),
+      PaymentInfoItem(label: 'Issue date', value: '15 April 2025'),
+      PaymentInfoItem(label: 'Due date', value: '29 April 2025'),
+    ];
+
+    if (_currentStatus == ContractInvoiceStatus.paid) {
+      items.addAll([
+        PaymentInfoItem(
+          label: 'Transaction ID',
+          value: '0x684Aafe...60b3',
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '0x684Aafe...60b3',
+                style: fonts.textMdBold.copyWith(
+                  color: colors.textPrimary,
+                  fontSize: 14.sp,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              SizedBox(width: 4.w),
+              Icon(Icons.copy_rounded, color: colors.textSecondary, size: 16.sp),
+            ],
+          ),
+        ),
+        PaymentInfoItem(label: 'Payment date', value: '29 April 2025'),
+      ]);
+    }
+
+    // Add contract details specific to Contract Invoices at the bottom
+    items.addAll([
+      PaymentInfoItem(
+        label: 'Contract',
+        value: 'Brightfolk Payment for c...',
+        showOpenIcon: true,
+      ),
+      PaymentInfoItem(label: 'Contract Type', value: 'Fixed Rate'),
+    ]);
+
+    return PaymentInfoSection(items: items);
   }
 
-  List<TimelineStep> _getTimelineSteps() {
-    switch (contractType) {
-      case ContractType.payg:
-        return [
-          TimelineStep(
-            title: '(Unit) worked submitted',
-            subtitle: '20 April 2025, 04:40 PM',
-            isCompleted: true,
-          ),
-          TimelineStep(
-            title: 'Awaiting client approval',
-            description: 'Payment is linked to the approval of your submission',
-            isActive: true,
-            activeIcon: Icons.access_time_rounded,
-            activeIconColor: const Color(0xFFF97316),
-            isDashed: true,
-          ),
-          TimelineStep(
-            title: 'Invoice created for this submission',
-            description: 'An invoice will be created for this submission',
-            isDashed: true,
-          ),
-          TimelineStep(
-            title: 'Awaiting payment confirmation',
-            description: 'Your client will get invoice access [10 days] before it is due.',
-            isDashed: true,
-          ),
-          TimelineStep(title: 'Process your client payment', isDashed: true),
-          TimelineStep(
-            title:
-                'According to your contract, funds should be reflected in your balance on [31 May 2025].',
-          ),
-        ];
-      case ContractType.milestone:
-        return [
-          TimelineStep(
-            title: 'Milestone completion submitted',
-            subtitle: '20 April 2025, 04:40 PM',
-            isCompleted: true,
-          ),
-          TimelineStep(
-            title: 'Awaiting client approval',
-            description: 'Payment is linked to the approval of your submission',
-            isActive: true,
-            activeIcon: Icons.access_time_rounded,
-            activeIconColor: const Color(0xFFF97316),
-            isDashed: true,
-          ),
-          TimelineStep(
-            title: 'Invoice created for this submission',
-            description: 'An invoice will be created for this milestone',
-            isDashed: true,
-          ),
-          TimelineStep(
-            title: 'Awaiting payment confirmation',
-            description: 'Your client will get access to your invoice.',
-            isDashed: true,
-          ),
-          TimelineStep(title: 'Process your client payment', isDashed: true),
-          TimelineStep(
-            title:
-                'According to your contract, funds should be reflected in your balance on [31 May 2025].',
-          ),
-        ];
-      case ContractType.fixed:
-      default:
-        return [
-          TimelineStep(
-            title: 'Contract cycle completed',
-            subtitle: '20 April 2025, 04:40 PM',
-            isCompleted: true,
-          ),
-          TimelineStep(
-            title: 'Client approved contract cycle',
-            subtitle: '20 April 2025, 04:40 PM',
-            isCompleted: true,
-          ),
-          TimelineStep(
-            title: 'Invoice created for this cycle',
-            subtitle: '20 April 2025, 04:40 PM',
-            isCompleted: true,
-          ),
-          TimelineStep(
-            title: 'Awaiting payment confirmation',
-            description:
-                'Your client will get invoice access [10 days] before it is due.',
-            isActive: true,
-            activeIcon: Icons.access_time_rounded,
-            activeIconColor: const Color(0xFFF97316),
-            isDashed: true,
-          ),
-          TimelineStep(title: 'Process your client payment', isDashed: true),
-          TimelineStep(
-            title:
-                'According to your balance, funds should be reflected in your balance on [31 May 2025].',
-          ),
-        ];
-    }
+  Widget _buildBilledToCard(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
+    return _buildContactCard(
+      title: 'Billed To',
+      name: 'Adegboyega Oluwagbemiro',
+      email: 'adeshinaadegboyega@icloud.com',
+      phone: '+234 (801) 234 5678',
+      country: 'Nigeria',
+      address: 'No 8 James Robertson Shittu/\nOgunlana Drive, Surulere | 142261',
+      colors: colors,
+      fonts: fonts,
+    );
   }
 
-  Widget _buildEthereumIcon() {
-    return SvgPicture.asset(
-      AppAssets.ethereumIcon,
-      width: 24.sp,
-      height: 24.sp,
+  Widget _buildBilledFromCard(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
+    return _buildContactCard(
+      title: 'Billed From',
+      name: 'Adegboyega Oluwagbemiro',
+      email: 'adeshinaadegboyega@icloud.com',
+      phone: '+234 (801) 234 5678',
+      country: 'Nigeria',
+      address: 'No 8 James Robertson Shittu/\nOgunlana Drive, Surulere | 142261',
+      colors: colors,
+      fonts: fonts,
+    );
+  }
+
+  Widget _buildContactCard({
+    required String title,
+    required String name,
+    required String email,
+    required String phone,
+    required String country,
+    required String address,
+    required ColorSystemExtension colors,
+    required AppFontThemeExtension fonts,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: colors.bgB0,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: fonts.textMdBold.copyWith(
+              color: colors.textPrimary,
+              fontSize: 15.sp,
+            ),
+          ),
+          SizedBox(height: 16.h),
+          PaymentInfoSection(
+            items: [
+              PaymentInfoItem(label: 'Name', value: name),
+              PaymentInfoItem(label: 'Email', value: email),
+              PaymentInfoItem(label: 'Phone no', value: phone),
+              PaymentInfoItem(
+                label: 'Country',
+                value: '',
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 16.w,
+                      height: 16.w,
+                      decoration: const BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(width: 4.w),
+                    Text(
+                      country,
+                      style: fonts.textMdBold.copyWith(
+                        color: colors.textPrimary,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PaymentInfoItem(
+                label: 'Address',
+                value: '',
+                trailing: Expanded(
+                  child: Text(
+                    address,
+                    style: fonts.textMdBold.copyWith(
+                      color: colors.textPrimary,
+                      fontSize: 14.sp,
+                    ),
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInvoiceBreakdownCard(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: colors.bgB0,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Invoice Breakdown',
+            style: fonts.textMdBold.copyWith(
+              color: colors.textPrimary,
+              fontSize: 15.sp,
+            ),
+          ),
+          SizedBox(height: 16.h),
+          _buildBreakdownItem(
+            label: 'Item Name',
+            amount: '500 USDT',
+            subText: '100 unt/sz at 5 USDT',
+            colors: colors,
+            fonts: fonts,
+          ),
+          SizedBox(height: 16.h),
+          _buildBreakdownItem(
+            label: 'Item Name',
+            amount: '80 USDT',
+            subText: '10 unt/sz at 8 USDT',
+            colors: colors,
+            fonts: fonts,
+          ),
+          SizedBox(height: 16.h),
+          Divider(color: colors.strokePrimary, height: 1.h),
+          SizedBox(height: 16.h),
+          _buildSimpleRow('Subtotal', '580 USDT', colors, fonts, isBold: true),
+          SizedBox(height: 16.h),
+          _buildSimpleRow('VAT (20%)', '1 USDT', colors, fonts),
+          SizedBox(height: 16.h),
+          Divider(color: colors.strokePrimary, height: 1.h),
+          SizedBox(height: 16.h),
+          _buildSimpleRow('Total Amount', '581 USDT', colors, fonts, isBold: true),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBreakdownItem({
+    required String label,
+    required String amount,
+    required String subText,
+    required ColorSystemExtension colors,
+    required AppFontThemeExtension fonts,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: fonts.textMdRegular.copyWith(
+            color: colors.textSecondary,
+            fontSize: 14.sp,
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              amount,
+              style: fonts.textMdBold.copyWith(
+                color: colors.textPrimary,
+                fontSize: 14.sp,
+              ),
+            ),
+            SizedBox(height: 2.h),
+            Text(
+              subText,
+              style: fonts.textXsRegular.copyWith(
+                color: colors.textTertiary,
+                fontSize: 11.sp,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSimpleRow(
+    String label,
+    String value,
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts, {
+    bool isBold = false,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: isBold
+              ? fonts.textMdBold.copyWith(color: colors.textPrimary, fontSize: 14.sp)
+              : fonts.textMdRegular.copyWith(color: colors.textSecondary, fontSize: 14.sp),
+        ),
+        Text(
+          value,
+          style: fonts.textMdBold.copyWith(
+            color: colors.textPrimary,
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPaymentTrackerCard(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
+    List<TimelineStep> steps = [];
+
+    if (_currentStatus == ContractInvoiceStatus.pending) {
+      steps = [
+        TimelineStep(
+          title: 'Invoice created and sent to client',
+          subtitle: '20th April 2025, 04:40 PM',
+          isCompleted: true,
+        ),
+        TimelineStep(
+          title: 'Awaiting payment confirmation',
+          description:
+              'Your client will get invoice access before it is due on [31st May 2025].',
+          isActive: true,
+          activeIcon: Icons.access_time_rounded,
+          activeIconColor: colors.orange500,
+          isDashed: true,
+        ),
+        TimelineStep(title: 'Process your client payment', isDashed: true),
+        TimelineStep(
+          title:
+              'According to your invoice, funds should be reflected in your balance on [31st May 2025].',
+        ),
+      ];
+    } else if (_currentStatus == ContractInvoiceStatus.paid) {
+      steps = [
+        TimelineStep(
+          title: 'Invoice created and sent to client',
+          subtitle: '20th April 2025, 04:40 PM',
+          isCompleted: true,
+        ),
+        TimelineStep(
+          title: 'Client payment confirmed',
+          subtitle: '20th April 2025, 08:40 PM',
+          isCompleted: true,
+        ),
+        TimelineStep(
+          title: 'Client payment processed',
+          subtitle: '20th April 2025, 08:45 PM',
+          isCompleted: true,
+        ),
+        TimelineStep(
+          title: 'Funds received in your account',
+          subtitle: '20th April 2025, 08:46 PM',
+          isCompleted: true,
+        ),
+      ];
+    } else if (_currentStatus == ContractInvoiceStatus.overdue) {
+      steps = [
+        TimelineStep(
+          title: 'Invoice created and sent to client',
+          subtitle: '20th April 2025, 04:40 PM',
+          isCompleted: true,
+        ),
+        TimelineStep(
+          title: 'Client payment overdue',
+          description:
+              'The payment was expected by [31st May 2025] but has not yet been received.',
+          isActive: true,
+          activeIcon: Icons.warning_amber_rounded,
+          activeIconColor: colors.red500,
+          isDashed: true,
+        ),
+        TimelineStep(title: 'Process your client payment', isDashed: true),
+        TimelineStep(
+          title:
+              'According to your invoice, funds should be reflected in your balance on [31st May 2025].',
+        ),
+      ];
+    }
+
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: colors.bgB0,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 0),
+            child: Text(
+              'Payment Tracker',
+              style: fonts.textMdBold.copyWith(
+                color: colors.textPrimary,
+                fontSize: 15.sp,
+              ),
+            ),
+          ),
+          PaymentTimeline(steps: steps),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPaymentMemoCard(
+    ColorSystemExtension colors,
+    AppFontThemeExtension fonts,
+  ) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: colors.bgB0,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Payment Memo',
+            style: fonts.textMdBold.copyWith(
+              color: colors.textPrimary,
+              fontSize: 15.sp,
+            ),
+          ),
+          SizedBox(height: 12.h),
+          Text(
+            'Thank you for your business. Please remit payment according to the terms outlined in this invoice. If you have any questions regarding this invoice or the payment process, do not hesitate to contact us.',
+            style: fonts.textSmRegular.copyWith(
+              color: colors.textSecondary,
+              fontSize: 13.sp,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButtons(ColorSystemExtension colors) {
+    return Row(
+      children: [
+        Expanded(
+          child: SecondaryButton(
+            text: 'Preview PDF',
+            onPressed: () {},
+          ),
+        ),
+        SizedBox(width: 16.w),
+        Expanded(
+          child: PrimaryButton(
+            text: 'Download PDF',
+            isEnabled: true,
+            onPressed: () {},
+          ),
+        ),
+      ],
     );
   }
 }
