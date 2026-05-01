@@ -149,6 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBarWidget(
+        activeTab: BottomNavTab.home,
         onFinanceTap: () {
           showModalBottomSheet(
             context: context,
