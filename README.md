@@ -1,307 +1,133 @@
-# VestRoll Payroll System - Mobile Application
+# VestRoll Mobile
 
-https://www.vestroll.com/
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-3.16+-blue?style=for-the-badge&logo=flutter" alt="Flutter" />
+  <img src="https://img.shields.io/badge/Dart-3.2+-blue?style=for-the-badge&logo=dart" alt="Dart" />
+  <img src="https://img.shields.io/badge/BLoC-State-red?style=for-the-badge&logo=flutter" alt="BLoC" />
+  <img src="https://img.shields.io/badge/Stellar-Network-black?style=for-the-badge&logo=stellar" alt="Stellar" />
+</p>
 
-Cross-platform mobile application built with Flutter for iOS and Android devices.
-VestRoll is a Payroll management platform built for modern businesses. it provides a smooth experience for managing contracts, team members, and financial operations. By leveraging the Stellar configuration, VestRoll ensures fast, low-cost, and secure stablecoin interactions, making global payroll efficient and accessible.
+**VestRoll Mobile** is a cross-platform mobile application built with Flutter. It serves as the mobile gateway for the VestRoll payroll and invoicing orchestration platform, enabling global businesses and contractors to manage financial operations on the go via the Stellar network.
 
-## Technology Stack
+## 🚀 Features
 
-- **Framework**: Flutter 3.16+
-- **Language**: Dart 3.2+
-- **State Management**: BLoC
-- **Local Storage**: Hive / SQLite
-- **Networking**: Dio with retry interceptors
-- **Blockchain**: web3dart
-- **Authentication**: flutter_secure_storage
-- **Biometrics**: local_auth
-- **Push Notifications**: Firebase Cloud Messaging
+- 💰 **Global Payouts**: Review and approve payroll disbursements directly from your mobile device.
+- ⚡ **Real-time Status**: Instant notifications for invoice settlement and balance updates.
+- 🤝 **Invoice Management**: Generate blockchain-verifiable invoices on the move.
+- 💸 **Tax Insights**: View tax deductions and reporting details for every transaction.
+- 🔐 **Biometric Security**: Secure access and transaction signing using FaceID and TouchID.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Flutter 3.16+](https://flutter.dev/)
+- **Language**: [Dart 3.2+](https://dart.dev/)
+- **State Management**: BLoC / Riverpod
+- **Blockchain**: Stellar Network integration
+- **Storage**: Hive & Secure Storage
+
+## 🏁 Quick Start
+
+1. **Prerequisites**:
+   - Flutter SDK installed and configured.
+   - Android Studio / Xcode for native builds.
+
+2. **Clone and Prepare**:
+
+   ```bash
+   git clone https://github.com/SafeVault/vestrollmobile.git
+   cd vestrollmobile
+   ```
+
+3. **Install Dependencies**:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. **Code Generation**:
+
+   ```bash
+   flutter pub run build_runner build --delete-conflicting-outputs
+   ```
+
+5. **Run the Application**:
+   ```bash
+   flutter run
+   ```
 
 ## Project Structure
 
 ```
-├── lib/
-│   ├── main.dart                    # Application entry point
-│   ├── app/
-│   │   ├── routes/                  # Navigation and routing
-│   │   ├── theme/                   # App theming
-│   │   └── config/                  # App configuration
-│   ├── core/
-│   │   ├── constants/               # Constants and enums
-│   │   ├── utils/                   # Utility functions
-│   │   ├── network/                 # API client and interceptors
-│   │   └── errors/                  # Error handling
-│   ├── data/
-│   │   ├── models/                  # Data models
-│   │   ├── repositories/            # Data repositories
-│   │   ├── datasources/             # Local/Remote data sources
-│   │   └── services/                # API services
-│   ├── domain/
-│   │   ├── entities/                # Business entities
-│   │   ├── repositories/            # Repository interfaces
-│   │   └── usecases/                # Business logic
-│   ├── presentation/
-│   │   ├── screens/                 # Screen widgets
-│   │   ├── widgets/                 # Reusable widgets
-│   │   ├── providers/               # State management
-│   │   └── blocs/                   # BLoC pattern (if used)
-│   └── features/
-│       ├── auth/                    # Authentication feature
-│       ├── payroll/                 # Payroll feature
-│       ├── leave/                   # Leave management
-│       ├── attendance/              # Time & attendance
-│       ├── crypto/                  # Cryptocurrency features
-│       └── profile/                 # User profile
-├── assets/
-│   ├── images/                      # Image assets
-│   ├── icons/                       # Icon assets
-│   └── fonts/                       # Custom fonts
-├── test/                            # Unit tests
-├── integration_test/                # Integration tests
-└── android/                         # Android native code
-└── ios/                             # iOS native code
+lib/
+├── app/                # App-wide configuration, themes, and routes
+├── core/               # Shared utilities, constants, and network logic
+├── data/               # Models, repositories, and data sources
+├── domain/             # Business entities and use cases
+├── features/           # Feature-specific logic (Auth, Payroll, Leave)
+├── presentation/       # UI layer (Screens, Widgets, and BLoCs)
+└── main.dart           # Application entry point
 ```
 
-## Prerequisites
+## Documentation
 
-- Flutter SDK 3.16+
-- Dart SDK 3.2+
-- Android Studio / Xcode
-- Firebase project setup
-- CocoaPods (for iOS)
+Comprehensive documentation for the mobile application:
 
-## 🎯 Target Audience & Ecosystem Impact
+- [Documentation Index](./docs/README.md)
+- [Architecture Overview](./docs/architecture/overview.md)
+- [Project Vision](./docs/context/project-overview.md)
+- [Mobile Security Best Practices](./docs/security/best-practices.md)
 
-### Who is this for?
+## Use Cases
 
-- **Global Enterprises**: Companies with distributed teams needing seamless cross-border payroll.
-- **DAO & Web3 Organizations**: Native crypto organizations requiring fiat and stablecoin payroll solutions.
-- **Freelancers & Contractors**: Individuals seeking transparent, instant, and low-fee payments.
+### Mobile Payroll Approval
 
-### Contribution to the Stellar Ecosystem
+Managers can review and approve payroll disbursements from anywhere, ensuring team members are paid on time.
 
-VestRoll plays a pivotal role in the **Stellar ecosystem** by:
+### Contractor Invoice Tracking
 
-1.  **Driving Real-World Utility**: Moving beyond speculation to practical, high-volume stablecoin use cases (Payroll).
-2.  **Highlighting Efficiency**: Showcasing Stellar's speed and low fees for frequent, small-to-large value transactions.
+Contractors can generate invoices and receive push notifications the moment funds are settled.
 
-## Installation
+### Secure Balance Management
 
-```bash
-# Clone repository
-git clone https://github.com/SafeVault/vestrollmobile.git
-cd vestroll-mobile
-
-# Get dependencies
-flutter pub get
-
-# Run code generation (if using freezed/json_serializable)
-flutter pub run build_runner build --delete-conflicting-outputs
-
-# Run the app
-flutter run
-```
-
-## Configuration Files
-
-### Android (`android/app/build.gradle`)
-
-```gradle
-android {
-    compileSdkVersion 34
-    
-    defaultConfig {
-        applicationId "com.vestroll.app"
-        minSdkVersion 24
-        targetSdkVersion 34
-        versionCode 1
-        versionName "1.0.0"
-    }
-    
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-```
-
-### iOS (`ios/Runner/Info.plist`)
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>We need camera access to scan receipts and QR codes</string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>We need your location to verify attendance</string>
-<key>NSFaceIDUsageDescription</key>
-<string>We use Face ID for secure authentication</string>
-```
-
-## Key Dependencies
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  
-  # State Management
-  flutter_riverpod: ^2.4.0
-  
-  # Networking
-  dio: ^5.4.0
-  retrofit: ^4.0.0
-  
-  # Local Storage
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  flutter_secure_storage: ^9.0.0
-  
-  # Authentication
-  local_auth: ^2.1.7
-  
-  # Blockchain
-  web3dart: ^2.7.1
-  walletconnect_flutter_v2: ^2.1.0
-  
-  # UI
-  cached_network_image: ^3.3.0
-  flutter_svg: ^2.0.9
-  shimmer: ^3.0.0
-  
-  # Location
-  geolocator: ^10.1.0
-  geocoding: ^2.1.1
-  
-  # Push Notifications
-  firebase_messaging: ^14.7.6
-  flutter_local_notifications: ^16.2.0
-  
-  # Utilities
-  intl: ^0.18.1
-  qr_code_scanner: ^1.0.1
-  file_picker: ^6.1.1
-  path_provider: ^2.1.1
-  
-  # Code Generation
-  freezed_annotation: ^2.4.1
-  json_annotation: ^4.8.1
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  build_runner: ^2.4.7
-  freezed: ^2.4.5
-  json_serializable: ^6.7.1
-  flutter_launcher_icons: ^0.13.1
-```
-
-
-
-## Build & Release
-
-### Android
-
-```bash
-# Build APK
-flutter build apk --release
-
-# Build App Bundle
-flutter build appbundle --release
-
-# Build with flavors
-flutter build apk --release --flavor production
-```
-
-### iOS
-
-```bash
-# Build IPA
-flutter build ipa --release
-
-# Build with specific configuration
-flutter build ios --release --no-codesign
-```
-
-## Code Generation
-
-```bash
-# Generate model classes, serializers
-flutter pub run build_runner build --delete-conflicting-outputs
-
-# Watch for changes
-flutter pub run build_runner watch
-```
-
-
-```yaml
-# pubspec.yaml
-flutter:
-  generate: true
-```
-
-## Performance Optimization
-
-- **Image Caching**: Use cached_network_image for remote images
-- **Lazy Loading**: Implement pagination for large lists
-- **Memory Management**: Dispose controllers and streams properly
-- **Build Optimization**: Use const constructors where possible
-- **State Management**: Minimize unnecessary rebuilds with Riverpod selectors
-
-## Security Best Practices
-
-- Store sensitive data in flutter_secure_storage
-- Enable certificate pinning for API calls
-- Obfuscate code in release builds
-- Implement jailbreak/root detection
-- Use ProGuard rules for Android
-- Enable bitcode for iOS
-
-
-
+Individuals can safely manage their stablecoin and fiat balances with biometric security.
 
 ## Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## Code Style
-
-- Follow [Effective Dart](https://dart.dev/guides/language/effective-dart) guidelines
-- Use `flutter analyze` to check code quality
-- Format code with `dart format .`
-- Use linter rules defined in `analysis_options.yaml`
-
-## Troubleshooting
-
-### Common Issues
-
-**Issue**: Build fails on iOS
-```bash
-cd ios && pod install
-flutter clean && flutter pub get
-```
-
-**Issue**: Android build fails
-```bash
-cd android && ./gradlew clean
-flutter clean && flutter pub get
-```
-
-**Issue**: Hot reload not working
-```bash
-flutter clean
-flutter pub get
-```
+We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ## License
 
-Proprietary - All rights reserved
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ## Support
 
-- Email: vestrollofficail@gmail.com
+- **Issues**: [GitHub Issues](https://github.com/SafeVault/vestrollmobile/issues)
+- **Email**: vestrollofficail@gmail.com
+
+## Maintainers
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="https://github.com/codeze-us.png" alt="codeZe-us" width="150" />
+      <br /><br />
+      <strong>codeZe-us</strong>
+      <br /><br />
+      <a href="https://github.com/codeze-us" target="_blank">GitHub</a>
+    </td>
+  </tr>
+</table>
+
+---
+
+## **Thanks to all the contributors who have made this project possible!**
+
+[![Contributors](https://contrib.rocks/image?repo=SafeVault/vestrollmobile)](https://github.com/SafeVault/vestrollmobile/graphs/contributors)
+
+---
+
+<p align="center">
+  <i>Empowering mobile financial orchestration with Stellar</i>
+</p>
+
+---
