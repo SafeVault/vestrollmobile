@@ -9,15 +9,15 @@
 
 **VestRoll Mobile** is a cross-platform mobile application built with Flutter. It serves as the mobile gateway for the VestRoll payroll and invoicing orchestration platform, enabling global businesses and contractors to manage financial operations on the go via the Stellar network.
 
-## 🚀 Features
+## Features
 
-- 💰 **Global Payouts**: Review and approve payroll disbursements directly from your mobile device.
-- ⚡ **Real-time Status**: Instant notifications for invoice settlement and balance updates.
-- 🤝 **Invoice Management**: Generate blockchain-verifiable invoices on the move.
-- 💸 **Tax Insights**: View tax deductions and reporting details for every transaction.
-- 🔐 **Biometric Security**: Secure access and transaction signing using FaceID and TouchID.
+- **Global Payouts**: Review and approve payroll disbursements directly from your mobile device.
+- **Real-time Status**: Instant notifications for invoice settlement and balance updates.
+- **Invoice Management**: Generate blockchain-verifiable invoices on the move.
+- **Tax Insights**: View tax deductions and reporting details for every transaction.
+- **Biometric Security**: Secure access and transaction signing using FaceID and TouchID.
 
-## 🛠️ Tech Stack
+## Stack
 
 - **Framework**: [Flutter 3.16+](https://flutter.dev/)
 - **Language**: [Dart 3.2+](https://dart.dev/)
@@ -25,7 +25,7 @@
 - **Blockchain**: Stellar Network integration
 - **Storage**: Hive & Secure Storage
 
-## 🏁 Quick Start
+## Quick Start
 
 1. **Prerequisites**:
    - Flutter SDK installed and configured.
