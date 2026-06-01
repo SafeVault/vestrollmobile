@@ -29,6 +29,8 @@ dependencies:
   pin_code_fields: ^8.0.1
   url_launcher: ^6.3.2
   confetti: ^0.8.0
+  dio: ^5.9.2
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
