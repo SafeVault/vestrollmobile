@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 enum TransactionStatus { successful, processing, failed }
 
 enum TransactionType { all, contractPayment, invoice, quickpay, withdrawal }
@@ -10,8 +8,8 @@ class Transaction {
   final String time;
   final String amount;
   final TransactionStatus status;
-  final Color iconBackgroundColor;
-  final IconData icon;
+  final String iconBackgroundColor;
+  final String icon;
   final DateTime date;
   final TransactionType type;
 
@@ -27,14 +25,14 @@ class Transaction {
     required this.type,
   });
 
-  Color getStatusColor() {
+  String getStatusColor() {
     switch (status) {
       case TransactionStatus.successful:
-        return const Color(0xFF22C55E);
+        return '#22C55E';
       case TransactionStatus.processing:
-        return const Color(0xFFF97316);
+        return '#F97316';
       case TransactionStatus.failed:
-        return const Color(0xFFEF4444);
+        return '#EF4444';
     }
   }
 

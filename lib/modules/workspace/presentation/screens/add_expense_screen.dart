@@ -47,7 +47,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppTextField(
-              label: 'Expense name',
+              labelText: 'Expense name',
               hintText: 'e.g. Macbook Pro',
               controller: _nameController,
             ),
@@ -55,7 +55,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             _buildCategorySelector(colors, fonts),
             SizedBox(height: 20.h),
             AppTextField(
-              label: 'Payment date',
+              labelText: 'Payment date',
               hintText: 'Select date',
               controller: _dateController,
               readOnly: true,
@@ -68,7 +68,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             ),
             SizedBox(height: 20.h),
             AppTextField(
-              label: 'Amount',
+              labelText: 'Amount',
               hintText: '0.00',
               controller: _amountController,
               keyboardType: TextInputType.number,
@@ -82,10 +82,9 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             ),
             SizedBox(height: 20.h),
             AppTextField(
-              label: 'Expense description',
+              labelText: 'Expense description',
               hintText: 'Enter expense description',
               controller: _descriptionController,
-              maxLines: 4,
             ),
             SizedBox(height: 24.h),
             _buildAttachmentSection(colors, fonts),
@@ -104,8 +103,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
   Widget _buildCategorySelector(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -144,13 +142,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         ),
       ],
     );
-  }
 
   Widget _buildAttachmentSection(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -165,7 +161,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
             color: colors.bgB0,
             borderRadius: BorderRadius.circular(16.r),
             border: Border.all(
-              color: colors.brandDefault.withOpacity(0.2),
+              color: colors.brandDefault.withValues(alpha: 0.2),
               style: BorderStyle.solid,
             ),
           ),
@@ -191,7 +187,6 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         ),
       ],
     );
-  }
 
   void _showCategoryPicker(
     BuildContext context,
@@ -212,8 +207,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
-      builder: (context) {
-        return Container(
+      builder: (context) => Container(
           padding: EdgeInsets.symmetric(vertical: 24.h),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -223,8 +217,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 style: fonts.textLgBold.copyWith(color: colors.textPrimary),
               ),
               SizedBox(height: 16.h),
-              ...categories.map((cat) {
-                return ListTile(
+              ...categories.map((cat) => ListTile(
                   title: Text(
                     cat,
                     style: fonts.textMdMedium.copyWith(color: colors.textPrimary),
@@ -235,13 +228,11 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                     });
                     Navigator.pop(context);
                   },
-                );
-              }).toList(),
+                )),
               SizedBox(height: 24.h),
             ],
           ),
-        );
-      },
+        ),
     );
   }
 
@@ -254,7 +245,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     );
     if (picked != null) {
       setState(() {
-        _dateController.text = "${picked.day} ${_getMonth(picked.month)} ${picked.year}";
+        _dateController.text = '${picked.day} ${_getMonth(picked.month)} ${picked.year}';
       });
     }
   }
@@ -275,8 +266,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
       context: context,
       backgroundColor: Colors.transparent,
       isDismissible: false,
-      builder: (context) {
-        return Container(
+      builder: (context) => Container(
           padding: EdgeInsets.all(24.w),
           decoration: BoxDecoration(
             color: colors.bgB0,
@@ -289,7 +279,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 width: 64.w,
                 height: 64.h,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF8B5CF6).withOpacity(0.1),
+                  color: const Color(0xFF8B5CF6).withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
@@ -320,8 +310,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               SizedBox(height: 16.h),
             ],
           ),
-        );
-      },
+        ),
     );
   }
 }

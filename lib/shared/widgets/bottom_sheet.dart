@@ -205,8 +205,7 @@ Future<T?> showSearchableBottomSheet<T>({
   required String Function(T) getItemLabel,
   String? Function(T)? getItemLeading,
   bool Function(T, String)? customFilter,
-}) {
-  return showModalBottomSheet<T>(
+}) => showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
@@ -229,4 +228,3 @@ Future<T?> showSearchableBottomSheet<T>({
           ),
         ),
   );
-}

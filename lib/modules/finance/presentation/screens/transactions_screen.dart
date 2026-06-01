@@ -30,8 +30,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '06:30 PM',
       amount: '- 581 USDT',
       status: TransactionStatus.processing,
-      iconBackgroundColor: const Color(0xFF3B82F6),
-      icon: Icons.account_balance_wallet,
+      iconBackgroundColor: '#3B82F6',
+      icon: 'accountBalanceWallet',
       date: DateTime(2025, 4, 21),
       type: TransactionType.withdrawal,
     ),
@@ -41,8 +41,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '01:22 PM',
       amount: '+ 581 USDT',
       status: TransactionStatus.successful,
-      iconBackgroundColor: const Color(0xFFEC4899),
-      icon: Icons.shopping_bag,
+      iconBackgroundColor: '#EC4899',
+      icon: 'shoppingBag',
       date: DateTime(2025, 4, 21),
       type: TransactionType.contractPayment,
     ),
@@ -52,8 +52,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '09:05 AM',
       amount: '+ 581 USDT',
       status: TransactionStatus.successful,
-      iconBackgroundColor: const Color(0xFFF97316),
-      icon: Icons.receipt,
+      iconBackgroundColor: '#F97316',
+      icon: 'receipt',
       date: DateTime(2025, 4, 21),
       type: TransactionType.invoice,
     ),
@@ -63,8 +63,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '05:55 PM',
       amount: '+ 581 USDT',
       status: TransactionStatus.successful,
-      iconBackgroundColor: const Color(0xFF8B5CF6),
-      icon: Icons.bug_report,
+      iconBackgroundColor: '#8B5CF6',
+      icon: 'bugReport',
       date: DateTime(2025, 4, 21),
       type: TransactionType.quickpay,
     ),
@@ -74,8 +74,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '12:10 PM',
       amount: '+ 581 USDT',
       status: TransactionStatus.failed,
-      iconBackgroundColor: const Color(0xFFEC4899),
-      icon: Icons.payment,
+      iconBackgroundColor: '#EC4899',
+      icon: 'payment',
       date: DateTime(2025, 4, 21),
       type: TransactionType.contractPayment,
     ),
@@ -85,8 +85,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '08:15 AM',
       amount: '+ 581 USDT',
       status: TransactionStatus.processing,
-      iconBackgroundColor: const Color(0xFFF97316),
-      icon: Icons.swap_horiz,
+      iconBackgroundColor: '#F97316',
+      icon: 'swapHoriz',
       date: DateTime(2025, 4, 21),
       type: TransactionType.invoice,
     ),
@@ -96,8 +96,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '06:30 PM',
       amount: '+ 581 USDT',
       status: TransactionStatus.successful,
-      iconBackgroundColor: const Color(0xFF8B5CF6),
-      icon: Icons.account_balance,
+      iconBackgroundColor: '#8B5CF6',
+      icon: 'accountBalance',
       date: DateTime(2025, 4, 19),
       type: TransactionType.quickpay,
     ),
@@ -107,8 +107,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '01:22 PM',
       amount: '+ 581 USDT',
       status: TransactionStatus.failed,
-      iconBackgroundColor: const Color(0xFFEC4899),
-      icon: Icons.credit_card,
+      iconBackgroundColor: '#EC4899',
+      icon: 'creditCard',
       date: DateTime(2025, 4, 19),
       type: TransactionType.contractPayment,
     ),
@@ -118,8 +118,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       time: '09:05 AM',
       amount: '+ 581 USDT',
       status: TransactionStatus.processing,
-      iconBackgroundColor: const Color(0xFFF97316),
-      icon: Icons.design_services,
+      iconBackgroundColor: '#F97316',
+      icon: 'designServices',
       date: DateTime(2025, 4, 19),
       type: TransactionType.invoice,
     ),
@@ -161,8 +161,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     );
   }
 
-  List<Transaction> _getFilteredTransactions() {
-    return _transactions.where((transaction) {
+  List<Transaction> _getFilteredTransactions() => _transactions.where((transaction) {
       if (_searchQuery.isNotEmpty) {
         if (!transaction.title.toLowerCase().contains(_searchQuery) &&
             !transaction.amount.toLowerCase().contains(_searchQuery)) {
@@ -208,7 +207,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
       return true;
     }).toList();
-  }
 
   TransactionFilterStatus _mapTransactionStatusToFilterStatus(
     TransactionStatus status,
@@ -233,10 +231,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
     return Scaffold(
       backgroundColor: isDark ? colors.bgB0 : colors.bgB1,
-      appBar: VestrollAppBar(
+      appBar: const VestrollAppBar(
         title: 'Transactions',
         isBack: true,
-        actions: const [],
+        actions: [],
       ),
       body: Column(
         children: [
@@ -255,8 +253,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   Widget _buildSearchBar(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       child: Row(
         children: [
@@ -329,7 +326,6 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
         ],
       ),
     );
-  }
 
   Widget _buildTransactionsList(
     List<Transaction> transactions,
@@ -372,15 +368,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               ),
               child: Column(
                 children:
-                    transactionsForDate.map((transaction) {
-                      return TransactionListItem(
+                    transactionsForDate.map((transaction) => TransactionListItem(
                         transaction: transaction,
                         onTap: () => context.pushNamed(
                           RouteConstants.transactionDetails,
                           extra: transaction,
                         ),
-                      );
-                    }).toList(),
+                      )).toList(),
               ),
             );
           }

@@ -43,7 +43,7 @@ class _KeypadButtonState extends State<KeypadButton> {
             shape: BoxShape.circle,
             color:
                 _isPressed
-                    ? colors.gray400.withOpacity(0.1)
+                    ? colors.gray400.withValues(alpha: 0.1)
                     : Colors.transparent,
           ),
           child: Center(

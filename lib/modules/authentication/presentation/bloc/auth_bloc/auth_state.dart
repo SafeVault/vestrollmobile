@@ -1,59 +1,38 @@
-abstract class AuthState {
+import 'package:equatable/equatable.dart';
+import 'package:vestrollmobile/modules/authentication/domain/entities/user.dart';
+
+sealed class AuthState extends Equatable {
   const AuthState();
+
+  @override
+  List<Object?> get props => [];
 }
 
-class AuthInitial extends AuthState {
+final class AuthInitial extends AuthState {
   const AuthInitial();
 }
 
-class AuthLoading extends AuthState {
+final class AuthLoading extends AuthState {
   const AuthLoading();
 }
 
-class AuthAuthenticated extends AuthState {
-  final String userId;
-  final String email;
-  final String? name;
+final class AuthAuthenticated extends AuthState {
+  const AuthAuthenticated({required this.user, this.token});
+  final User user;
   final String? token;
 
-  const AuthAuthenticated({
-    required this.userId,
-    required this.email,
-    this.name,
-    this.token,
-  });
-
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is AuthAuthenticated &&
-        other.userId == userId &&
-        other.email == email &&
-        other.name == name &&
-        other.token == token;
-  }
-
-  @override
-  int get hashCode {
-    return userId.hashCode ^ email.hashCode ^ name.hashCode ^ token.hashCode;
-  }
+  List<Object?> get props => [user, token];
 }
 
-class AuthUnauthenticated extends AuthState {
+final class AuthUnauthenticated extends AuthState {
   const AuthUnauthenticated();
 }
 
-class AuthError extends AuthState {
+final class AuthError extends AuthState {
+  const AuthError(this.message);
   final String message;
 
-  const AuthError({required this.message});
-
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is AuthError && other.message == message;
-  }
-
-  @override
-  int get hashCode => message.hashCode;
+  List<Object?> get props => [message];
 }

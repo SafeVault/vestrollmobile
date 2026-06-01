@@ -49,7 +49,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(context.screenWidth(), 60),
-        child: VestrollAppBar(isBack: true, title: ''),
+        child: const VestrollAppBar(isBack: true, title: ''),
       ),
       body: Column(
         children: [
@@ -61,7 +61,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 children: [
                   const SizedBox(height: 8),
                   Text(
-                    "Create Your Password",
+                    'Create Your Password',
                     style: fonts.heading2Bold.copyWith(
                       fontSize: 24.sp,
                       color: colors.textPrimary,
@@ -69,7 +69,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    "Enter password to keep your account safe and secure.",
+                    'Enter password to keep your account safe and secure.',
                     style: fonts.bodyMedium.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
@@ -82,8 +82,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         (previous, current) =>
                             previous.newPasswordState?.hidePassword !=
                             current.newPasswordState?.hidePassword,
-                    builder: (context, state) {
-                      return AppTextField(
+                    builder: (context, state) => AppTextField(
                         borderRadius: 8.sp,
                         controller:
                             _passwordController, // Use persistent controller
@@ -95,7 +94,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         suffixIcon: GestureDetector(
                           onTap: () {
                             context.read<ForgotPasswordBloc>().add(
-                              TogglePasswordVisibility(),
+                              const TogglePasswordVisibility(),
                             );
                           },
                           child: Padding(
@@ -120,13 +119,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             (p0) => context.read<ForgotPasswordBloc>().add(
                               EnterPasswordString(p0),
                             ),
-                      );
-                    },
+                      ),
                   ),
                   const SizedBox(height: 20),
                   BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                    builder: (context, state) {
-                      return Wrap(
+                    builder: (context, state) => Wrap(
                         direction: Axis.horizontal,
                         runSpacing: 8,
                         spacing: 8,
@@ -166,8 +163,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             text: AppTexts.specialCharacter,
                           ),
                         ],
-                      );
-                    },
+                      ),
                   ),
                   const SizedBox(height: 20),
                   BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
@@ -175,8 +171,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         (previous, current) =>
                             previous.newPasswordState?.hideConfirmPassword !=
                             current.newPasswordState?.hideConfirmPassword,
-                    builder: (BuildContext context, ForgotPasswordState state) {
-                      return AppTextField(
+                    builder: (BuildContext context, ForgotPasswordState state) => AppTextField(
                         borderRadius: 8.sp,
                         controller:
                             _confirmPasswordController, // Use persistent controller
@@ -190,7 +185,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                         suffixIcon: GestureDetector(
                           onTap: () {
                             context.read<ForgotPasswordBloc>().add(
-                              ToggleConfirmPasswordVisibility(),
+                              const ToggleConfirmPasswordVisibility(),
                             );
                           },
                           child: Padding(
@@ -216,8 +211,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                             (p0) => context.read<ForgotPasswordBloc>().add(
                               EnterConfirmPasswordString(p0),
                             ),
-                      );
-                    },
+                      ),
                   ),
                   const SizedBox(height: 100),
                 ],
@@ -233,16 +227,14 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                     (previous, current) =>
                         previous.newPasswordState?.isVerificationPassed !=
                         current.newPasswordState?.isVerificationPassed,
-                builder: (context, state) {
-                  return PrimaryButton(
+                builder: (context, state) => PrimaryButton(
                     text: AppTexts.setPassword,
                     isEnabled:
                         state.newPasswordState?.isVerificationPassed ?? false,
                     onPressed: () {
                       context.pushNamed(RouteConstants.accountType);
                     },
-                  );
-                },
+                  ),
               ),
               SizedBox(height: 20.sp),
               if (MediaQuery.viewInsetsOf(context).bottom < 10)

@@ -17,19 +17,15 @@ class ProtocolTimeline extends StatelessWidget {
   const ProtocolTimeline({super.key, required this.items});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(items.length, (index) {
-        return ProtocolTimelineItem(
+  Widget build(BuildContext context) => Column(
+      children: List.generate(items.length, (index) => ProtocolTimelineItem(
           data: items[index],
           isLast: index == items.length - 1,
           isNextCompleted:
               index < items.length - 1 &&
               items[index + 1].status == TimelineStatus.completed,
-        );
-      }),
+        )),
     );
-  }
 }
 
 class ProtocolTimelineItem extends StatelessWidget {
@@ -45,8 +41,7 @@ class ProtocolTimelineItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return IntrinsicHeight(
+  Widget build(BuildContext context) => IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -85,10 +80,8 @@ class ProtocolTimelineItem extends StatelessWidget {
         ],
       ),
     );
-  }
 
-  Widget _buildIndicator(BuildContext context) {
-    return Column(
+  Widget _buildIndicator(BuildContext context) => Column(
       children: [
         _buildIcon(),
         if (!isLast)
@@ -103,7 +96,6 @@ class ProtocolTimelineItem extends StatelessWidget {
           ),
       ],
     );
-  }
 
   Widget _buildIcon() {
     switch (data.status) {
@@ -134,7 +126,7 @@ class ProtocolTimelineItem extends StatelessWidget {
           ),
         );
       case TimelineStatus.warning:
-        return Container(
+        return SizedBox(
           width: 20.sp,
           height: 20.sp,
           child: Icon(
@@ -157,14 +149,12 @@ class ProtocolTimelineItem extends StatelessWidget {
 
   Color _getLineColor() {
     if (data.status == TimelineStatus.completed && isNextCompleted) {
-      return const Color(0xFF10B981).withOpacity(0.3);
+      return const Color(0xFF10B981).withValues(alpha: 0.3);
     }
     return const Color(0xFFE5E7EB);
   }
 
-  bool _isLineDotted() {
-    return data.status != TimelineStatus.completed;
-  }
+  bool _isLineDotted() => data.status != TimelineStatus.completed;
 }
 
 class TimelineLinePainter extends CustomPainter {

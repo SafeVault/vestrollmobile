@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
+
+IconData _mapIcon(String name) {
+  switch (name) {
+    case 'accountBalanceWallet': return Icons.account_balance_wallet;
+    case 'shoppingBag': return Icons.shopping_bag;
+    case 'receipt': return Icons.receipt;
+    case 'bugReport': return Icons.bug_report;
+    case 'payment': return Icons.payment;
+    case 'swapHoriz': return Icons.swap_horiz;
+    case 'accountBalance': return Icons.account_balance;
+    case 'creditCard': return Icons.credit_card;
+    case 'designServices': return Icons.design_services;
+    case 'arrowUp': return Icons.arrow_upward;
+    case 'arrowDown': return Icons.arrow_downward;
+    case 'receiptLong': return Icons.receipt_long;
+    case 'wallet': return Icons.wallet;
+    default: return Icons.help_outline;
+  }
+}
 
 class UpcomingPaymentCard extends StatelessWidget {
   final UpcomingPayment payment;
@@ -39,7 +58,7 @@ class UpcomingPaymentCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: colors.gray100.withOpacity(0.1),
+              color: colors.gray100.withValues(alpha: 0.1),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -94,17 +113,15 @@ class UpcomingPaymentCard extends StatelessWidget {
     );
   }
 
-  Widget _buildIcon(ColorSystemExtension colors) {
-    return Container(
+  Widget _buildIcon(ColorSystemExtension colors) => Container(
       width: 44.w,
       height: 44.h,
       decoration: BoxDecoration(
-        color: payment.iconBackgroundColor,
+        color: Color(int.parse(payment.iconBackgroundColor.replaceFirst('#', '0xFF'))),
         shape: BoxShape.circle,
       ),
-      child: Icon(payment.icon, color: colors.constantContrast, size: 20.sp),
+      child: Icon(_mapIcon(payment.icon), color: colors.constantContrast, size: 20.sp),
     );
-  }
 
   Widget _buildStatus(
     ColorSystemExtension colors,

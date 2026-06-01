@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
-import 'package:vestrollmobile/shared/widgets/vestroll_app_bar.dart';
 import 'package:vestrollmobile/shared/widgets/secondary.dart';
+import 'package:vestrollmobile/shared/widgets/vestroll_app_bar.dart';
 
 enum ExpenseStatus { awaitingApproval, approved, declined }
 
@@ -16,7 +16,7 @@ class ExpenseDetailsScreen extends StatefulWidget {
 
 class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
   // Toggle this to see different states from the screenshot
-  ExpenseStatus _status = ExpenseStatus.awaitingApproval;
+  final ExpenseStatus _status = ExpenseStatus.awaitingApproval;
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +63,7 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
   Widget _buildMainDetails(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: colors.bgB0,
@@ -96,7 +95,6 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
         ],
       ),
     );
-  }
 
   Widget _buildInfoRow(
     String label,
@@ -104,8 +102,7 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
     ColorSystemExtension colors,
     AppFontThemeExtension fonts, {
     bool isMultiline = false,
-  }) {
-    return Row(
+  }) => Row(
       crossAxisAlignment: isMultiline ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         SizedBox(
@@ -119,7 +116,6 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
         Expanded(child: Align(alignment: Alignment.centerRight, child: value)),
       ],
     );
-  }
 
   Widget _buildTextValue(String text) {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
@@ -152,7 +148,7 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Text(
@@ -165,8 +161,7 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
   Widget _buildAttachmentSection(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -205,19 +200,17 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
         ],
       ),
     );
-  }
 
   Widget _buildDeclinedNote(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: colors.red500.withOpacity(0.05),
+        color: colors.red500.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: colors.red500.withOpacity(0.2)),
+        border: Border.all(color: colors.red500.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,7 +233,6 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
         ],
       ),
     );
-  }
 
   void _showDeleteConfirmation(
     BuildContext context,
@@ -249,8 +241,7 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
   ) {
     showDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
+      builder: (context) => AlertDialog(
           backgroundColor: colors.bgB0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
           title: Text(
@@ -277,7 +268,7 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        side: Border.all(color: colors.strokePrimary),
+                        side: BorderSide(color: colors.strokePrimary),
                       ),
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
@@ -307,8 +298,7 @@ class _ExpenseDetailsScreenState extends State<ExpenseDetailsScreen> {
               ],
             ),
           ],
-        );
-      },
+        ),
     );
   }
 }

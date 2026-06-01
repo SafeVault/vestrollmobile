@@ -54,12 +54,10 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
     }
   }
 
-  bool _isFormValid() {
-    return _countryController.text.isNotEmpty &&
+  bool _isFormValid() => _countryController.text.isNotEmpty &&
         _addressController.text.isNotEmpty &&
         _cityController.text.isNotEmpty &&
         _postalCodeController.text.isNotEmpty;
-  }
 
   void _handleFinishSetup() {
     if (_isFormValid()) {
@@ -102,8 +100,7 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
     );
   }
 
-  Widget _buildProgressBar(ColorSystemExtension colors) {
-    return Container(
+  Widget _buildProgressBar(ColorSystemExtension colors) => Container(
       height: 4,
       width: double.infinity,
       color: Colors.grey[200],
@@ -117,13 +114,11 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
         ),
       ),
     );
-  }
 
   Widget _buildHeader(
     AppFontThemeExtension fonts,
     ColorSystemExtension colors,
-  ) {
-    return Column(
+  ) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -145,10 +140,8 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
         ),
       ],
     );
-  }
 
-  Widget _buildFormFields() {
-    return Column(
+  Widget _buildFormFields() => Column(
       children: [
         AppTextField(
           borderRadius: 8.sp,
@@ -181,12 +174,9 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
         ),
       ],
     );
-  }
 
-  Widget _buildFinishButton() {
-    return Padding(
+  Widget _buildFinishButton() => Padding(
       padding: const EdgeInsets.all(24),
       child: PrimaryButton(text: 'Finish setup', onPressed: _handleFinishSetup),
     );
-  }
 }

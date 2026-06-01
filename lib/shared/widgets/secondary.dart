@@ -100,9 +100,9 @@ class _SecondaryButtonState extends State<SecondaryButton>
       onTap:
           widget.isEnabled == true
               ? () async {
-                _triggerSpringEffect();
+                final FocusScopeNode currentFocus = FocusScope.of(context);
+                await _triggerSpringEffect();
                 await _triggerShineEffect();
-                FocusScopeNode currentFocus = FocusScope.of(context);
                 if (!currentFocus.hasPrimaryFocus &&
                     currentFocus.focusedChild != null) {
                   currentFocus.unfocus();
@@ -114,8 +114,7 @@ class _SecondaryButtonState extends State<SecondaryButton>
               : null,
       child: AnimatedBuilder(
         animation: Listenable.merge([_scaleAnimation, _shineAnimation]),
-        builder: (context, child) {
-          return Transform.scale(
+        builder: (context, child) => Transform.scale(
             scale: _scaleAnimation.value,
             child: Stack(
               children: [
@@ -179,8 +178,7 @@ class _SecondaryButtonState extends State<SecondaryButton>
                           widget.borderRadius ?? BorderRadius.circular(28.sp),
                       child: AnimatedBuilder(
                         animation: _shineAnimation,
-                        builder: (context, child) {
-                          return Transform.translate(
+                        builder: (context, child) => Transform.translate(
                             offset: Offset(
                               _shineAnimation.value *
                                   (MediaQuery.of(context).size.width + 100),
@@ -207,8 +205,7 @@ class _SecondaryButtonState extends State<SecondaryButton>
                                 ),
                               ),
                             ),
-                          );
-                        },
+                          ),
                       ),
                     ),
                   ),
@@ -220,7 +217,7 @@ class _SecondaryButtonState extends State<SecondaryButton>
                       child: AnimatedBuilder(
                         animation: _shineAnimation,
                         builder: (context, child) {
-                          double delayedProgress = (_shineAnimation.value + 0.2)
+                          final double delayedProgress = (_shineAnimation.value + 0.2)
                               .clamp(-1.0, 1.0);
 
                           return Transform.translate(
@@ -257,8 +254,7 @@ class _SecondaryButtonState extends State<SecondaryButton>
                   ),
               ],
             ),
-          );
-        },
+          ),
       ),
     );
   }

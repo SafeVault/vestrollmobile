@@ -37,14 +37,12 @@ class TransactionDetailsScreen extends StatelessWidget {
 
   String get _amountPrefix => _isDebit ? '-' : '+';
 
-  String get _rawAmount {
-    // Strip leading +/- and spaces from amount string, e.g. "- 581 USDT" → "581"
-    return transaction.amount
-        .replaceAll(RegExp(r'^[+\-]\s*'), '')
-        .split(' ')
-        .first
-        .trim();
-  }
+  // Strip leading +/- and spaces from amount string, e.g. "- 581 USDT" → "581"
+  String get _rawAmount => transaction.amount
+      .replaceAll(RegExp(r'^[+\-]\s*'), '')
+      .split(' ')
+      .first
+      .trim();
 
   String get _currency {
     final parts = transaction.amount.replaceAll(RegExp(r'^[+\-]\s*'), '').trim().split(' ');
@@ -53,7 +51,7 @@ class TransactionDetailsScreen extends StatelessWidget {
 
   /// Build the "Successful" / "Processing" / "Failed" status badge
   Widget _buildStatusBadge(ColorSystemExtension colors, AppFontThemeExtension fonts) {
-    final color = transaction.getStatusColor();
+    final color = Color(int.parse(transaction.getStatusColor().replaceFirst('#', '0xFF')));
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
       decoration: BoxDecoration(
@@ -74,8 +72,7 @@ class TransactionDetailsScreen extends StatelessWidget {
     Widget valueWidget,
     AppFontThemeExtension fonts,
     ColorSystemExtension colors,
-  ) {
-    return Row(
+  ) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
@@ -91,25 +88,21 @@ class TransactionDetailsScreen extends StatelessWidget {
         Expanded(child: Align(alignment: Alignment.centerRight, child: valueWidget)),
       ],
     );
-  }
 
   /// Builds just a text value widget
-  Widget _textValue(String text, AppFontThemeExtension fonts, ColorSystemExtension colors) {
-    return Text(
+  Widget _textValue(String text, AppFontThemeExtension fonts, ColorSystemExtension colors) => Text(
       text,
       style: fonts.textMdBold.copyWith(color: colors.textPrimary, fontSize: 14.sp),
       textAlign: TextAlign.end,
       overflow: TextOverflow.ellipsis,
     );
-  }
 
   /// Network row with Ethereum icon
   Widget _buildNetworkRow(
     AppFontThemeExtension fonts,
     ColorSystemExtension colors,
     Widget networkIcon,
-  ) {
-    return Row(
+  ) => Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         networkIcon,
@@ -120,7 +113,6 @@ class TransactionDetailsScreen extends StatelessWidget {
         ),
       ],
     );
-  }
 
   /// Clickable Transaction ID row with copy icon
   Widget _buildTxIdRow(
@@ -128,8 +120,7 @@ class TransactionDetailsScreen extends StatelessWidget {
     AppFontThemeExtension fonts,
     ColorSystemExtension colors,
     BuildContext context,
-  ) {
-    return GestureDetector(
+  ) => GestureDetector(
       onTap: () {
         Clipboard.setData(ClipboardData(text: txId));
         ScaffoldMessenger.of(context).showSnackBar(
@@ -152,7 +143,6 @@ class TransactionDetailsScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 
   // ── Timeline ──────────────────────────────────────────────────────────────
 
@@ -243,9 +233,9 @@ class TransactionDetailsScreen extends StatelessWidget {
   Widget _buildInfoCard(BuildContext context, ColorSystemExtension colors, AppFontThemeExtension fonts) {
     final networkIcon = SvgPicture.asset(AppAssets.ethereumIcon, width: 20.sp, height: 20.sp);
     const txId = '0x6885afa...63b3';
-    final date = '20 April 2025, 04:40 PM';
+    const date = '20 April 2025, 04:40 PM';
 
-    List<Widget> rows = [];
+    final List<Widget> rows = [];
 
     void addRow(String label, Widget value) {
       if (rows.isNotEmpty) rows.add(SizedBox(height: 16.h));
@@ -316,8 +306,7 @@ class TransactionDetailsScreen extends StatelessWidget {
     BuildContext context,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return GestureDetector(
+  ) => GestureDetector(
       onTap: () => _showInvoiceBreakdown(context),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -331,7 +320,6 @@ class TransactionDetailsScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 
   void _showInvoiceBreakdown(BuildContext context) {
     showModalBottomSheet(
@@ -348,8 +336,7 @@ class TransactionDetailsScreen extends StatelessWidget {
   }
 
   /// Contract-specific second info card (Contract name, type, Invoice, Client)
-  Widget _buildContractCard(BuildContext context, ColorSystemExtension colors, AppFontThemeExtension fonts) {
-    return Container(
+  Widget _buildContractCard(BuildContext context, ColorSystemExtension colors, AppFontThemeExtension fonts) => Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: colors.bgB0,
@@ -399,7 +386,6 @@ class TransactionDetailsScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 
   @override
   Widget build(BuildContext context) {

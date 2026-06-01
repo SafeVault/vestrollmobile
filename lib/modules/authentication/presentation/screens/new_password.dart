@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/managers/app_text.dart';
 import 'package:vestrollmobile/core/utils/managers/config.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
-import 'package:go_router/go_router.dart';
-import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/bloc/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/password_requirements_viewer.dart';
 import 'package:vestrollmobile/shared/widgets/app_textfiled.dart';
@@ -49,7 +49,7 @@ class _NewPasswordState extends State<NewPassword> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(context.screenWidth(), 60),
-        child: VestrollAppBar(isBack: true, title: ''),
+        child: const VestrollAppBar(isBack: true, title: ''),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -58,7 +58,7 @@ class _NewPasswordState extends State<NewPassword> {
           children: [
             const SizedBox(height: 8),
             Text(
-              "Enter New Password",
+              'Enter New Password',
               style: fonts.heading2Bold.copyWith(
                 fontSize: 24.sp,
                 color: colors.textPrimary,
@@ -78,8 +78,7 @@ class _NewPasswordState extends State<NewPassword> {
                   (previous, current) =>
                       previous.newPasswordState?.hidePassword !=
                       current.newPasswordState?.hidePassword,
-              builder: (context, state) {
-                return AppTextField(
+              builder: (context, state) => AppTextField(
                   borderRadius: 8.sp,
                   controller:
                       _passwordController, // Use the persistent controller
@@ -90,7 +89,7 @@ class _NewPasswordState extends State<NewPassword> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       context.read<ForgotPasswordBloc>().add(
-                        TogglePasswordVisibility(),
+                        const TogglePasswordVisibility(),
                       );
                     },
                     child: Padding(
@@ -112,13 +111,11 @@ class _NewPasswordState extends State<NewPassword> {
                       (p0) => context.read<ForgotPasswordBloc>().add(
                         EnterPasswordString(p0),
                       ),
-                );
-              },
+                ),
             ),
             SizedBox(height: 20.h),
             BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-              builder: (context, state) {
-                return Wrap(
+              builder: (context, state) => Wrap(
                   direction: Axis.horizontal,
                   runSpacing: 8,
                   spacing: 8,
@@ -156,8 +153,7 @@ class _NewPasswordState extends State<NewPassword> {
                       text: AppTexts.specialCharacter,
                     ),
                   ],
-                );
-              },
+                ),
             ),
             SizedBox(height: 20.h),
             BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
@@ -165,8 +161,7 @@ class _NewPasswordState extends State<NewPassword> {
                   (previous, current) =>
                       previous.newPasswordState?.hideConfirmPassword !=
                       current.newPasswordState?.hideConfirmPassword,
-              builder: (BuildContext context, ForgotPasswordState state) {
-                return AppTextField(
+              builder: (BuildContext context, ForgotPasswordState state) => AppTextField(
                   borderRadius: 8.sp,
                   controller: _confirmPasswordController,
                   hideText:
@@ -177,7 +172,7 @@ class _NewPasswordState extends State<NewPassword> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       context.read<ForgotPasswordBloc>().add(
-                        ToggleConfirmPasswordVisibility(),
+                        const ToggleConfirmPasswordVisibility(),
                       );
                     },
                     child: Padding(
@@ -199,8 +194,7 @@ class _NewPasswordState extends State<NewPassword> {
                       (p0) => context.read<ForgotPasswordBloc>().add(
                         EnterConfirmPasswordString(p0),
                       ),
-                );
-              },
+                ),
             ),
             const Expanded(child: SizedBox()),
             BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
@@ -208,16 +202,14 @@ class _NewPasswordState extends State<NewPassword> {
                   (previous, current) =>
                       previous.newPasswordState?.isVerificationPassed !=
                       current.newPasswordState?.isVerificationPassed,
-              builder: (context, state) {
-                return PrimaryButton(
+              builder: (context, state) => PrimaryButton(
                   text: AppTexts.resetPassword,
                   isEnabled:
                       state.newPasswordState?.isVerificationPassed ?? false,
                   onPressed: () {
                     context.goNamed(RouteConstants.signUp);
                   },
-                );
-              },
+                ),
             ),
             if (MediaQuery.viewInsetsOf(context).bottom < 10)
               SizedBox(

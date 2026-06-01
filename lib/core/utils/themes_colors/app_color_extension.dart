@@ -292,8 +292,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
   final Color contrastWhite;
 
   /// Create light theme colors
-  factory ColorSystemExtension.light() {
-    return const ColorSystemExtension(
+  factory ColorSystemExtension.light() => const ColorSystemExtension(
       // Constant/Brand Colors
       constantDefault: Color(0xFF000000),
       constantContrast: Color(0xFFFFFFFF),
@@ -438,11 +437,9 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       contrastBlack: Color(0xFF000000),
       contrastWhite: Color(0xFFFFFFFF),
     );
-  }
 
   /// Create dark theme colors
-  factory ColorSystemExtension.dark() {
-    return const ColorSystemExtension(
+  factory ColorSystemExtension.dark() => const ColorSystemExtension(
       // Constant/Brand Colors
       constantDefault: Color(0xFFFFFFFF),
       constantContrast: Color(0xFF000000),
@@ -587,7 +584,6 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       contrastBlack: Color(0xFF000000),
       contrastWhite: Color(0xFFFFFFFF),
     );
-  }
 
   @override
   ThemeExtension<ColorSystemExtension> copyWith({
@@ -734,8 +730,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
     // Miscellaneous colors
     Color? contrastBlack,
     Color? contrastWhite,
-  }) {
-    return ColorSystemExtension(
+  }) => ColorSystemExtension(
       // Constant/Brand Colors
       constantDefault: constantDefault ?? this.constantDefault,
       constantContrast: constantContrast ?? this.constantContrast,
@@ -880,7 +875,6 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
       contrastBlack: contrastBlack ?? this.contrastBlack,
       contrastWhite: contrastWhite ?? this.contrastWhite,
     );
-  }
 
   @override
   ThemeExtension<ColorSystemExtension> lerp(
@@ -1043,8 +1037,7 @@ class ColorSystemExtension extends ThemeExtension<ColorSystemExtension> {
 
 /// Extension to create a ColorScheme from ColorSystemExtension.
 extension ColorSchemeBuilder on ColorSystemExtension {
-  ColorScheme toColorScheme(Brightness brightness) {
-    return ColorScheme(
+  ColorScheme toColorScheme(Brightness brightness) => ColorScheme(
       brightness: brightness,
       primary: blue500,
       onPrimary: constantContrast,
@@ -1058,7 +1051,6 @@ extension ColorSchemeBuilder on ColorSystemExtension {
       onSurface: textPrimary,
       surfaceTint: blue500.withValues(alpha: 0.05),
     );
-  }
 }
 
 /// Helper extension for semantic color usage

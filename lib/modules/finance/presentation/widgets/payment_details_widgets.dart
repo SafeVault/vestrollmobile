@@ -4,13 +4,33 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
+IconData _stringToIcon(String? name) {
+  if (name == null) return Icons.help_outline;
+  switch (name) {
+    case 'accountBalanceWallet': return Icons.account_balance_wallet;
+    case 'shoppingBag': return Icons.shopping_bag;
+    case 'receipt': return Icons.receipt;
+    case 'bugReport': return Icons.bug_report;
+    case 'payment': return Icons.payment;
+    case 'swapHoriz': return Icons.swap_horiz;
+    case 'accountBalance': return Icons.account_balance;
+    case 'creditCard': return Icons.credit_card;
+    case 'designServices': return Icons.design_services;
+    case 'arrowUp': return Icons.arrow_upward;
+    case 'arrowDown': return Icons.arrow_downward;
+    case 'receiptLong': return Icons.receipt_long;
+    case 'wallet': return Icons.wallet;
+    default: return Icons.help_outline;
+  }
+}
+
 class PaymentDetailsHeader extends StatelessWidget {
   final String amount;
   final String currency;
   final String approxValue;
   final String? assetPath;
-  final IconData? icon;
-  final Color iconBackgroundColor;
+  final String? icon;
+  final String iconBackgroundColor;
   final Color? amountColor;
   final String? amountPrefix;
 
@@ -48,7 +68,7 @@ class PaymentDetailsHeader extends StatelessWidget {
             width: 56.w,
             height: 56.h,
             decoration: BoxDecoration(
-              color: iconBackgroundColor,
+              color: Color(int.parse(iconBackgroundColor.replaceFirst('#', '0xFF'))),
               shape: BoxShape.circle,
             ),
             child:
@@ -64,7 +84,7 @@ class PaymentDetailsHeader extends StatelessWidget {
                         ),
                       ),
                     )
-                    : Icon(icon, color: colors.constantContrast, size: 28.sp),
+                    : Icon(_stringToIcon(icon), color: colors.constantContrast, size: 28.sp),
           ),
           SizedBox(height: 16.h),
           Text(
@@ -163,8 +183,7 @@ class PaymentStatusCard extends StatelessWidget {
     Widget value,
     AppFontThemeExtension fonts,
     ColorSystemExtension colors,
-  ) {
-    return Row(
+  ) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
@@ -177,7 +196,6 @@ class PaymentStatusCard extends StatelessWidget {
         value,
       ],
     );
-  }
 
   Widget _buildStatusBadge(
     ColorSystemExtension colors,
@@ -186,13 +204,13 @@ class PaymentStatusCard extends StatelessWidget {
     // Colors from screenshots: blue for "Coming in 2 days", orange for "Overdue"
     final Color bgColor =
         isOverdue
-            ? colors.orange500.withOpacity(0.1)
-            : colors.brandDefault.withOpacity(0.05);
+            ? colors.orange500.withValues(alpha: 0.1)
+            : colors.brandDefault.withValues(alpha: 0.05);
     final Color textColor = isOverdue ? colors.orange500 : colors.brandDefault;
     final Color borderColor =
         isOverdue
-            ? colors.orange500.withOpacity(0.2)
-            : colors.brandDefault.withOpacity(0.1);
+            ? colors.orange500.withValues(alpha: 0.2)
+            : colors.brandDefault.withValues(alpha: 0.1);
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
@@ -245,8 +263,7 @@ class PaymentInfoSection extends StatelessWidget {
     PaymentInfoItem item,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return GestureDetector(
+  ) => GestureDetector(
       onTap: item.onTap,
       behavior: HitTestBehavior.opaque,
       child: Row(
@@ -295,7 +312,6 @@ class PaymentInfoSection extends StatelessWidget {
         ],
       ),
     );
-  }
 }
 
 class PaymentInfoItem {
@@ -346,8 +362,7 @@ class PaymentTimeline extends StatelessWidget {
     bool isLast,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return IntrinsicHeight(
+  ) => IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -389,14 +404,12 @@ class PaymentTimeline extends StatelessWidget {
         ],
       ),
     );
-  }
 
   Widget _buildIndicator(
     TimelineStep step,
     bool isLast,
     ColorSystemExtension colors,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         if (step.isCompleted)
           Icon(Icons.check_circle, color: colors.green500, size: 20.sp)
@@ -428,10 +441,8 @@ class PaymentTimeline extends StatelessWidget {
           ),
       ],
     );
-  }
 
-  Widget _buildDashedDivider(ColorSystemExtension colors) {
-    return LayoutBuilder(
+  Widget _buildDashedDivider(ColorSystemExtension colors) => LayoutBuilder(
       builder: (context, constraints) {
         final boxHeight = constraints.constrainHeight();
         const dashHeight = 4.0;
@@ -439,18 +450,15 @@ class PaymentTimeline extends StatelessWidget {
         final dashCount = (boxHeight / (dashHeight + dashSpace)).floor();
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(dashCount, (index) {
-            return Container(
+          children: List.generate(dashCount, (index) => Container(
               width: 2,
               height: dashHeight,
               color: colors.gray200,
               margin: const EdgeInsets.symmetric(vertical: dashSpace / 2),
-            );
-          }),
+            )),
         );
       },
     );
-  }
 
   Widget _buildDescription(
     String description,

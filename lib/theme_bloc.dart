@@ -20,11 +20,9 @@ class ThemeState {
   
   bool get isDarkMode => themeMode == ThemeMode.dark;
   
-  ThemeState copyWith({ThemeMode? themeMode}) {
-    return ThemeState(
+  ThemeState copyWith({ThemeMode? themeMode}) => ThemeState(
       themeMode: themeMode ?? this.themeMode,
     );
-  }
 }
 
 // Convert to regular Bloc with manual persistence

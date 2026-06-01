@@ -41,6 +41,7 @@ class AppAssets {
   static const background = '$defifundrImagePath/background.png';
   static const logo = '$defifundrImagePath/logo.png';
   static const rocket = '$defifundrImagePath/rocket.png';
+  static const rocketPng = '$defifundrImagePath/rocket.png';
   static const backgroundnewImagePath = '$defifundrImagePath/backgroundnew.png';
   static const incompleteRegistrationImagePath =
       '$defifundrIconPath/incompletRegistration.svg';
@@ -132,6 +133,7 @@ class AppAssets {
   static String buildingOfficeSvg = '${_baseAssetUrl}BuildingOffice.svg';
   static const questionSvg = '$_baseAssetUrl/question_svg.svg';
   static const notificationHome = '$_baseAssetUrl/notificationHome.svg';
+  static const notificationSvg = '$_baseAssetUrl/notificationHome.svg';
   static const homeIcon = '$_baseAssetUrl/homeIcon.svg';
   static const moreIcon = '$_baseAssetUrl/moreIcon.svg';
   static const workspaceIcon = '$_baseAssetUrl/workspaceIcon.svg';

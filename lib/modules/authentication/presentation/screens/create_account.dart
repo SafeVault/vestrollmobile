@@ -50,7 +50,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 16.h),
-                AppBarHeaderWidget(),
+                const AppBarHeaderWidget(),
                 SizedBox(height: 20.h),
                 Text(
                   'Create An Account',
@@ -88,13 +88,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
                 SizedBox(height: 20.h),
                 PrimaryButton(
-                  text: "Create account",
+                  text: 'Create account',
                   onPressed: () {
                     context.pushNamed(RouteConstants.verifyAccount);
                   },
                 ),
                 SizedBox(height: 20.h),
-                ORWidget(),
+                const ORWidget(),
                 SizedBox(height: 20.h),
                 SecondaryButton(
                   text: 'Sign up using Google',
@@ -144,7 +144,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ],
                 ),
                 SizedBox(height: 70.h),
-                TermsAgreementText(),
+                const TermsAgreementText(),
               ],
             ),
           ),

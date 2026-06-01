@@ -28,7 +28,7 @@ class WorkspaceScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: SvgPicture.asset(AppAssets.notificationSvg, colorFilter: ColorFilter.mode(colors.textPrimary!, BlendMode.srcIn)),
+            icon: SvgPicture.asset(AppAssets.notificationSvg, colorFilter: ColorFilter.mode(colors.textPrimary, BlendMode.srcIn)),
             onPressed: () {},
           ),
         ],
@@ -158,8 +158,7 @@ class WorkspaceScreen extends StatelessWidget {
     required Color color,
     required VoidCallback onTap,
     required AppFontThemeExtension fonts,
-  }) {
-    return GestureDetector(
+  }) => GestureDetector(
       onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +166,7 @@ class WorkspaceScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: icon.endsWith('.svg') ? SvgPicture.asset(
@@ -194,5 +193,4 @@ class WorkspaceScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 }

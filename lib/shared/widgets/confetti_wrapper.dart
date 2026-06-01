@@ -58,8 +58,7 @@ class _ConfettiWrapperState extends State<ConfettiWrapper> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
+  Widget build(BuildContext context) => Stack(
       children: [
         // Main child content
         widget.child,
@@ -68,7 +67,6 @@ class _ConfettiWrapperState extends State<ConfettiWrapper> {
         _buildConfettiOverlay(context),
       ],
     );
-  }
 
   Widget _buildConfettiOverlay(BuildContext context) {
     final colors = widget.customColors ?? _getDefaultColors(context);
@@ -204,12 +202,12 @@ class _ConfettiWrapperState extends State<ConfettiWrapper> {
 }
 
 /// Extension to provide easy access to confetti controls
-extension ConfettiControl on GlobalKey<_ConfettiWrapperState> {
+extension ConfettiControl on GlobalKey<State<ConfettiWrapper>> {
   void playConfetti() {
-    currentState?.playConfetti();
+    (currentState as dynamic).playConfetti();
   }
 
   void stopConfetti() {
-    currentState?.stopConfetti();
+    (currentState as dynamic).stopConfetti();
   }
 }

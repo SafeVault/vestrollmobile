@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
-import 'package:vestrollmobile/modules/workspace/presentation/screens/workspace_screen.dart';
+import 'package:vestrollmobile/modules/homepage/presentation/widgets/contract_list_item.dart';
 
 class ContractCard extends StatelessWidget {
   final dynamic contract;
@@ -93,8 +93,7 @@ class ContractCard extends StatelessWidget {
     );
   }
 
-  Widget _buildAvatar(ColorSystemExtension colors, AppFontThemeExtension fonts) {
-    return Container(
+  Widget _buildAvatar(ColorSystemExtension colors, AppFontThemeExtension fonts) => Container(
       width: 44.w,
       height: 44.h,
       decoration: BoxDecoration(
@@ -112,7 +111,6 @@ class ContractCard extends StatelessWidget {
         ),
       ),
     );
-  }
 
   Widget _buildStatusBadge(
     ColorSystemExtension colors,
@@ -124,19 +122,19 @@ class ContractCard extends StatelessWidget {
 
     switch (contract.status as ContractStatus) {
       case ContractStatus.active:
-        bgColor = colors.green500.withOpacity(0.12);
+        bgColor = colors.green500.withValues(alpha: 0.12);
         textColor = colors.green500;
         label = 'Active';
         break;
       case ContractStatus.pending:
-        bgColor = colors.orange500.withOpacity(0.12);
+        bgColor = colors.orange500.withValues(alpha: 0.12);
         textColor = colors.orange500;
         label = 'Pending';
         break;
-      case ContractStatus.completed:
-        bgColor = colors.blue500.withOpacity(0.12);
-        textColor = colors.blue500;
-        label = 'Completed';
+      case ContractStatus.expired:
+        bgColor = colors.orange500.withValues(alpha: 0.12);
+        textColor = colors.orange500;
+        label = 'Expired';
         break;
     }
 
@@ -163,8 +161,7 @@ class ContractCard extends StatelessWidget {
     required String label,
     required String value,
     TextAlign align = TextAlign.left,
-  }) {
-    return Column(
+  }) => Column(
       crossAxisAlignment: align == TextAlign.left
           ? CrossAxisAlignment.start
           : align == TextAlign.right
@@ -193,5 +190,4 @@ class ContractCard extends StatelessWidget {
         ),
       ],
     );
-  }
 }

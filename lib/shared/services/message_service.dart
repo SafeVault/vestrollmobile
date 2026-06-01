@@ -33,9 +33,7 @@ class MessageService {
                 message: message,
                 type: type,
                 duration: duration,
-                onDismiss: () {
-                  _dismissCurrent();
-                },
+                onDismiss: _dismissCurrent,
               ),
             ),
           ),

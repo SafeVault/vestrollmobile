@@ -8,12 +8,9 @@ import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension
 class TermsAgreementText extends StatelessWidget {
   const TermsAgreementText({super.key});
 
-  // Function to launch URLs
   Future<void> _launchUrl(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $url');
-    }
+    final uri = Uri.parse(url);
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 
   @override

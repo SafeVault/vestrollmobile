@@ -1,13 +1,12 @@
+import 'package:vestrollmobile/core/errors/failure.dart';
+import 'package:vestrollmobile/modules/authentication/domain/entities/user.dart';
+
 abstract class AuthRepository {
-  Future<Map<String, dynamic>> login(String email, String password);
-  Future<Map<String, dynamic>> register(
-    String email,
-    String password,
-    String name,
-  );
-  Future<void> logout();
+  Future<ApiResult<User>> login(String email, String password);
+  Future<ApiResult<User>> register(String email, String password, String name);
+  Future<ApiResult<void>> logout();
   Future<bool> isLoggedIn();
   Future<String?> getStoredToken();
-  Future<Map<String, dynamic>?> getCurrentUser();
+  Future<User?> getCurrentUser();
   Future<String?> refreshToken();
 }

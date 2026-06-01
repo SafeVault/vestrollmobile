@@ -73,10 +73,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
       items: CountryData.countries,
       getItemLabel: (country) => '${country.name} ${country.dialCode}',
       getItemLeading: (country) => country.flag,
-      customFilter: (country, query) {
-        return country.name.toLowerCase().contains(query.toLowerCase()) ||
-            country.dialCode.contains(query);
-      },
+      customFilter: (country, query) => country.name.toLowerCase().contains(query.toLowerCase()) ||
+            country.dialCode.contains(query),
     );
 
     if (result != null) {
@@ -110,8 +108,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
       initialDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
-      builder: (context, child) {
-        return Theme(
+      builder: (context, child) => Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.dark(
               primary: colors.activeButton,
@@ -122,8 +119,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
             dialogBackgroundColor: const Color(0xFF121212),
           ),
           child: child!,
-        );
-      },
+        ),
     );
 
     if (picked != null) {
@@ -134,12 +130,10 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     }
   }
 
-  bool _isFormValid() {
-    return _countryOfCitizenshipController.text.isNotEmpty &&
+  bool _isFormValid() => _countryOfCitizenshipController.text.isNotEmpty &&
         _genderController.text.isNotEmpty &&
         _dobController.text.isNotEmpty &&
         _phoneController.text.isNotEmpty;
-  }
 
   void _handleContinue() {
     if (_isFormValid()) {
@@ -182,8 +176,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
     );
   }
 
-  Widget _buildProgressBar(ColorSystemExtension colors) {
-    return Container(
+  Widget _buildProgressBar(ColorSystemExtension colors) => Container(
       height: 4,
       width: double.infinity,
       color: Colors.grey[200],
@@ -197,13 +190,11 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         ),
       ),
     );
-  }
 
   Widget _buildHeader(
     AppFontThemeExtension fonts,
     ColorSystemExtension colors,
-  ) {
-    return Column(
+  ) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -225,7 +216,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         ),
       ],
     );
-  }
 
   Widget _buildFormFields() {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
@@ -268,8 +258,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   Widget _buildPhoneNumberField(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Row(
+  ) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
@@ -309,12 +298,9 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
         ),
       ],
     );
-  }
 
-  Widget _buildContinueButton() {
-    return Padding(
+  Widget _buildContinueButton() => Padding(
       padding: const EdgeInsets.all(24),
       child: PrimaryButton(text: 'Continue', onPressed: _handleContinue),
     );
-  }
 }

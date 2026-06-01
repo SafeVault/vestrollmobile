@@ -52,10 +52,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                     color: colors.textSecondary,
                   ),
                 ),
-                VerticalMargin(20),
+                const VerticalMargin(20),
                 AppTextField(
                   borderRadius: 8.sp,
-                  hintText: "Email address",
+                  hintText: 'Email address',
                   controller: _emailController,
                 ),
                 const Spacer(),

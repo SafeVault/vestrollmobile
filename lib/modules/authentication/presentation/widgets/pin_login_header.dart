@@ -17,7 +17,7 @@ class PinLoginHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppBarHeaderWidget(),
+        const AppBarHeaderWidget(),
         SizedBox(height: 32.h),
         Text(
           'Welcome Back, $userName',

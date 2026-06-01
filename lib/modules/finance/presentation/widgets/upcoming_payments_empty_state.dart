@@ -42,12 +42,11 @@ class UpcomingPaymentsEmptyState extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyStateIllustration(ColorSystemExtension colors) {
-    return Container(
+  Widget _buildEmptyStateIllustration(ColorSystemExtension colors) => Container(
       width: 180.w,
       height: 150.h,
       decoration: BoxDecoration(
-        color: colors.gray50.withOpacity(0.5),
+        color: colors.gray50.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Stack(
@@ -57,7 +56,7 @@ class UpcomingPaymentsEmptyState extends StatelessWidget {
           Icon(
             Icons.receipt_long_rounded,
             size: 80.sp,
-            color: colors.gray300.withOpacity(0.5),
+            color: colors.gray300.withValues(alpha: 0.5),
           ),
           Positioned(
             top: 30.h,
@@ -65,7 +64,7 @@ class UpcomingPaymentsEmptyState extends StatelessWidget {
             child: Icon(
               Icons.auto_awesome,
               size: 20.sp,
-              color: colors.gray300.withOpacity(0.5),
+              color: colors.gray300.withValues(alpha: 0.5),
             ),
           ),
           Positioned(
@@ -74,11 +73,10 @@ class UpcomingPaymentsEmptyState extends StatelessWidget {
             child: Icon(
               Icons.auto_awesome,
               size: 14.sp,
-              color: colors.gray300.withOpacity(0.5),
+              color: colors.gray300.withValues(alpha: 0.5),
             ),
           ),
         ],
       ),
     );
-  }
 }

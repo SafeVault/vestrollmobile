@@ -74,7 +74,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
       AppTexts.otpCodeResentDesc,
     );
 
-    context.read<ForgotPasswordBloc>().add(ResendOtpEvent());
+    context.read<ForgotPasswordBloc>().add(const ResendOtpEvent());
     _countdownNotifier.start();
   }
 
@@ -113,12 +113,11 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
   Widget _buildHeader(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Verify Your Email",
+          'Verify Your Email',
           style: fonts.heading2Bold.copyWith(fontSize: 24.sp),
         ),
         const SizedBox(height: 4),
@@ -126,10 +125,9 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
           buildWhen:
               (previous, current) =>
                   previous.emailAddress != current.emailAddress,
-          builder: (context, state) {
-            return RichText(
+          builder: (context, state) => RichText(
               text: TextSpan(
-                text: "Please enter the 6 digit OTP code sent to ",
+                text: 'Please enter the 6 digit OTP code sent to ',
                 style: fonts.textMdRegular.copyWith(
                   color: colors.textSecondary,
                   fontSize: 14.sp,
@@ -144,12 +142,10 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
                   ),
                 ],
               ),
-            );
-          },
+            ),
         ),
       ],
     );
-  }
 
   Widget _buildOtpInput(
     ColorSystemExtension colors,
@@ -170,8 +166,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
               setState(() => _hasError = true);
             }
           },
-          builder: (context, state) {
-            return PinCodeTextField(
+          builder: (context, state) => PinCodeTextField(
               appContext: context,
               backgroundColor: isDark ? colors.bgB0 : colors.bgB1,
               useHapticFeedback: true,
@@ -190,7 +185,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
               focusNode: _otpFocusNode,
               errorAnimationController: _errorController,
               onCompleted: (value) {
-                if (value.length == 6 && value == "123456") {
+                if (value.length == 6 && value == '123456') {
                   _handleOtpVerification();
                 } else {
                   _errorController.onListen!();
@@ -217,8 +212,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
               enableActiveFill: true,
               onChanged: (value) => _clearError(),
               validator: _hasError ? (value) => '' : null,
-            );
-          },
+            ),
         ),
       ],
     );
@@ -252,7 +246,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
               children: [
                 Text(AppTexts.cantFindCode, style: fonts.textMdSemiBold),
                 Text(
-                  "Try checking your junk/spam folder, or resend the code.",
+                  'Try checking your junk/spam folder, or resend the code.',
                   style: fonts.textSmRegular,
                 ),
               ],
@@ -263,23 +257,20 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
     );
   }
 
-  Widget _buildVerifyButton() {
-    return BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
+  Widget _buildVerifyButton() => BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
       listener: (context, state) {
         if (state is ForgotPasswordSuccess) {}
       },
       child: PrimaryButton(
-        text: "Verify account",
+        text: 'Verify account',
         onPressed: _handleOtpVerification,
       ),
     );
-  }
 
   Widget _buildResendButton(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return ValueListenableBuilder<int>(
+  ) => ValueListenableBuilder<int>(
       valueListenable: _countdownNotifier,
       builder: (context, countdown, child) {
         final isEnabled = countdown == 60;
@@ -299,7 +290,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
               ),
               SizedBox(width: 8.sp),
               Text(
-                "${AppTexts.resendCode}$countdownText",
+                '${AppTexts.resendCode}$countdownText',
                 style: fonts.textMdMedium.copyWith(
                   color: isEnabled ? colors.brandDefault : colors.textSecondary,
                   fontSize: 16.sp,
@@ -311,10 +302,8 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
         );
       },
     );
-  }
 
-  Widget _buildBottomSpacing() {
-    return Column(
+  Widget _buildBottomSpacing() => Column(
       children: [
         if (MediaQuery.viewInsetsOf(context).bottom < 10)
           SizedBox(
@@ -322,7 +311,6 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
           ),
       ],
     );
-  }
 }
 
 class CountdownNotifier extends ValueNotifier<int> {

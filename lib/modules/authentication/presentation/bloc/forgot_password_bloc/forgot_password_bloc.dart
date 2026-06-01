@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vestrollmobile/core/utils/managers/app_text.dart';
 
 part 'forgot_password_event.dart';
@@ -9,21 +9,14 @@ part 'forgot_password_state.dart';
 
 class ForgotPasswordBloc
     extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
-  ForgotPasswordBloc() : super(ForgotPasswordInitial()) {
+  ForgotPasswordBloc() : super(const ForgotPasswordInitial()) {
     on<SubmitEmail>(_submitEmailHandler);
-
     on<EnterPasswordString>(
       _enterPasswordStringHandler,
-      // Use the `restartable` transformer to prevent multiple rapid state changes
-      // that can occur when the user rapidly toggles the password visibility
-      // This will ensure that only the last event is processed after the delay
       transformer: restartable(),
     );
     on<EnterConfirmPasswordString>(
       _enterConfirmPasswordStringHandler,
-      // Use the `restartable` transformer to prevent multiple rapid state changes
-      // that can occur when the user rapidly toggles the password visibility
-      // This will ensure that only the last event is processed after the delay
       transformer: restartable(),
     );
     on<TogglePasswordVisibility>(_togglePasswordVisibilityHandler);
@@ -39,25 +32,21 @@ class ForgotPasswordBloc
     Emitter<ForgotPasswordState> emit,
   ) {
     if (!EmailValidator.validate(event.email)) {
-      emit(ForgotPasswordError("Invalid email format"));
+      emit(const ForgotPasswordError('Invalid email format'));
       return;
     }
-    emit(ForgotPasswordSuccess("A reset link has been sent to ${event.email}"));
+    emit(ForgotPasswordSuccess('A reset link has been sent to ${event.email}'));
   }
 
   Future<void> _enterPasswordStringHandler(
     EnterPasswordString event,
     Emitter<ForgotPasswordState> emit,
   ) async {
-    // Adding a delay to prevent overloading the UI with state changes
-    // This is a simple way to debounce the event and prevent rapid state changes
-    await Future.delayed(Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     emit(
       ForgotPasswordInitial(
         newPasswordState: (state.newPasswordState ??
-                NewPasswordState(
-                  password: state.newPasswordState?.password ?? '',
-                ))
+                NewPasswordState(password: state.newPasswordState?.password ?? ''))
             .copyWith(password: event.passwordString),
       ),
     );
@@ -67,15 +56,11 @@ class ForgotPasswordBloc
     EnterConfirmPasswordString event,
     Emitter<ForgotPasswordState> emit,
   ) async {
-    // Adding a delay to prevent overloading the UI with state changes
-    // This is a simple way to debounce the event and prevent rapid state changes
-    await Future.delayed(Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
     emit(
       ForgotPasswordInitial(
         newPasswordState: (state.newPasswordState ??
-                NewPasswordState(
-                  password: state.newPasswordState?.password ?? '',
-                ))
+                NewPasswordState(password: state.newPasswordState?.password ?? ''))
             .copyWith(confirmPassword: event.passwordString),
       ),
     );
@@ -88,12 +73,10 @@ class ForgotPasswordBloc
     emit(
       ForgotPasswordInitial(
         newPasswordState: (state.newPasswordState ??
-                NewPasswordState(
-                  password: state.newPasswordState?.password ?? '',
-                ))
+                NewPasswordState(password: state.newPasswordState?.password ?? ''))
             .copyWith(
-              showPassword: !(state.newPasswordState?.hidePassword ?? false),
-            ),
+          showPassword: !(state.newPasswordState?.hidePassword ?? false),
+        ),
       ),
     );
   }
@@ -105,13 +88,11 @@ class ForgotPasswordBloc
     emit(
       ForgotPasswordInitial(
         newPasswordState: (state.newPasswordState ??
-                NewPasswordState(
-                  password: state.newPasswordState?.password ?? '',
-                ))
+                NewPasswordState(password: state.newPasswordState?.password ?? ''))
             .copyWith(
-              showConfirmPassword:
-                  !(state.newPasswordState?.hideConfirmPassword ?? false),
-            ),
+          showConfirmPassword:
+              !(state.newPasswordState?.hideConfirmPassword ?? false),
+        ),
       ),
     );
   }
@@ -126,6 +107,6 @@ class ForgotPasswordBloc
     Emitter<ForgotPasswordState> emit,
   ) {
     emit(ForgotPasswordError(AppTexts.invalidOTPCode));
-    emit(ForgotPasswordInitial());
+    emit(const ForgotPasswordInitial());
   }
 }

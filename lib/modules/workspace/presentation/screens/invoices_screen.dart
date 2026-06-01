@@ -65,7 +65,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.r),
                       side: BorderSide(
-                        color: isSelected ? Colors.transparent : colors.strokeSecondary ?? Colors.grey.shade300,
+                        color: isSelected ? Colors.transparent : colors.strokeSecondary,
                       ),
                     ),
                     showCheckmark: false,
@@ -115,8 +115,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
     required String date,
     required String amount,
     required bool isPaid,
-  }) {
-    return GestureDetector(
+  }) => GestureDetector(
       onTap: () {
         context.pushNamed(RouteConstants.invoiceDetails);
       },
@@ -126,7 +125,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
         decoration: BoxDecoration(
           color: colors.bgB0,
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(color: colors.strokeSecondary ?? Colors.grey.shade200),
+          border: Border.all(color: colors.strokeSecondary),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +133,7 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
             Container(
               padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
-                color: const Color(0xFFF97316).withOpacity(0.1),
+                color: const Color(0xFFF97316).withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: SvgPicture.asset(
@@ -171,12 +170,12 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                         decoration: BoxDecoration(
-                          color: isPaid ? colors.green500?.withOpacity(0.1) : colors.orange500?.withOpacity(0.1),
+                          color: isPaid ? colors.green500.withValues(alpha: 0.1) : colors.orange500.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Text(
                           isPaid ? 'Paid' : 'Unpaid',
-                          style: fonts.textxsMedium?.copyWith(
+                          style: fonts.textXsMedium.copyWith(
                             color: isPaid ? colors.green500 : colors.orange500,
                           ),
                         ),
@@ -205,5 +204,4 @@ class _InvoicesScreenState extends State<InvoicesScreen> {
         ),
       ),
     );
-  }
 }

@@ -13,8 +13,7 @@ class ProfileCreatedScreen extends StatelessWidget {
   const ProfileCreatedScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ConfettiWrapper(
+  Widget build(BuildContext context) => ConfettiWrapper(
       autoStart: true,
       duration: const Duration(seconds: 5),
       particleIntensity: 1000,
@@ -34,10 +33,8 @@ class ProfileCreatedScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 
-  Widget _buildContent(BuildContext context) {
-    return Column(
+  Widget _buildContent(BuildContext context) => Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         _buildSuccessIcon(context),
@@ -45,7 +42,6 @@ class ProfileCreatedScreen extends StatelessWidget {
         _buildTextContent(context),
       ],
     );
-  }
 
   Widget _buildSuccessIcon(BuildContext context) {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
@@ -95,13 +91,11 @@ class ProfileCreatedScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButton(BuildContext context) {
-    return PrimaryButton(
+  Widget _buildActionButton(BuildContext context) => PrimaryButton(
       text: 'Create your PIN',
       isEnabled: true,
       onPressed: () {
         context.pushNamed(RouteConstants.createPin);
       },
     );
-  }
 }

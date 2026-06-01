@@ -83,8 +83,7 @@ class _FinanceScreenState extends State<FinanceScreen>
     );
   }
 
-  Widget _buildTabs(ColorSystemExtension colors, AppFontThemeExtension fonts) {
-    return Container(
+  Widget _buildTabs(ColorSystemExtension colors, AppFontThemeExtension fonts) => Container(
       margin: EdgeInsets.symmetric(horizontal: 20.w),
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: colors.strokePrimary)),
@@ -103,18 +102,15 @@ class _FinanceScreenState extends State<FinanceScreen>
         ],
       ),
     );
-  }
 
   Widget _buildTransactionsList(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return ListView.separated(
+  ) => ListView.separated(
       padding: EdgeInsets.all(20.w),
       itemCount: 5,
       separatorBuilder: (context, index) => SizedBox(height: 12.h),
-      itemBuilder: (context, index) {
-        return HomeTransactionListItem(
+      itemBuilder: (context, index) => HomeTransactionListItem(
           title: index % 2 == 0 ? 'Withdrawal' : 'Payment Received',
           subtitle: '06:30 PM',
           amount: index % 2 == 0 ? '- 581 USDT' : '+ 1,200 USDT',
@@ -125,7 +121,7 @@ class _FinanceScreenState extends State<FinanceScreen>
             width: 44.w,
             height: 44.w,
             decoration: BoxDecoration(
-              color: index % 2 == 0 ? colors.red500.withOpacity(0.1) : colors.green500.withOpacity(0.1),
+              color: index % 2 == 0 ? colors.red500.withValues(alpha: 0.1) : colors.green500.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -134,31 +130,25 @@ class _FinanceScreenState extends State<FinanceScreen>
               size: 20.sp,
             ),
           ),
-        );
-      },
+        ),
     );
-  }
 
   Widget _buildUpcomingPaymentsList(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return ListView.separated(
+  ) => ListView.separated(
       padding: EdgeInsets.all(20.w),
       itemCount: 3,
       separatorBuilder: (context, index) => SizedBox(height: 12.h),
-      itemBuilder: (context, index) {
-        return UpcomingPaymentListItem(
+      itemBuilder: (context, index) => UpcomingPaymentListItem(
           title: 'Contract Payment #$index',
           date: '20 April 2025',
           amount: '500 USDT',
           status: 'Due in 2 days',
           statusColor: colors.brandDefault,
           icon: Icons.receipt_long_rounded,
-          iconBackgroundColor: colors.brandDefault.withOpacity(0.1),
+          iconBackgroundColor: colors.brandDefault.withValues(alpha: 0.1),
           onTap: () {},
-        );
-      },
+        ),
     );
-  }
 }

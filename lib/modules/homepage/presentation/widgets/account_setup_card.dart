@@ -1,9 +1,5 @@
- // ignore_for_file: deprecated_member_use
-
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 
 class AccountSetupCard extends StatelessWidget {
@@ -14,7 +10,6 @@ class AccountSetupCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<ColorSystemExtension>()!;
     final fonts = Theme.of(context).extension<AppFontThemeExtension>()!;
 
     return GestureDetector(
@@ -30,7 +25,7 @@ class AccountSetupCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -57,7 +52,7 @@ class AccountSetupCard extends StatelessWidget {
                     'Complete your profile to get started',
                     style: fonts.textSmRegular.copyWith(
                       fontSize: 12.sp,
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -79,7 +74,7 @@ class AccountSetupCard extends StatelessWidget {
                       value: progress,
                       strokeWidth: 3,
                       valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-                      backgroundColor: Colors.white.withOpacity(0.3),
+                      backgroundColor: Colors.white.withValues(alpha: 0.3),
                       strokeCap: StrokeCap.round,
                     ),
                   ),

@@ -107,7 +107,7 @@ class _AppTextFieldState extends State<AppTextField> {
       _focusNode = null;
     } else {
       _focusNode = FocusNode();
-      _focusNode!.addListener(() => _alignInput(_focusNode!));
+      _focusNode!.addListener(() => _alignInput(_focusNode));
     }
   }
 
@@ -120,7 +120,7 @@ class _AppTextFieldState extends State<AppTextField> {
   }
 
   @override
-  dispose() {
+  void dispose() {
     _errorTextStreamController.close();
     _alignInputToBottomController.close();
     _hasErrorController.close();
@@ -143,11 +143,8 @@ class _AppTextFieldState extends State<AppTextField> {
       case InputFormatterType.custom:
         if (widget.inputFormatters != null) {
           return widget.inputFormatters;
-        } else {
-          throw Exception(
-            'inputFormatters must not be null when inputFormatterType is set to custom',
-          );
         }
+        return null;
       default:
         return null;
     }
@@ -169,13 +166,10 @@ class _AppTextFieldState extends State<AppTextField> {
         if (widget.prefixIcon != null) {
           return Padding(
             padding: const EdgeInsets.all(14),
-            child: widget.prefixIcon!,
-          );
-        } else {
-          throw Exception(
-            'prefixIcon must not be null when prefixType is set to customIcon',
+            child: widget.prefixIcon,
           );
         }
+        return null;
       case PrefixType.customWidget:
         _buildPrefixWidget();
         return null;
@@ -186,16 +180,9 @@ class _AppTextFieldState extends State<AppTextField> {
 
   Widget? _buildPrefixWidget() {
     if (widget.prefixType == PrefixType.customWidget) {
-      if (widget.prefixWidget != null) {
-        return widget.prefixWidget!;
-      } else {
-        throw Exception(
-          'prefixWidget must not be null when prefixType is set to customWidget',
-        );
-      }
-    } else {
-      return null;
+      return widget.prefixWidget;
     }
+    return null;
   }
 
   Widget? _buildSuffixIcon() {
@@ -211,11 +198,8 @@ class _AppTextFieldState extends State<AppTextField> {
       case SuffixType.customIcon:
         if (widget.suffixIcon != null) {
           return widget.suffixIcon;
-        } else {
-          throw Exception(
-            'sufixIcon must not be null when suffixType is set to customIcon',
-          );
         }
+        return null;
       case SuffixType.customWidget:
         _buildSuffixWidget();
         return null;
@@ -226,16 +210,9 @@ class _AppTextFieldState extends State<AppTextField> {
 
   Widget? _buildSuffixWidget() {
     if (widget.suffixType == SuffixType.customWidget) {
-      if (widget.suffixWidget != null) {
-        return widget.suffixWidget!;
-      } else {
-        throw Exception(
-          'suffixWidget must not be null when suffixType is set to customWidget',
-        );
-      }
-    } else {
-      return null;
+      return widget.suffixWidget;
     }
+    return null;
   }
 
   String? _val(String? value) {
@@ -373,23 +350,19 @@ class _AppTextFieldState extends State<AppTextField> {
                   prefixIcon: StreamBuilder<bool>(
                     stream: _alignInputToBottomController.stream,
                     initialData: false,
-                    builder: (context, snapshot) {
-                      return Padding(
+                    builder: (context, snapshot) => Padding(
                         padding: EdgeInsets.only(top: snapshot.data! ? 17 : 0),
                         child: _buildPrefixIcon(),
-                      );
-                    },
+                      ),
                   ),
                   suffix: _buildSuffixWidget(),
                   suffixIcon: StreamBuilder<bool>(
                     stream: _alignInputToBottomController.stream,
                     initialData: false,
-                    builder: (context, snapshot) {
-                      return Padding(
+                    builder: (context, snapshot) => Padding(
                         padding: EdgeInsets.only(top: snapshot.data! ? 18 : 0),
                         child: _buildSuffixIcon(),
-                      );
-                    },
+                      ),
                   ),
                   suffixIconConstraints:
                       widget.suffixIconConstraints ?? const BoxConstraints(),

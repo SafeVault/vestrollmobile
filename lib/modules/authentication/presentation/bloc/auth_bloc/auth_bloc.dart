@@ -1,11 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vestrollmobile/core/errors/failure.dart';
 import 'package:vestrollmobile/modules/authentication/domain/domain_repositories/auth_domain_repositories.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/bloc/auth_bloc/auth_event.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/bloc/auth_bloc/auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository _authRepository;
-
   AuthBloc({required AuthRepository authRepository})
     : _authRepository = authRepository,
       super(const AuthInitial()) {
@@ -16,26 +15,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthTokenRefreshRequested>(_onTokenRefreshRequested);
   }
 
+  final AuthRepository _authRepository;
+
   Future<void> _onLoginRequested(
     AuthLoginRequested event,
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoading());
-
-    try {
-      final result = await _authRepository.login(event.email, event.password);
-
-      emit(
-        AuthAuthenticated(
-          userId: result['userId'] ?? '',
-          email: result['email'] ?? event.email,
-          name: result['name'],
-          token: result['token'],
-        ),
-      );
-    } catch (e) {
-      emit(AuthError(message: e.toString()));
-    }
+    final result = await _authRepository.login(event.email, event.password);
+    if (isClosed) return;
+    result.fold(
+      (failure) => emit(AuthError(_mapFailure(failure))),
+      (user) => emit(AuthAuthenticated(user: user, token: user.token)),
+    );
   }
 
   Future<void> _onRegisterRequested(
@@ -43,25 +35,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoading());
-
-    try {
-      final result = await _authRepository.register(
-        event.email,
-        event.password,
-        event.name,
-      );
-
-      emit(
-        AuthAuthenticated(
-          userId: result['userId'] ?? '',
-          email: result['email'] ?? event.email,
-          name: result['name'] ?? event.name,
-          token: result['token'],
-        ),
-      );
-    } catch (e) {
-      emit(AuthError(message: e.toString()));
-    }
+    final result = await _authRepository.register(
+      event.email,
+      event.password,
+      event.name,
+    );
+    if (isClosed) return;
+    result.fold(
+      (failure) => emit(AuthError(_mapFailure(failure))),
+      (user) => emit(AuthAuthenticated(user: user, token: user.token)),
+    );
   }
 
   Future<void> _onLogoutRequested(
@@ -69,15 +52,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoading());
-
-    try {
-      await _authRepository.logout();
-      emit(const AuthUnauthenticated());
-    } catch (e) {
-      emit(AuthError(message: e.toString()));
-      // Even if logout fails, we still want to clear the local state
-      emit(const AuthUnauthenticated());
-    }
+    final result = await _authRepository.logout();
+    if (isClosed) return;
+    result.fold(
+      (_) => emit(const AuthUnauthenticated()),
+      (_) => emit(const AuthUnauthenticated()),
+    );
   }
 
   Future<void> _onCheckStatusRequested(
@@ -85,30 +65,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(const AuthLoading());
-
     try {
-      final isLoggedIn = await _authRepository.isLoggedIn();
-
-      if (isLoggedIn) {
+      final loggedIn = await _authRepository.isLoggedIn();
+      if (isClosed) return;
+      if (loggedIn) {
         final user = await _authRepository.getCurrentUser();
+        if (isClosed) return;
         final token = await _authRepository.getStoredToken();
-
+        if (isClosed) return;
         if (user != null) {
-          emit(
-            AuthAuthenticated(
-              userId: user['userId'] ?? '',
-              email: user['email'] ?? '',
-              name: user['name'],
-              token: token,
-            ),
-          );
+          emit(AuthAuthenticated(user: user, token: token));
         } else {
           emit(const AuthUnauthenticated());
         }
       } else {
         emit(const AuthUnauthenticated());
       }
-    } catch (e) {
+    } catch (_) {
+      if (isClosed) return;
       emit(const AuthUnauthenticated());
     }
   }
@@ -117,23 +91,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthTokenRefreshRequested event,
     Emitter<AuthState> emit,
   ) async {
-    try {
-      final newToken = await _authRepository.refreshToken();
-
-      if (state is AuthAuthenticated && newToken != null) {
-        final currentState = state as AuthAuthenticated;
-        emit(
-          AuthAuthenticated(
-            userId: currentState.userId,
-            email: currentState.email,
-            name: currentState.name,
-            token: newToken,
-          ),
-        );
-      }
-    } catch (e) {
-      // If token refresh fails, logout the user
-      add(AuthLogoutRequested());
+    final newToken = await _authRepository.refreshToken();
+    if (isClosed) return;
+    if (state case AuthAuthenticated(:final user) when newToken != null) {
+      emit(AuthAuthenticated(user: user, token: newToken));
+    } else {
+      add(const AuthLogoutRequested());
     }
   }
+
+  String _mapFailure(Failure failure) => switch (failure) {
+      NetworkFailure() => 'No internet connection. Please try again.',
+      AuthFailure(:final message) => message,
+      ValidationFailure(:final message) => message,
+      TimeoutFailure() => 'Request timed out. Please try again.',
+      ServerFailure(:final message) => 'Server error: $message',
+      CacheFailure(:final message) => message,
+    };
 }

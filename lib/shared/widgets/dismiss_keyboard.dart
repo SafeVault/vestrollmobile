@@ -6,10 +6,9 @@ class DismissKeyboard extends StatelessWidget {
   const DismissKeyboard({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
+        final FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus &&
             currentFocus.focusedChild != null) {
           currentFocus.unfocus();
@@ -18,5 +17,4 @@ class DismissKeyboard extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: child,
     );
-  }
 }

@@ -70,8 +70,7 @@ class FinanceBottomSheet extends StatelessWidget {
     required VoidCallback onTap,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return InkWell(
+  }) => InkWell(
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
@@ -80,7 +79,7 @@ class FinanceBottomSheet extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
-                color: colors.brandDefault.withOpacity(0.1),
+                color: colors.brandDefault.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, color: colors.brandDefault, size: 24.sp),
@@ -103,10 +102,8 @@ class FinanceBottomSheet extends StatelessWidget {
         ),
       ),
     );
-  }
 
-  Widget _buildDivider(ColorSystemExtension colors) {
-    return Padding(
+  Widget _buildDivider(ColorSystemExtension colors) => Padding(
       padding: EdgeInsets.only(left: 74.w, right: 24.w),
       child: Divider(
         color: colors.strokeSecondary,
@@ -114,5 +111,4 @@ class FinanceBottomSheet extends StatelessWidget {
         thickness: 1.h,
       ),
     );
-  }
 }

@@ -30,8 +30,8 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       estimatedDate: DateTime(2025, 4, 20),
       status: UpcomingPaymentStatus.inDays,
       daysRemaining: 7,
-      iconBackgroundColor: const Color(0xFFF97316),
-      icon: Icons.receipt_long,
+      iconBackgroundColor: '#F97316',
+      icon: 'receiptLong',
       type: PaymentType.invoice,
     ),
     UpcomingPayment(
@@ -42,8 +42,8 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       estimatedDate: DateTime(2025, 4, 20),
       status: UpcomingPaymentStatus.inDays,
       daysRemaining: 7,
-      iconBackgroundColor: const Color(0xFF8B5CF6),
-      icon: Icons.wallet,
+      iconBackgroundColor: '#8B5CF6',
+      icon: 'wallet',
       type: PaymentType.contract,
       contractType: ContractType.fixed,
     ),
@@ -55,8 +55,8 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       estimatedDate: DateTime(2025, 4, 25),
       status: UpcomingPaymentStatus.inDays,
       daysRemaining: 12,
-      iconBackgroundColor: const Color(0xFF8B5CF6),
-      icon: Icons.wallet,
+      iconBackgroundColor: '#8B5CF6',
+      icon: 'wallet',
       type: PaymentType.contract,
       contractType: ContractType.payg,
     ),
@@ -68,8 +68,8 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       estimatedDate: DateTime(2025, 5, 2),
       status: UpcomingPaymentStatus.inDays,
       daysRemaining: 20,
-      iconBackgroundColor: const Color(0xFF8B5CF6),
-      icon: Icons.wallet,
+      iconBackgroundColor: '#8B5CF6',
+      icon: 'wallet',
       type: PaymentType.contract,
       contractType: ContractType.milestone,
     ),
@@ -80,8 +80,8 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
       currency: 'USDT',
       estimatedDate: DateTime(2025, 4, 15),
       status: UpcomingPaymentStatus.overdue,
-      iconBackgroundColor: const Color(0xFFF97316),
-      icon: Icons.receipt_long,
+      iconBackgroundColor: '#F97316',
+      icon: 'receiptLong',
       type: PaymentType.invoice,
     ),
   ];
@@ -129,8 +129,7 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
     );
   }
 
-  List<UpcomingPayment> get _filteredPayments {
-    return _allPayments.where((p) {
+  List<UpcomingPayment> get _filteredPayments => _allPayments.where((p) {
       // Search filter
       final matchesSearch =
           _searchQuery.isEmpty || p.title.toLowerCase().contains(_searchQuery);
@@ -153,7 +152,6 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
 
       return matchesSearch && matchesType && matchesStatus;
     }).toList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,8 +182,7 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
   Widget _buildSearchBar(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Padding(
+  ) => Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       child: Row(
         children: [
@@ -239,15 +236,10 @@ class _UpcomingPaymentsScreenState extends State<UpcomingPaymentsScreen> {
         ],
       ),
     );
-  }
 
-  Widget _buildPaymentsList() {
-    return ListView.builder(
+  Widget _buildPaymentsList() => ListView.builder(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       itemCount: _filteredPayments.length,
-      itemBuilder: (context, index) {
-        return UpcomingPaymentCard(payment: _filteredPayments[index]);
-      },
+      itemBuilder: (context, index) => UpcomingPaymentCard(payment: _filteredPayments[index]),
     );
-  }
 }

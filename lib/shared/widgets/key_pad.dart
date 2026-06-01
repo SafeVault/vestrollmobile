@@ -19,8 +19,7 @@ class Keypad extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       children: [
         _buildKeypadRow(['1', '2', '3']),
         SizedBox(height: 24.h),
@@ -31,10 +30,8 @@ class Keypad extends StatelessWidget {
         _buildBottomRow(),
       ],
     );
-  }
 
-  Widget _buildKeypadRow(List<String> numbers) {
-    return Row(
+  Widget _buildKeypadRow(List<String> numbers) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:
           numbers
@@ -46,10 +43,8 @@ class Keypad extends StatelessWidget {
               )
               .toList(),
     );
-  }
 
-  Widget _buildBottomRow() {
-    return Row(
+  Widget _buildBottomRow() => Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         if (biometricType != BiometricType.none)
@@ -71,5 +66,4 @@ class Keypad extends StatelessWidget {
         ),
       ],
     );
-  }
 }

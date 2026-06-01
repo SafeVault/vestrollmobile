@@ -1,59 +1,52 @@
-// forgot_password_event.dart
 part of 'forgot_password_bloc.dart';
 
-abstract class ForgotPasswordEvent extends Equatable {
+sealed class ForgotPasswordEvent extends Equatable {
   const ForgotPasswordEvent();
+
+  @override
+  List<Object?> get props => [];
 }
 
-class SubmitEmail extends ForgotPasswordEvent {
-  final String email;
+final class SubmitEmail extends ForgotPasswordEvent {
   const SubmitEmail(this.email);
+  final String email;
 
   @override
-  List<Object> get props => [email];
+  List<Object?> get props => [email];
 }
 
-class EnterPasswordString extends ForgotPasswordEvent {
-  final String passwordString;
+final class EnterPasswordString extends ForgotPasswordEvent {
   const EnterPasswordString(this.passwordString);
-
-  @override
-  List<Object> get props => [passwordString];
-}
-
-class EnterConfirmPasswordString extends ForgotPasswordEvent {
   final String passwordString;
+
+  @override
+  List<Object?> get props => [passwordString];
+}
+
+final class EnterConfirmPasswordString extends ForgotPasswordEvent {
   const EnterConfirmPasswordString(this.passwordString);
+  final String passwordString;
 
   @override
-  List<Object> get props => [passwordString];
+  List<Object?> get props => [passwordString];
 }
 
-class TogglePasswordVisibility extends ForgotPasswordEvent {
+final class TogglePasswordVisibility extends ForgotPasswordEvent {
   const TogglePasswordVisibility();
-
-  @override
-  List<Object> get props => [];
 }
 
-class ToggleConfirmPasswordVisibility extends ForgotPasswordEvent {
+final class ToggleConfirmPasswordVisibility extends ForgotPasswordEvent {
   const ToggleConfirmPasswordVisibility();
-
-  @override
-  List<Object> get props => [];
 }
 
-class ResendOtpEvent extends ForgotPasswordEvent {
+final class ResendOtpEvent extends ForgotPasswordEvent {
   const ResendOtpEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
-class VerifyOtpEvent extends ForgotPasswordEvent {
-  final String otpCode;
+final class VerifyOtpEvent extends ForgotPasswordEvent {
   const VerifyOtpEvent(this.otpCode);
+  final String otpCode;
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [otpCode];
 }

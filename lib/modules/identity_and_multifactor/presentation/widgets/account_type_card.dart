@@ -57,7 +57,7 @@ class AccountTypeCard extends StatelessWidget {
                         // Icon container at top-left
                         SvgPicture.asset(
                           icon,
-                          color: colors.brandDefault,
+                          colorFilter: ColorFilter.mode(colors.brandDefault, BlendMode.srcIn),
                           height: 24.sp,
                         ),
 

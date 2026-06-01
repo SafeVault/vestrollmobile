@@ -69,8 +69,7 @@ class _ExpensesListScreenState extends State<ExpensesListScreen>
     );
   }
 
-  Widget _buildTabBar(ColorSystemExtension colors, AppFontThemeExtension fonts) {
-    return Container(
+  Widget _buildTabBar(ColorSystemExtension colors, AppFontThemeExtension fonts) => Container(
       margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
@@ -94,7 +93,6 @@ class _ExpensesListScreenState extends State<ExpensesListScreen>
         ],
       ),
     );
-  }
 
   Widget _buildExpensesList(
     ColorSystemExtension colors,
@@ -161,14 +159,13 @@ class _ExpensesListScreenState extends State<ExpensesListScreen>
   Widget _buildEmptyState(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
           Icons.receipt_long_rounded,
           size: 64.sp,
-          color: colors.textTertiary.withOpacity(0.2),
+          color: colors.textTertiary.withValues(alpha: 0.2),
         ),
         SizedBox(height: 16.h),
         Text(
@@ -183,16 +180,14 @@ class _ExpensesListScreenState extends State<ExpensesListScreen>
         ),
       ],
     );
-  }
 
-  Widget _buildBottomAction(BuildContext context, ColorSystemExtension colors) {
-    return Container(
+  Widget _buildBottomAction(BuildContext context, ColorSystemExtension colors) => Container(
       padding: EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 32.h),
       decoration: BoxDecoration(
         color: colors.bgB0,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),
@@ -205,7 +200,6 @@ class _ExpensesListScreenState extends State<ExpensesListScreen>
         },
       ),
     );
-  }
 }
 
 class _ExpenseCard extends StatelessWidget {
@@ -222,8 +216,7 @@ class _ExpenseCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(16.w),
@@ -270,7 +263,6 @@ class _ExpenseCard extends StatelessWidget {
         ),
       ),
     );
-  }
 
   Widget _buildStatusBadge() {
     Color color;
@@ -294,7 +286,7 @@ class _ExpenseCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(4.r),
       ),
       child: Text(

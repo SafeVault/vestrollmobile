@@ -17,7 +17,7 @@ class RouteConstants {
   static const String safetyAndSecurity = 'safetyAndSecurity';
   static const String communitySharing = 'communitySharing';
   static const String callPolice = 'callPolice';
-  static const String callAnAbulance = 'callAnAbu;ance';
+  static const String callAnAbulance = 'callAnAbulance';
   static const String helpCenter = 'helpCenter';
   static const String emergencyContact = 'emergencyContact';
   static const String selectPaymentPlan = 'selectPaymentPlan';
@@ -45,4 +45,7 @@ class RouteConstants {
   static const String transactionDetails = 'transactionDetails';
   static const String invoicesScreen = 'invoicesScreen';
   static const String createInvoiceScreen = 'createInvoiceScreen';
+  static const String transactionsScreen = 'transactionsScreen';
+  static const String expenseDetails = 'expenseDetails';
+  static const String addExpense = 'addExpense';
 }

@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
-import 'package:vestrollmobile/shared/widgets/vestroll_app_bar.dart';
-import 'package:vestrollmobile/shared/widgets/primary_button.dart';
 import 'package:vestrollmobile/shared/widgets/app_textfiled.dart';
+import 'package:vestrollmobile/shared/widgets/primary_button.dart';
+import 'package:vestrollmobile/shared/widgets/vestroll_app_bar.dart';
 
 class CreateInvoiceScreen extends StatefulWidget {
   const CreateInvoiceScreen({super.key});
@@ -18,6 +18,21 @@ class CreateInvoiceScreen extends StatefulWidget {
 class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
   final TextEditingController clientController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
+  final TextEditingController clientNameController = TextEditingController();
+  final TextEditingController clientEmailController = TextEditingController();
+  final TextEditingController itemNameController = TextEditingController();
+  final TextEditingController itemRateController = TextEditingController();
+  final TextEditingController itemQuantityController = TextEditingController();
+
+  @override
+  void dispose() {
+    clientNameController.dispose();
+    clientEmailController.dispose();
+    itemNameController.dispose();
+    itemRateController.dispose();
+    itemQuantityController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +49,7 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
           children: [
             AppTextField(
               controller: clientController,
-              label: 'Billed to',
+              labelText: 'Billed to',
               hintText: 'Select Client',
               readOnly: true,
               suffixIcon: const Icon(Icons.keyboard_arrow_down),
@@ -45,7 +60,7 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
             SizedBox(height: 20.h),
             AppTextField(
               controller: dateController,
-              label: 'Date',
+              labelText: 'Date',
               hintText: 'Select date',
               readOnly: true,
               suffixIcon: const Icon(Icons.calendar_today_outlined),
@@ -67,10 +82,10 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(vertical: 16.h),
                 decoration: BoxDecoration(
-                  color: colors.brandDefault.withOpacity(0.05),
+                  color: colors.brandDefault.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(
-                    color: colors.brandDefault.withOpacity(0.2),
+                    color: colors.brandDefault.withValues(alpha: 0.2),
                     style: BorderStyle.solid,
                   ),
                 ),
@@ -91,15 +106,10 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
             ),
             SizedBox(height: 40.h),
             PrimaryButton(
-              onTap: () {
-                context.pushNamed(
-                  RouteConstants.invoiceDetails,
-                ); // Going to preview or details for now
+              text: 'Continue',
+              onPressed: () {
+                context.pushNamed(RouteConstants.invoiceDetails);
               },
-              title: 'Continue',
-              isActive: true,
-              text: '',
-              onPressed: () {},
             ),
           ],
         ),
@@ -137,26 +147,23 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                 ),
                 SizedBox(height: 24.h),
                 AppTextField(
-                  label: 'Client Name',
+                  labelText: 'Client Name',
                   hintText: 'Enter client name',
-                  controller: null,
+                  controller: clientNameController,
                 ),
                 SizedBox(height: 16.h),
                 AppTextField(
-                  label: 'Email',
+                  labelText: 'Email',
                   hintText: 'Enter email address',
-                  controller: null,
+                  controller: clientEmailController,
                 ),
                 SizedBox(height: 32.h),
                 PrimaryButton(
-                  onTap: () {
+                  text: 'Add Client',
+                  onPressed: () {
                     clientController.text = 'Neurolytix Inc.';
                     Navigator.pop(context);
                   },
-                  title: 'Add Client',
-                  isActive: true,
-                  text: '',
-                  onPressed: () {},
                 ),
                 SizedBox(height: 24.h),
               ],
@@ -196,7 +203,7 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                     lastDate: DateTime(2100),
                     onDateChanged: (date) {
                       dateController.text =
-                          "\${date.day} \${date.month} \${date.year}";
+                          '${date.day} ${date.month} ${date.year}';
                       Navigator.pop(context);
                     },
                   ),
@@ -238,39 +245,36 @@ class _CreateInvoiceScreenState extends State<CreateInvoiceScreen> {
                 ),
                 SizedBox(height: 24.h),
                 AppTextField(
-                  label: 'Item Name',
+                  labelText: 'Item Name',
                   hintText: 'Enter item name',
-                  controller: null,
+                  controller: itemNameController,
                 ),
                 SizedBox(height: 16.h),
                 Row(
                   children: [
                     Expanded(
                       child: AppTextField(
-                        label: 'Rate',
+                        labelText: 'Rate',
                         hintText: '0.00',
-                        controller: null,
+                        controller: itemRateController,
                       ),
                     ),
                     SizedBox(width: 16.w),
                     Expanded(
                       child: AppTextField(
-                        label: 'Quantity',
+                        labelText: 'Quantity',
                         hintText: '1',
-                        controller: null,
+                        controller: itemQuantityController,
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: 32.h),
                 PrimaryButton(
-                  onTap: () {
+                  text: 'Add Item',
+                  onPressed: () {
                     Navigator.pop(context);
                   },
-                  title: 'Add Item',
-                  isActive: true,
-                  text: '',
-                  onPressed: () {},
                 ),
                 SizedBox(height: 24.h),
               ],

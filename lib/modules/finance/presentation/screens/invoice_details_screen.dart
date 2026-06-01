@@ -29,11 +29,11 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
 
     return Scaffold(
       backgroundColor: colors.bgB1,
-      appBar: VestrollAppBar(
+      appBar: const VestrollAppBar(
         title: '#INV-607',
         isBack: true,
         centerTitle: true,
-        actions: const [],
+        actions: [],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 40.h),
@@ -48,7 +48,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
               currency: 'USDT',
               approxValue: '\$476.19',
               assetPath: AppAssets.invoiceSvg,
-              iconBackgroundColor: const Color(0xFFF97316),
+              iconBackgroundColor: '#F97316',
             ),
             SizedBox(height: 16.h),
             _buildInvoiceInfoCard(colors, fonts),
@@ -73,14 +73,13 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
   Widget _buildOverdueBanner(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: colors.bgB0,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: colors.red500.withOpacity(0.3)),
+        border: Border.all(color: colors.red500.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +102,6 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
         ],
       ),
     );
-  }
 
   Widget _buildInvoiceInfoCard(
     ColorSystemExtension colors,
@@ -115,17 +113,17 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
 
     switch (_currentStatus) {
       case InvoiceStatus.pending:
-        badgeColor = colors.orange500.withOpacity(0.1);
+        badgeColor = colors.orange500.withValues(alpha: 0.1);
         badgeTextColor = colors.orange500;
         badgeText = 'Pending';
         break;
       case InvoiceStatus.paid:
-        badgeColor = colors.green500.withOpacity(0.1);
+        badgeColor = colors.green500.withValues(alpha: 0.1);
         badgeTextColor = colors.green500;
         badgeText = 'Paid';
         break;
       case InvoiceStatus.overdue:
-        badgeColor = colors.red500.withOpacity(0.1);
+        badgeColor = colors.red500.withValues(alpha: 0.1);
         badgeTextColor = colors.red500;
         badgeText = 'Overdue';
         break;
@@ -183,8 +181,8 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
             Container(
               width: 16.sp,
               height: 16.sp,
-              decoration: BoxDecoration(
-                color: const Color(0xFF22C55E),
+              decoration: const BoxDecoration(
+                color: Color(0xFF22C55E),
                 shape: BoxShape.circle,
               ),
               child: Center(
@@ -243,8 +241,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
   Widget _buildBilledToCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return _buildContactCard(
+  ) => _buildContactCard(
       title: 'Billed To',
       name: 'Adegboyega Oluwagbemiro',
       email: 'adeshinaadegboyega@icloud.com',
@@ -254,13 +251,11 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
       colors: colors,
       fonts: fonts,
     );
-  }
 
   Widget _buildBilledFromCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return _buildContactCard(
+  ) => _buildContactCard(
       title: 'Billed From',
       name: 'Adegboyega Oluwagbemiro',
       email: 'adeshinaadegboyega@icloud.com',
@@ -270,7 +265,6 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
       colors: colors,
       fonts: fonts,
     );
-  }
 
   Widget _buildContactCard({
     required String title,
@@ -281,8 +275,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
     required String address,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return Container(
+  }) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -314,7 +307,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
                     Container(
                       width: 16.w,
                       height: 16.w,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.green,
                         shape: BoxShape.circle,
                       ),
@@ -349,13 +342,11 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
         ],
       ),
     );
-  }
 
   Widget _buildInvoiceBreakdownCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -401,7 +392,6 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
         ],
       ),
     );
-  }
 
   Widget _buildBreakdownItem({
     required String label,
@@ -409,8 +399,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
     required String subText,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return Row(
+  }) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -443,7 +432,6 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
         ),
       ],
     );
-  }
 
   Widget _buildSimpleRow(
     String label,
@@ -451,8 +439,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
     ColorSystemExtension colors,
     AppFontThemeExtension fonts, {
     bool isBold = false,
-  }) {
-    return Row(
+  }) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
@@ -470,7 +457,6 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
         ),
       ],
     );
-  }
 
   Widget _buildPaymentTrackerCard(
     ColorSystemExtension colors,
@@ -575,8 +561,7 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
   Widget _buildPaymentMemoCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -605,10 +590,8 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
         ],
       ),
     );
-  }
 
-  Widget _buildActionButtons(ColorSystemExtension colors) {
-    return Row(
+  Widget _buildActionButtons(ColorSystemExtension colors) => Row(
       children: [
         Expanded(
           child: SecondaryButton(
@@ -626,5 +609,4 @@ class _InvoiceDetailsScreenState extends State<InvoiceDetailsScreen> {
         ),
       ],
     );
-  }
 }

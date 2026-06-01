@@ -45,8 +45,7 @@ class PinCreatedScreen extends StatelessWidget {
     BuildContext context,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         _buildSuccessIcon(colors),
@@ -54,10 +53,8 @@ class PinCreatedScreen extends StatelessWidget {
         _buildTextContent(colors, fonts),
       ],
     );
-  }
 
-  Widget _buildSuccessIcon(ColorSystemExtension colors) {
-    return Container(
+  Widget _buildSuccessIcon(ColorSystemExtension colors) => Container(
       width: 80.w,
       height: 80.h,
       decoration: BoxDecoration(
@@ -72,13 +69,11 @@ class PinCreatedScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 
   Widget _buildTextContent(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         Text(
           'Your PIN Has Been Created!',
@@ -93,15 +88,12 @@ class PinCreatedScreen extends StatelessWidget {
         ),
       ],
     );
-  }
 
-  Widget _buildActionButton(BuildContext context) {
-    return PrimaryButton(
+  Widget _buildActionButton(BuildContext context) => PrimaryButton(
       text: 'Continue',
       isEnabled: true,
       onPressed: () {
         context.pushNamed(RouteConstants.homeScreen);
       },
     );
-  }
 }

@@ -77,7 +77,7 @@ class Config {
     return size * (hyp / 100);
   }
 
-  static copyWith({required color}) async {}
+  static Future<void> copyWith({required Color color}) async {}
 }
 
 extension CustomContext on BuildContext {
@@ -93,9 +93,7 @@ class HorizontalMargin extends StatelessWidget {
   final double x;
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(width: x.sp);
-  }
+  Widget build(BuildContext context) => SizedBox(width: x.sp);
 }
 
 class VerticalMargin extends StatelessWidget {
@@ -103,7 +101,5 @@ class VerticalMargin extends StatelessWidget {
   final double y;
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(height: y.sp);
-  }
+  Widget build(BuildContext context) => SizedBox(height: y.sp);
 }

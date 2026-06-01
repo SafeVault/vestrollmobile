@@ -40,7 +40,7 @@ class ThemeAdaptiveImage extends StatelessWidget {
   final Widget? errorWidget;
 
   const ThemeAdaptiveImage({
-    Key? key,
+    super.key,
     this.lightAsset,
     this.darkAsset,
     this.asset,
@@ -56,47 +56,39 @@ class ThemeAdaptiveImage extends StatelessWidget {
   }) : assert(
          (lightAsset != null && darkAsset != null) || asset != null,
          'Either provide both lightAsset and darkAsset, or a single asset',
-       ),
-       super(key: key);
+       );
 
   /// Constructor for different assets per theme
   const ThemeAdaptiveImage.assets({
-    Key? key,
-    required String lightAsset,
-    required String darkAsset,
+    super.key,
+    required this.lightAsset,
+    required this.darkAsset,
     this.width,
     this.height,
     this.fit,
     this.semanticsLabel,
     this.placeholder,
     this.errorWidget,
-  }) : lightAsset = lightAsset,
-       darkAsset = darkAsset,
-       asset = null,
+  }) : asset = null,
        lightColor = null,
        darkColor = null,
-       useThemeColors = false,
-       super(key: key);
+       useThemeColors = false;
 
   /// Constructor for single asset with color adaptation (SVG only)
   const ThemeAdaptiveImage.colorAdaptive({
-    Key? key,
-    required String asset,
+    super.key,
+    required this.asset,
     this.width,
     this.height,
     this.fit,
-    Color? lightColor,
-    Color? darkColor,
+    this.lightColor,
+    this.darkColor,
     this.useThemeColors = true,
     this.semanticsLabel,
     this.placeholder,
     this.errorWidget,
-  }) : asset = asset,
-       lightAsset = null,
-       darkAsset = null,
-       lightColor = lightColor,
-       darkColor = darkColor,
-       super(key: key);
+  }) : lightAsset = null,
+       darkAsset = null;
 
   @override
   Widget build(BuildContext context) {
@@ -152,8 +144,7 @@ class ThemeAdaptiveImage extends StatelessWidget {
     );
   }
 
-  Widget _buildImage(BuildContext context, String assetPath) {
-    return Image.asset(
+  Widget _buildImage(BuildContext context, String assetPath) => Image.asset(
       assetPath,
       width: width,
       height: height,
@@ -173,7 +164,6 @@ class ThemeAdaptiveImage extends StatelessWidget {
               ? (context, error, stackTrace) => errorWidget!
               : null,
     );
-  }
 }
 
 /// Extension to make theme detection easier
@@ -188,9 +178,7 @@ class ThemeImageAssets {
 
   const ThemeImageAssets({required this.light, required this.dark});
 
-  String getAsset(BuildContext context) {
-    return context.isDarkMode ? dark : light;
-  }
+  String getAsset(BuildContext context) => context.isDarkMode ? dark : light;
 }
 
 // Usage examples:

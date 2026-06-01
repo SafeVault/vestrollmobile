@@ -42,12 +42,11 @@ class TransactionsEmptyState extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyStateIllustration(ColorSystemExtension colors) {
-    return Container(
+  Widget _buildEmptyStateIllustration(ColorSystemExtension colors) => Container(
       width: 160.w,
       height: 160.h,
       decoration: BoxDecoration(
-        color: colors.gray100.withOpacity(0.3),
+        color: colors.gray100.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Stack(
@@ -67,5 +66,4 @@ class TransactionsEmptyState extends StatelessWidget {
         ],
       ),
     );
-  }
 }

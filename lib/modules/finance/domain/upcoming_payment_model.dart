@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 enum UpcomingPaymentStatus { inDays, overdue }
 
 enum PaymentType { contract, invoice }
@@ -13,9 +11,9 @@ class UpcomingPayment {
   final String currency;
   final DateTime estimatedDate;
   final UpcomingPaymentStatus status;
-  final int? daysRemaining; // For "In X days"
-  final Color iconBackgroundColor;
-  final IconData icon;
+  final int? daysRemaining;
+  final String iconBackgroundColor;
+  final String icon;
   final PaymentType type;
   final ContractType? contractType;
 

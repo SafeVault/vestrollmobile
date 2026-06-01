@@ -34,11 +34,11 @@ class _ContractPaymentDetailsScreenState
 
     return Scaffold(
       backgroundColor: colors.bgB1,
-      appBar: VestrollAppBar(
+      appBar: const VestrollAppBar(
         title: '#INV-607',
         isBack: true,
         centerTitle: true,
-        actions: const [],
+        actions: [],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 40.h),
@@ -53,7 +53,7 @@ class _ContractPaymentDetailsScreenState
               currency: 'USDT',
               approxValue: '\$476.19',
               assetPath: AppAssets.invoiceSvg,
-              iconBackgroundColor: const Color(0xFFF97316),
+              iconBackgroundColor: '#F97316',
             ),
             SizedBox(height: 16.h),
             _buildInvoiceInfoCard(colors, fonts),
@@ -78,14 +78,13 @@ class _ContractPaymentDetailsScreenState
   Widget _buildOverdueBanner(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: colors.bgB0,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: colors.red500.withOpacity(0.3)),
+        border: Border.all(color: colors.red500.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +107,6 @@ class _ContractPaymentDetailsScreenState
         ],
       ),
     );
-  }
 
   Widget _buildInvoiceInfoCard(
     ColorSystemExtension colors,
@@ -120,17 +118,17 @@ class _ContractPaymentDetailsScreenState
 
     switch (_currentStatus) {
       case ContractInvoiceStatus.pending:
-        badgeColor = colors.orange500.withOpacity(0.1);
+        badgeColor = colors.orange500.withValues(alpha: 0.1);
         badgeTextColor = colors.orange500;
         badgeText = 'Pending';
         break;
       case ContractInvoiceStatus.paid:
-        badgeColor = colors.green500.withOpacity(0.1);
+        badgeColor = colors.green500.withValues(alpha: 0.1);
         badgeTextColor = colors.green500;
         badgeText = 'Paid';
         break;
       case ContractInvoiceStatus.overdue:
-        badgeColor = colors.red500.withOpacity(0.1);
+        badgeColor = colors.red500.withValues(alpha: 0.1);
         badgeTextColor = colors.red500;
         badgeText = 'Overdue';
         break;
@@ -256,8 +254,7 @@ class _ContractPaymentDetailsScreenState
   Widget _buildBilledToCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return _buildContactCard(
+  ) => _buildContactCard(
       title: 'Billed To',
       name: 'Adegboyega Oluwagbemiro',
       email: 'adeshinaadegboyega@icloud.com',
@@ -267,13 +264,11 @@ class _ContractPaymentDetailsScreenState
       colors: colors,
       fonts: fonts,
     );
-  }
 
   Widget _buildBilledFromCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return _buildContactCard(
+  ) => _buildContactCard(
       title: 'Billed From',
       name: 'Adegboyega Oluwagbemiro',
       email: 'adeshinaadegboyega@icloud.com',
@@ -283,7 +278,6 @@ class _ContractPaymentDetailsScreenState
       colors: colors,
       fonts: fonts,
     );
-  }
 
   Widget _buildContactCard({
     required String title,
@@ -294,8 +288,7 @@ class _ContractPaymentDetailsScreenState
     required String address,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return Container(
+  }) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -362,13 +355,11 @@ class _ContractPaymentDetailsScreenState
         ],
       ),
     );
-  }
 
   Widget _buildInvoiceBreakdownCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -414,7 +405,6 @@ class _ContractPaymentDetailsScreenState
         ],
       ),
     );
-  }
 
   Widget _buildBreakdownItem({
     required String label,
@@ -422,8 +412,7 @@ class _ContractPaymentDetailsScreenState
     required String subText,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return Row(
+  }) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -456,7 +445,6 @@ class _ContractPaymentDetailsScreenState
         ),
       ],
     );
-  }
 
   Widget _buildSimpleRow(
     String label,
@@ -464,8 +452,7 @@ class _ContractPaymentDetailsScreenState
     ColorSystemExtension colors,
     AppFontThemeExtension fonts, {
     bool isBold = false,
-  }) {
-    return Row(
+  }) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
@@ -483,7 +470,6 @@ class _ContractPaymentDetailsScreenState
         ),
       ],
     );
-  }
 
   Widget _buildPaymentTrackerCard(
     ColorSystemExtension colors,
@@ -588,8 +574,7 @@ class _ContractPaymentDetailsScreenState
   Widget _buildPaymentMemoCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -618,10 +603,8 @@ class _ContractPaymentDetailsScreenState
         ],
       ),
     );
-  }
 
-  Widget _buildActionButtons(ColorSystemExtension colors) {
-    return Row(
+  Widget _buildActionButtons(ColorSystemExtension colors) => Row(
       children: [
         Expanded(
           child: SecondaryButton(
@@ -639,5 +622,4 @@ class _ContractPaymentDetailsScreenState
         ),
       ],
     );
-  }
 }

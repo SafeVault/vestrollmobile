@@ -11,8 +11,7 @@ class ThemeToggleButton extends StatelessWidget {
     final colors = Theme.of(context).extension<ColorSystemExtension>()!;
 
     return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, themeState) {
-        return IconButton(
+      builder: (context, themeState) => IconButton(
           onPressed: () => context.read<ThemeBloc>().add(ThemeToggled()),
           icon: Icon(
             themeState.isDarkMode ? Icons.light_mode : Icons.dark_mode,
@@ -22,8 +21,7 @@ class ThemeToggleButton extends StatelessWidget {
               themeState.isDarkMode
                   ? 'Switch to Light Mode'
                   : 'Switch to Dark Mode',
-        );
-      },
+        ),
     );
   }
 }

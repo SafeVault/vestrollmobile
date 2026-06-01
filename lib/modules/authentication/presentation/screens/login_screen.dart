@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
-import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
-import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/core/utils/assets_folder/app_icons.dart';
 import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
+import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/authentication/presentation/widgets/or_widget.dart';
 import 'package:vestrollmobile/shared/widgets/app_bar.dart';
 import 'package:vestrollmobile/shared/widgets/app_textfiled.dart';
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 16.h),
-                AppBarHeaderWidget(),
+                const AppBarHeaderWidget(),
                 SizedBox(height: 15.h),
                 Text(
                   'Welcome Back!',
@@ -70,14 +70,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 24.h),
                 AppTextField(
                   borderRadius: 8.sp,
-                  hintText: "Email address",
+                  hintText: 'Email address',
                   controller: _emailController,
                 ),
                 SizedBox(height: 20.h),
                 ValueListenableBuilder<TextInputFormatter?>(
                   valueListenable: inputFormatter,
-                  builder: (context, inputFormatter, _) {
-                    return AppTextField(
+                  builder: (context, inputFormatter, _) => AppTextField(
                       borderRadius: 8.sp,
                       controller: _passwordController,
                       hintText: 'Enter password',
@@ -111,8 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                    );
-                  },
+                    ),
                 ),
                 SizedBox(height: 20.h),
                 Align(
@@ -138,13 +136,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20.h),
                 PrimaryButton(
-                  text: "Log In",
+                  text: 'Log In',
                   onPressed: () {
                     context.pushNamed(RouteConstants.keypad);
                   },
                 ),
                 SizedBox(height: 20.h),
-                ORWidget(),
+                const ORWidget(),
                 SizedBox(height: 20.h),
                 SecondaryButton(
                   text: 'Log in using Google',

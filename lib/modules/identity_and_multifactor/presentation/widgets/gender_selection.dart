@@ -64,8 +64,7 @@ Future<T?> showSelectionDialog<T>({
   required String title,
   required List<T> items,
   required String Function(T) getItemLabel,
-}) {
-  return showDialog<T>(
+}) => showDialog<T>(
     context: context,
     builder:
         (context) => SelectionDialog<T>(
@@ -77,4 +76,3 @@ Future<T?> showSelectionDialog<T>({
           },
         ),
   );
-}

@@ -1,9 +1,7 @@
  import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vestrollmobile/core/navigation/routes_constant.dart';
-import 'package:vestrollmobile/core/utils/assets_folder/assets.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart';
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/finance/domain/upcoming_payment_model.dart';
@@ -28,7 +26,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // Toggle this to see empty vs filled states
-  bool _isEmpty = true;
+  final bool _isEmpty = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   balance: 5050.00,
                   onNotificationTap: () {
                     // Handle notification tap
-                    print('Notification tapped');
+                    debugPrint('Notification tapped');
                   },
                 ),
               ),
@@ -77,10 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     padding: EdgeInsets.all(12.sp),
                     decoration: BoxDecoration(
-                      color: colors.brandDefault.withOpacity(0.05),
+                      color: colors.brandDefault.withValues(alpha: 0.05),
                       borderRadius: BorderRadius.circular(12.r),
                       border: Border.all(
-                        color: colors.brandDefault.withOpacity(0.1),
+                        color: colors.brandDefault.withValues(alpha: 0.1),
                       ),
                     ),
                     child: Row(
@@ -166,8 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildHeader(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Padding(
+  ) => Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,7 +187,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-  }
 
   // Updated Section Builder with EmptyStateType
   Widget _buildSection({
@@ -222,8 +218,8 @@ class _HomeScreenState extends State<HomeScreen> {
               InkWell(
                 onTap: onSeeAll,
                 borderRadius: BorderRadius.circular(4.r),
-                splashColor: colors.brandDefault.withOpacity(0.1),
-                highlightColor: colors.brandDefault.withOpacity(0.05),
+                splashColor: colors.brandDefault.withValues(alpha: 0.1),
+                highlightColor: colors.brandDefault.withValues(alpha: 0.05),
                 child: Padding(
                   padding: EdgeInsets.all(8.w),
                   child: Row(
@@ -267,8 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildContractsList(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         ContractListItem(
           title: 'Weave Finance Mobile &...',
@@ -294,19 +289,17 @@ class _HomeScreenState extends State<HomeScreen> {
           amount: '581 USDT',
           status: ContractStatus.active,
           initials: 'DM',
-          avatarColor: colors.brandContrast ?? Colors.purple,
+          avatarColor: colors.brandContrast,
           onTap: () {},
         ),
       ],
     );
-  }
-
+ 
   // Updated Transactions List - keeping the stacked icons (they're already good)
   Widget _buildTransactionsList(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         HomeTransactionListItem(
           title: 'Withdrawal',
@@ -345,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Center(
                     child: Icon(
                       Icons.arrow_upward,
-                      color: Color(0xFFEF4444), // Red
+                      color: const Color(0xFFEF4444), // Red
                       size: 12.sp,
                     ),
                   ),
@@ -385,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Icon(Icons.check, color: Color(0xFF10B981), size: 12.sp),
+                    child: Icon(Icons.check, color: const Color(0xFF10B981), size: 12.sp),
                   ),
                 ),
               ),
@@ -427,7 +420,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Icon(Icons.check, color: Color(0xFF10B981), size: 12.sp),
+                    child: Icon(Icons.check, color: const Color(0xFF10B981), size: 12.sp),
                   ),
                 ),
               ),
@@ -436,14 +429,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
     );
-  }
 
   // Upcoming Payments List (unchanged)
   Widget _buildUpcomingPaymentsList(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         UpcomingPaymentListItem(
           title: 'Brightfolk Payment for c...',
@@ -452,7 +443,7 @@ class _HomeScreenState extends State<HomeScreen> {
           status: 'Overdue',
           statusColor: colors.orange500,
           icon: Icons.account_balance_wallet,
-          iconBackgroundColor: colors.brandContrast ?? Colors.purple,
+          iconBackgroundColor: colors.brandContrast,
           paymentType: PaymentType.contract,
           onTap: () {},
         ),
@@ -474,11 +465,10 @@ class _HomeScreenState extends State<HomeScreen> {
           status: 'Overdue',
           statusColor: colors.orange500,
           icon: Icons.account_balance_wallet,
-          iconBackgroundColor: colors.brandContrast ?? Colors.purple,
+          iconBackgroundColor: colors.brandContrast,
           paymentType: PaymentType.contract,
           onTap: () {},
         ),
       ],
     );
-  }
 }

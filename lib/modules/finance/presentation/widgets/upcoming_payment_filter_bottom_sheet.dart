@@ -137,8 +137,7 @@ class _UpcomingPaymentFilterBottomSheetState
     bool isStatus = false,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return Column(
+  }) => Column(
       children: [
         ListTile(
           contentPadding: EdgeInsets.zero,
@@ -168,7 +167,6 @@ class _UpcomingPaymentFilterBottomSheetState
           ),
       ],
     );
-  }
 
   Widget _buildFilterItem({
     required String label,
@@ -184,8 +182,8 @@ class _UpcomingPaymentFilterBottomSheetState
     
     if (label == 'All') {
       final currentList = isStatus ? _selectedStatuses : _selectedTypes;
-      final totalPossible = 2; // Contract payment, Invoice OR Coming, Overdue
-      if (currentList.length > 0 && currentList.length < totalPossible) {
+      const totalPossible = 2; // Contract payment, Invoice OR Coming, Overdue
+      if (currentList.isNotEmpty && currentList.length < totalPossible) {
         showMinus = true;
       } else if (currentList.length == totalPossible) {
         allChecked = true;
@@ -268,8 +266,7 @@ class _UpcomingPaymentFilterBottomSheetState
     return Text(label);
   }
 
-  Widget _buildCheckbox(bool isSelected, ColorSystemExtension colors) {
-    return Container(
+  Widget _buildCheckbox(bool isSelected, ColorSystemExtension colors) => Container(
       width: 20.w,
       height: 20.h,
       decoration: BoxDecoration(
@@ -285,7 +282,6 @@ class _UpcomingPaymentFilterBottomSheetState
               ? Icon(Icons.check, size: 14.sp, color: colors.constantContrast)
               : null,
     );
-  }
 
   Widget _buildCheckboxAll(bool isSelected, bool isIndeterminate, ColorSystemExtension colors) {
     if (!isSelected && !isIndeterminate) {
@@ -317,8 +313,7 @@ class _UpcomingPaymentFilterBottomSheetState
   Widget _buildActionButtons(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Row(
+  ) => Row(
       children: [
         Expanded(
           child: GestureDetector(
@@ -371,5 +366,4 @@ class _UpcomingPaymentFilterBottomSheetState
         ),
       ],
     );
-  }
 }

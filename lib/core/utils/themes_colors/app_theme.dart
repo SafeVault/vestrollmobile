@@ -451,12 +451,12 @@ class AppTheme {
 
   // Define the static light theme configurations
   static final light = () {
-    final defaultTheme = ThemeData.light();
+    final defaultTheme = ThemeData.light(useMaterial3: true);
     return defaultTheme.copyWith(
       colorScheme: _lightAppColors.toColorScheme(Brightness.light),
       scaffoldBackgroundColor: _lightAppColors.bgB1,
       appBarTheme: AppBarTheme(
-        color: _lightAppColors.bgB0,
+        backgroundColor: _lightAppColors.bgB0,
         titleTextStyle: _lightFontTheme.heading2Bold,
         elevation: 0,
       ),
@@ -556,12 +556,12 @@ class AppTheme {
   }();
 
   static final dark = () {
-    final defaultTheme = ThemeData.dark();
+    final defaultTheme = ThemeData.dark(useMaterial3: true);
     return defaultTheme.copyWith(
       colorScheme: _darkAppColors.toColorScheme(Brightness.dark),
       scaffoldBackgroundColor: _darkAppColors.bgB0,
       appBarTheme: AppBarTheme(
-        color: _darkAppColors.bgB0,
+        backgroundColor: _darkAppColors.bgB0,
         titleTextStyle: _darkFontTheme.heading2Bold,
         elevation: 0,
       ),

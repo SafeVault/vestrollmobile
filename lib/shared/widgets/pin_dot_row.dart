@@ -17,11 +17,9 @@ class PinDotsRow extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
+  Widget build(BuildContext context) => AnimatedBuilder(
       animation: shakeAnimation,
-      builder: (context, child) {
-        return Transform.translate(
+      builder: (context, child) => Transform.translate(
           offset: Offset(
             shakeAnimation.value *
                 8 *
@@ -43,8 +41,6 @@ class PinDotsRow extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
+        ),
     );
-  }
 }

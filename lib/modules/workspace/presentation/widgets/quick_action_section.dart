@@ -41,15 +41,15 @@ class QuickActionsSection extends StatelessWidget {
                   label: 'Contract',
                   iconColor: colors.brandDefault,
                 ),
-                _QuickActionItem(
+                const _QuickActionItem(
                   icon: Icons.receipt_long_outlined,
                   label: 'Invoice',
-                  iconColor: const Color(0xFFFF9500),
+                  iconColor: Color(0xFFFF9500),
                 ),
-                _QuickActionItem(
+                const _QuickActionItem(
                   icon: Icons.payment_outlined,
                   label: 'Quickpay',
-                  iconColor: const Color(0xFFE91E63),
+                  iconColor: Color(0xFFE91E63),
                 ),
               ],
             ),

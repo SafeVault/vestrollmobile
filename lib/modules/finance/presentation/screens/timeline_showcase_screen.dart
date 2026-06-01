@@ -7,9 +7,8 @@ class TimelineShowcaseScreen extends StatelessWidget {
   const TimelineShowcaseScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: VestrollAppBar(isBack: true, centerTitle: false),
+  Widget build(BuildContext context) => Scaffold(
+      appBar: const VestrollAppBar(isBack: true, centerTitle: false),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.w),
         child: Column(
@@ -21,10 +20,8 @@ class TimelineShowcaseScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 
-  Widget _buildMilestoneVariations() {
-    return Column(
+  Widget _buildMilestoneVariations() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
@@ -171,10 +168,8 @@ class TimelineShowcaseScreen extends StatelessWidget {
         ),
       ],
     );
-  }
 
-  Widget _buildContractCycleVariations() {
-    return Column(
+  Widget _buildContractCycleVariations() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
@@ -289,7 +284,6 @@ class TimelineShowcaseScreen extends StatelessWidget {
         ),
       ],
     );
-  }
 }
 
 class _TimelineShowcaseCard extends StatelessWidget {
@@ -298,8 +292,7 @@ class _TimelineShowcaseCard extends StatelessWidget {
   const _TimelineShowcaseCard({required this.items});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) => Container(
       width: double.infinity,
       padding: EdgeInsets.all(24.sp),
       decoration: BoxDecoration(
@@ -307,7 +300,7 @@ class _TimelineShowcaseCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.02),
+            color: Colors.black.withValues(alpha: 0.02),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -315,5 +308,4 @@ class _TimelineShowcaseCard extends StatelessWidget {
       ),
       child: ProtocolTimeline(items: items),
     );
-  }
 }

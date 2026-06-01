@@ -29,8 +29,7 @@ class _AppState extends State<App> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
+  Widget build(BuildContext context) => ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: false,
@@ -45,7 +44,7 @@ class _AppState extends State<App> {
                 debugShowCheckedModeBanner: false,
                 title: 'VestrollMobile',
                 theme: AppTheme.light,
-                darkTheme: AppTheme.light,
+                darkTheme: AppTheme.dark,
                 themeMode:
                     themeState.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 scrollBehavior: const _AppScrollBehavior(),
@@ -59,14 +58,11 @@ class _AppState extends State<App> {
         ),
       ),
     );
-  }
 }
 
 class _AppScrollBehavior extends ScrollBehavior {
   const _AppScrollBehavior();
 
   @override
-  ScrollPhysics getScrollPhysics(BuildContext context) {
-    return const BouncingScrollPhysics();
-  }
+  ScrollPhysics getScrollPhysics(BuildContext context) => const BouncingScrollPhysics();
 }

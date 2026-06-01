@@ -4,6 +4,25 @@ import 'package:vestrollmobile/core/utils/themes_colors/app_color_extension.dart
 import 'package:vestrollmobile/core/utils/themes_colors/app_font_theme_extension.dart';
 import 'package:vestrollmobile/modules/finance/domain/transaction_model.dart';
 
+IconData _mapIcon(String name) {
+  switch (name) {
+    case 'accountBalanceWallet': return Icons.account_balance_wallet;
+    case 'shoppingBag': return Icons.shopping_bag;
+    case 'receipt': return Icons.receipt;
+    case 'bugReport': return Icons.bug_report;
+    case 'payment': return Icons.payment;
+    case 'swapHoriz': return Icons.swap_horiz;
+    case 'accountBalance': return Icons.account_balance;
+    case 'creditCard': return Icons.credit_card;
+    case 'designServices': return Icons.design_services;
+    case 'arrowUp': return Icons.arrow_upward;
+    case 'arrowDown': return Icons.arrow_downward;
+    case 'receiptLong': return Icons.receipt_long;
+    case 'wallet': return Icons.wallet;
+    default: return Icons.help_outline;
+  }
+}
+
 class TransactionListItem extends StatelessWidget {
   final Transaction transaction;
   final VoidCallback? onTap;
@@ -26,10 +45,10 @@ class TransactionListItem extends StatelessWidget {
               width: 40.w,
               height: 40.h,
               decoration: BoxDecoration(
-                color: transaction.iconBackgroundColor,
+                color: Color(int.parse(transaction.iconBackgroundColor.replaceFirst('#', '0xFF'))),
                 shape: BoxShape.circle,
               ),
-              child: Icon(transaction.icon, color: Colors.white, size: 20.sp),
+              child: Icon(_mapIcon(transaction.icon), color: Colors.white, size: 20.sp),
             ),
             SizedBox(width: 12.w),
             Expanded(
@@ -82,15 +101,14 @@ class TransactionListItem extends StatelessWidget {
     Transaction transaction,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Row(
+  ) => Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: 6.w,
           height: 6.h,
           decoration: BoxDecoration(
-            color: transaction.getStatusColor(),
+            color: Color(int.parse(transaction.getStatusColor().replaceFirst('#', '0xFF'))),
             shape: BoxShape.circle,
           ),
         ),
@@ -98,12 +116,11 @@ class TransactionListItem extends StatelessWidget {
         Text(
           transaction.getStatusText(),
           style: fonts.textXsRegular.copyWith(
-            color: transaction.getStatusColor(),
+            color: Color(int.parse(transaction.getStatusColor().replaceFirst('#', '0xFF'))),
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,
           ),
         ),
       ],
     );
-  }
 }

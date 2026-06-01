@@ -64,7 +64,7 @@ class MoreScreen extends StatelessWidget {
                             fonts,
                             icon: Icons.receipt_long_outlined,
                             label: 'Invoice',
-                            color: Color(0xFF8B5CF6),
+                            color: const Color(0xFF8B5CF6),
                             onTap: () {
                               Navigator.pop(context);
                             },
@@ -75,7 +75,7 @@ class MoreScreen extends StatelessWidget {
                             fonts,
                             icon: Icons.handshake_outlined,
                             label: 'Contract',
-                            color: Color(0xFF3B82F6),
+                            color: const Color(0xFF3B82F6),
                             onTap: () {
                               Navigator.pop(context);
                               context.pushNamed(RouteConstants.workspaceScreen);
@@ -87,7 +87,7 @@ class MoreScreen extends StatelessWidget {
                             fonts,
                             icon: Icons.flash_on_rounded,
                             label: 'Quick Pay',
-                            color: Color(0xFFF97316),
+                            color: const Color(0xFFF97316),
                             onTap: () {
                               Navigator.pop(context);
                             },
@@ -98,7 +98,7 @@ class MoreScreen extends StatelessWidget {
                             fonts,
                             icon: Icons.send_rounded,
                             label: 'Transfer',
-                            color: Color(0xFF22C55E),
+                            color: const Color(0xFF22C55E),
                             onTap: () {
                               Navigator.pop(context);
                             },
@@ -168,8 +168,7 @@ class MoreScreen extends StatelessWidget {
     required String label,
     required Color color,
     required VoidCallback onTap,
-  }) {
-    return GestureDetector(
+  }) => GestureDetector(
       onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -178,9 +177,9 @@ class MoreScreen extends StatelessWidget {
             width: 60.w,
             height: 60.h,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(color: color.withOpacity(0.2)),
+              border: Border.all(color: color.withValues(alpha: 0.2)),
             ),
             child: Icon(icon, color: color, size: 26.sp),
           ),
@@ -195,7 +194,6 @@ class MoreScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 
   Widget _buildListItem(
     ColorSystemExtension colors,
@@ -204,8 +202,7 @@ class MoreScreen extends StatelessWidget {
     required String label,
     required String subtitle,
     required VoidCallback onTap,
-  }) {
-    return InkWell(
+  }) => InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12.r),
       child: Container(
@@ -221,7 +218,7 @@ class MoreScreen extends StatelessWidget {
               width: 40.w,
               height: 40.h,
               decoration: BoxDecoration(
-                color: colors.brandDefault.withOpacity(0.08),
+                color: colors.brandDefault.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(10.r),
               ),
               child: Icon(icon, color: colors.brandDefault, size: 20.sp),
@@ -255,5 +252,4 @@ class MoreScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 }

@@ -72,8 +72,7 @@ class InvoiceBreakdownBottomSheet extends StatelessWidget {
     bool isBold,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Row(
+  ) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
@@ -92,5 +91,4 @@ class InvoiceBreakdownBottomSheet extends StatelessWidget {
         ),
       ],
     );
-  }
 }

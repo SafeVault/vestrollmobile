@@ -17,7 +17,7 @@ class MoreOptionsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.bgB1,
-      appBar: VestrollAppBar(title: 'More', isBack: false),
+      appBar: const VestrollAppBar(title: 'More', isBack: false),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -106,7 +106,7 @@ class MoreOptionsScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(
+      bottomNavigationBar: const BottomNavigationBarWidget(
         activeTab: BottomNavTab.more,
       ),
     );
@@ -115,8 +115,7 @@ class MoreOptionsScreen extends StatelessWidget {
   Widget _buildProfileCard(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: colors.bgB0,
@@ -128,11 +127,11 @@ class MoreOptionsScreen extends StatelessWidget {
           Container(
             width: 56.w,
             height: 56.h,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  const Color(0xFF5E2A8C),
-                  const Color(0xFF8B5CF6),
+                  Color(0xFF5E2A8C),
+                  Color(0xFF8B5CF6),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -177,7 +176,7 @@ class MoreOptionsScreen extends StatelessWidget {
                     vertical: 3.h,
                   ),
                   decoration: BoxDecoration(
-                    color: colors.green500.withOpacity(0.1),
+                    color: colors.green500.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Text(
@@ -199,14 +198,12 @@ class MoreOptionsScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 
   Widget _buildSectionHeader(
     String title,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Align(
+  ) => Align(
       alignment: Alignment.centerLeft,
       child: Text(
         title,
@@ -217,14 +214,12 @@ class MoreOptionsScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 
   Widget _buildMenuGroup(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts, {
     required List<_MenuItem> items,
-  }) {
-    return Container(
+  }) => Container(
       decoration: BoxDecoration(
         color: colors.bgB0,
         borderRadius: BorderRadius.circular(16.r),
@@ -259,7 +254,7 @@ class MoreOptionsScreen extends StatelessWidget {
                         width: 36.w,
                         height: 36.h,
                         decoration: BoxDecoration(
-                          color: colors.brandDefault.withOpacity(0.08),
+                          color: colors.brandDefault.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Icon(
@@ -301,23 +296,21 @@ class MoreOptionsScreen extends StatelessWidget {
         }).toList(),
       ),
     );
-  }
 
   Widget _buildLogoutButton(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
     BuildContext context,
-  ) {
-    return GestureDetector(
+  ) => GestureDetector(
       onTap: () {
         context.go('/');
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 14.h),
         decoration: BoxDecoration(
-          color: colors.red500.withOpacity(0.08),
+          color: colors.red500.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(color: colors.red500.withOpacity(0.2)),
+          border: Border.all(color: colors.red500.withValues(alpha: 0.2)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -335,7 +328,6 @@ class MoreOptionsScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 }
 
 class _MenuItem {

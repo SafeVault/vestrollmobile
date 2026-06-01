@@ -18,7 +18,7 @@ class ORWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'or',
-            style: fonts.bodyMedium?.copyWith(
+            style: fonts.bodyMedium.copyWith(
               color: colors.gray500,
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,

@@ -128,8 +128,7 @@ class AppFontThemeExtension extends ThemeExtension<AppFontThemeExtension> {
     TextStyle? headerSmall,
     TextStyle? subHeader,
     TextStyle? bodyMedium,
-  }) {
-    return AppFontThemeExtension(
+  }) => AppFontThemeExtension(
       // Headings
       heading1Bold: heading1Bold ?? this.heading1Bold,
       heading1SemiBold: heading1SemiBold ?? this.heading1SemiBold,
@@ -170,7 +169,6 @@ class AppFontThemeExtension extends ThemeExtension<AppFontThemeExtension> {
       subHeader: subHeader ?? this.subHeader,
       bodyMedium: bodyMedium ?? this.bodyMedium,
     );
-  }
 
   @override
   ThemeExtension<AppFontThemeExtension> lerp(
@@ -232,8 +230,7 @@ class AppFontThemeExtension extends ThemeExtension<AppFontThemeExtension> {
   }
 
   /// Get a text style with a different color
-  AppFontThemeExtension withColor(Color color) {
-    return AppFontThemeExtension(
+  AppFontThemeExtension withColor(Color color) => AppFontThemeExtension(
       // Headings
       heading1Bold: heading1Bold.copyWith(color: color),
       heading1SemiBold: heading1SemiBold.copyWith(color: color),
@@ -274,19 +271,15 @@ class AppFontThemeExtension extends ThemeExtension<AppFontThemeExtension> {
       subHeader: subHeader.copyWith(color: color),
       bodyMedium: bodyMedium.copyWith(color: color),
     );
-  }
 
   /// Get a text style with a different font weight
-  TextStyle applyWeight(TextStyle style, FontWeight weight) {
-    return style.copyWith(fontWeight: weight);
-  }
+  TextStyle applyWeight(TextStyle style, FontWeight weight) => style.copyWith(fontWeight: weight);
 
   /// Map a style to a Material 3 typography role
   static AppFontThemeExtension fromTextTheme(
     TextTheme textTheme,
     Color textColor,
-  ) {
-    return AppFontThemeExtension(
+  ) => AppFontThemeExtension(
       // Headings (matching image sizes)
       heading1Bold: GoogleFonts.hankenGrotesk(
         // Using Hanken Grotesk font
@@ -511,5 +504,4 @@ class AppFontThemeExtension extends ThemeExtension<AppFontThemeExtension> {
         fontWeight: FontWeight.w400,
       ),
     );
-  }
 }

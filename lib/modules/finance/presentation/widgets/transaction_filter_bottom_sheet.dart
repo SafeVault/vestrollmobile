@@ -48,11 +48,9 @@ class TransactionFilters {
     }
   }
 
-  bool get hasActiveFilters {
-    return !transactionTypes.contains(TransactionType.all) ||
+  bool get hasActiveFilters => !transactionTypes.contains(TransactionType.all) ||
         !statuses.contains(TransactionFilterStatus.all) ||
         dateFilterType != null;
-  }
 
   TransactionFilters copyWith({
     Set<TransactionType>? transactionTypes,
@@ -60,8 +58,7 @@ class TransactionFilters {
     DateFilterType? dateFilterType,
     DateTimeRange? customDateRange,
     bool clearDate = false,
-  }) {
-    return TransactionFilters(
+  }) => TransactionFilters(
       transactionTypes: transactionTypes ?? this.transactionTypes,
       statuses: statuses ?? this.statuses,
       dateFilterType:
@@ -69,16 +66,13 @@ class TransactionFilters {
       customDateRange:
           clearDate ? null : (customDateRange ?? this.customDateRange),
     );
-  }
 
-  TransactionFilters clear() {
-    return TransactionFilters(
+  TransactionFilters clear() => TransactionFilters(
       transactionTypes: {TransactionType.all},
       statuses: {TransactionFilterStatus.all},
       dateFilterType: null,
       customDateRange: null,
     );
-  }
 }
 
 class TransactionFilterBottomSheet extends StatefulWidget {
@@ -272,8 +266,7 @@ class _TransactionFilterBottomSheetState
     required VoidCallback onTap,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return InkWell(
+  }) => InkWell(
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
@@ -296,14 +289,12 @@ class _TransactionFilterBottomSheetState
         ),
       ),
     );
-  }
 
   Widget _buildCheckbox({
     required bool isSelected,
     required bool isIndeterminate,
     required ColorSystemExtension colors,
-  }) {
-    return Container(
+  }) => Container(
       width: 24.w,
       height: 24.h,
       decoration: BoxDecoration(
@@ -327,13 +318,11 @@ class _TransactionFilterBottomSheetState
               )
               : null,
     );
-  }
 
   Widget _buildTransactionTypeSection(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         _buildSectionHeader(
           title: 'Transaction type',
@@ -364,7 +353,6 @@ class _TransactionFilterBottomSheetState
         ],
       ],
     );
-  }
 
   Widget _buildTypeOption(
     String label,
@@ -404,8 +392,7 @@ class _TransactionFilterBottomSheetState
   Widget _buildStatusSection(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         _buildSectionHeader(
           title: 'Status',
@@ -438,7 +425,6 @@ class _TransactionFilterBottomSheetState
         ],
       ],
     );
-  }
 
   Widget _buildStatusOption(
     String label,
@@ -482,8 +468,7 @@ class _TransactionFilterBottomSheetState
   Widget _buildDateSection(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Column(
+  ) => Column(
       children: [
         _buildSectionHeader(
           title: 'Date',
@@ -544,7 +529,6 @@ class _TransactionFilterBottomSheetState
         ],
       ],
     );
-  }
 
   Widget _buildDateRadioOption(
     String label,
@@ -591,8 +575,7 @@ class _TransactionFilterBottomSheetState
     required VoidCallback onTap,
     required ColorSystemExtension colors,
     required AppFontThemeExtension fonts,
-  }) {
-    return GestureDetector(
+  }) => GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
@@ -618,13 +601,11 @@ class _TransactionFilterBottomSheetState
         ),
       ),
     );
-  }
 
   Widget _buildBottomButtons(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Container(
+  ) => Container(
       padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 32.h),
       decoration: BoxDecoration(
         color: colors.bgB0,
@@ -678,5 +659,4 @@ class _TransactionFilterBottomSheetState
         ],
       ),
     );
-  }
 }

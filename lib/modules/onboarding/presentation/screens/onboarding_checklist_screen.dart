@@ -66,10 +66,10 @@ class _OnboardingChecklistScreenState extends State<OnboardingChecklistScreen> {
 
     return Scaffold(
       backgroundColor: colors.bgB0,
-      appBar: VestrollAppBar(
+      appBar: const VestrollAppBar(
         isBack: true,
         centerTitle: false,
-        actions: const [],
+        actions: [],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24.w),

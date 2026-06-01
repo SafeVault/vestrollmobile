@@ -23,7 +23,7 @@ class PasswordRequirementViewer extends StatelessWidget {
         color: isPassed ? colors.green50 : colors.red50,
         border: Border.all(color: isPassed ? colors.green300 : colors.red300),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 4,

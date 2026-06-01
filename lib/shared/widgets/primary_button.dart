@@ -123,12 +123,10 @@ class _PrimaryButtonState extends State<PrimaryButton>
       onTap: _handleTap,
       child: AnimatedBuilder(
         animation: Listenable.merge([_scaleAnimation, _shineAnimation]),
-        builder: (context, child) {
-          return Transform.scale(
+        builder: (context, child) => Transform.scale(
             scale: _scaleAnimation.value,
             child: _buildButtonContainer(context, colors, fonts),
-          );
-        },
+          ),
       ),
     );
   }
@@ -137,8 +135,7 @@ class _PrimaryButtonState extends State<PrimaryButton>
     BuildContext context,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Stack(
+  ) => Stack(
       children: [
         _buildMainButton(context, colors, fonts),
         if (widget.enableShine && widget.isEnabled) ...[
@@ -147,14 +144,12 @@ class _PrimaryButtonState extends State<PrimaryButton>
         ],
       ],
     );
-  }
 
   Widget _buildMainButton(
     BuildContext context,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return AnimatedContainer(
+  ) => AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       decoration: _getButtonDecoration(colors),
@@ -163,10 +158,8 @@ class _PrimaryButtonState extends State<PrimaryButton>
       width: widget.fixedSize?.width ?? MediaQuery.of(context).size.width - 40,
       child: _buildButtonContent(context, colors, fonts),
     );
-  }
 
-  BoxDecoration _getButtonDecoration(ColorSystemExtension colors) {
-    return BoxDecoration(
+  BoxDecoration _getButtonDecoration(ColorSystemExtension colors) => BoxDecoration(
       color:
           widget.isEnabled
               ? widget.color ?? colors.brandDefault
@@ -179,18 +172,14 @@ class _PrimaryButtonState extends State<PrimaryButton>
                 : Colors.transparent,
       ),
     );
-  }
 
-  EdgeInsetsGeometry _getButtonPadding() {
-    return widget.padding ?? EdgeInsets.symmetric(vertical: 10.sp);
-  }
+  EdgeInsetsGeometry _getButtonPadding() => widget.padding ?? EdgeInsets.symmetric(vertical: 10.sp);
 
   Widget _buildButtonContent(
     BuildContext context,
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Row(
+  ) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (widget.icon != null) _buildIcon(colors, widget.icon!),
@@ -200,10 +189,8 @@ class _PrimaryButtonState extends State<PrimaryButton>
         if (widget.iconRtr != null) _buildIcon(colors, widget.iconRtr!),
       ],
     );
-  }
 
-  Widget _buildIcon(ColorSystemExtension colors, String iconPath) {
-    return SvgPicture.asset(
+  Widget _buildIcon(ColorSystemExtension colors, String iconPath) => SvgPicture.asset(
       iconPath,
       height: 18.sp,
       width: 18.sp,
@@ -213,13 +200,11 @@ class _PrimaryButtonState extends State<PrimaryButton>
         BlendMode.srcIn,
       ),
     );
-  }
 
   Widget _buildButtonText(
     ColorSystemExtension colors,
     AppFontThemeExtension fonts,
-  ) {
-    return Text(
+  ) => Text(
       widget.text,
       style: fonts.textMdBold.copyWith(
         fontSize: widget.textSize,
@@ -228,14 +213,12 @@ class _PrimaryButtonState extends State<PrimaryButton>
             (widget.isEnabled ? colors.constantContrast : colors.gray500),
       ),
     );
-  }
 
   Widget _buildShineEffect(
     BuildContext context,
     ColorSystemExtension colors,
     double delay,
-  ) {
-    return Positioned.fill(
+  ) => Positioned.fill(
       child: ClipRRect(
         borderRadius: widget.borderRadius ?? BorderRadius.circular(200.sp),
         child: AnimatedBuilder(
@@ -273,7 +256,6 @@ class _PrimaryButtonState extends State<PrimaryButton>
         ),
       ),
     );
-  }
 
   List<Color> _getShineColors(ColorSystemExtension colors, bool isPrimary) {
     final baseColor = colors.bgB0;

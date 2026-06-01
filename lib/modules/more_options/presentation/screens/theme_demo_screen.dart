@@ -420,8 +420,7 @@ class ThemeDemoScreen extends StatelessWidget {
     required ColorSystemExtension colorSystem,
     required AppFontThemeExtension fontSystem,
     required Widget child,
-  }) {
-    return Column(
+  }) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -434,15 +433,13 @@ class ThemeDemoScreen extends StatelessWidget {
         child,
       ],
     );
-  }
 
   Widget _buildTypographyGroup(
     String title,
     List<Widget> examples,
     ColorSystemExtension colorSystem,
     AppFontThemeExtension fontSystem,
-  ) {
-    return Column(
+  ) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -453,15 +450,13 @@ class ThemeDemoScreen extends StatelessWidget {
         ...examples,
       ],
     );
-  }
 
   Widget _buildTypographyExample(
     String text,
     String usage,
     TextStyle style,
     Color color,
-  ) {
-    return Padding(
+  ) => Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -478,15 +473,13 @@ class ThemeDemoScreen extends StatelessWidget {
         ],
       ),
     );
-  }
 
   Widget _buildColorGroup(
     String title,
     List<Widget> swatches,
     ColorSystemExtension colorSystem,
     AppFontThemeExtension fontSystem,
-  ) {
-    return Card(
+  ) => Card(
       color: colorSystem.bgB1,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -505,10 +498,8 @@ class ThemeDemoScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 
-  Widget _buildColorSwatch(String name, Color color, String usage) {
-    return Column(
+  Widget _buildColorSwatch(String name, Color color, String usage) => Column(
       children: [
         Container(
           width: 60,
@@ -536,7 +527,6 @@ class ThemeDemoScreen extends StatelessWidget {
         ),
       ],
     );
-  }
 
   Widget _buildColorPalette(
     String title,
@@ -544,8 +534,7 @@ class ThemeDemoScreen extends StatelessWidget {
     String usage,
     ColorSystemExtension colorSystem,
     AppFontThemeExtension fontSystem,
-  ) {
-    return Card(
+  ) => Card(
       color: colorSystem.bgB1,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -569,8 +558,7 @@ class ThemeDemoScreen extends StatelessWidget {
             const SizedBox(height: 12),
             Row(
               children:
-                  colors.map((color) {
-                    return Expanded(
+                  colors.map((color) => Expanded(
                       child: Container(
                         height: 40,
                         decoration: BoxDecoration(
@@ -580,12 +568,10 @@ class ThemeDemoScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    );
-                  }).toList(),
+                    )).toList(),
             ),
           ],
         ),
       ),
     );
-  }
 }

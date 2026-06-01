@@ -90,8 +90,7 @@ class _OverlayMessageState extends State<OverlayMessage>
 
     return AnimatedBuilder(
       animation: _animationController,
-      builder: (context, child) {
-        return Transform.translate(
+      builder: (context, child) => Transform.translate(
           offset: Offset(0, _slideAnimation.value),
           child: Opacity(
             opacity: _opacityAnimation.value,
@@ -160,8 +159,7 @@ class _OverlayMessageState extends State<OverlayMessage>
               ),
             ),
           ),
-        );
-      },
+        ),
     );
   }
 }
